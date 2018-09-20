@@ -1,0 +1,25 @@
+<configuration>
+    <appender name="IMMOREGION_FILE" class="ch.qos.logback.core.FileAppender" >
+        <param name="Append" value="false" />
+
+        <file>immoregion.log</file>
+
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.barrak.immocrawler.crawler.impl.immoregion">
+        <appender-ref ref="IMMOREGION_FILE" />
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
