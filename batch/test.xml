@@ -1,0 +1,1962 @@
+<body>
+    <div id="app" key="app">
+        <div class="app-parent" data-reactroot="" data-reactid="1"
+             data-react-checksum="1098204061"><!-- react-empty: 2 -->
+            <div class="parent" data-reactid="3">
+                <input type="checkbox" class="checkbox-modal" id="modal-energy"
+                       data-reactid="4"/>
+                <input type="checkbox" class="checkbox-modal"
+                       id="modal-error" data-reactid="5"/>
+                <div class="main-container" data-reactid="6">
+                    <div class="container-fluid" data-reactid="7">
+                        <div class="luportal" data-reactid="8"><!-- react-text: 9 --><!-- /react-text -->
+                            <!-- react-empty: 10 -->
+                            <div data-reactid="11"><!-- react-empty: 12 -->
+                                <header class="sc-bdVaJa hOOHGK" data-reactid="13">
+                                    <div class="row" data-reactid="14">
+                                        <div class="container-smartphone-menu" data-reactid="15">
+                                            <button class="toggle sc-bwzfXH hgsZOX" data-reactid="16">
+                                                <span
+                                                        data-reactid="17"></span>
+                                            </button>
+                                            <nav class="tablet-navigation sc-iwsKbI jTskRu" data-reactid="18">
+                                                <ul data-reactid="19">
+                                                    <li class="buy active" data-reactid="20">
+                                                        <a href="/vente"
+                                                           data-reactid="21">Acheter
+                                                        </a>
+                                                    </li>
+                                                    <li class="rent" data-reactid="22">
+                                                        <a href="/location"
+                                                           data-reactid="23">Louer
+                                                        </a>
+                                                    </li>
+                                                    <li class="publish" data-reactid="24">
+                                                        <a href="/publier"
+                                                           data-reactid="25">Publier
+                                                        </a>
+                                                    </li>
+                                                    <li class="commercial-&amp;-offices" data-reactid="26">
+                                                        <a
+                                                                href="https://www.atoffice.lu/" target="_blank"
+                                                                data-reactid="27">Commerces
+                                                        </a>
+                                                    </li>
+                                                    <li class="agencies" data-reactid="28">
+                                                        <a
+                                                                href="/lorraine/agences-immobilieres"
+                                                                data-reactid="29">Agences
+                                                        </a>
+                                                    </li>
+                                                    <li class="service-move" data-reactid="30">
+                                                        <a href="/demenager"
+                                                           data-reactid="31">Déménager
+                                                        </a>
+                                                    </li>
+                                                    <li class="blog" data-reactid="32">
+                                                        <a href="/blog" data-reactid="33">Blog</a>
+                                                    </li>
+                                                    <li class="separator" data-reactid="34"></li>
+                                                </ul>
+                                                <ul data-reactid="35">
+                                                    <li data-reactid="36">
+                                                        <a href="" data-reactid="37">Publier</a>
+                                                    </li>
+                                                    <li data-reactid="38">
+                                                        <a href="/pro" data-reactid="39">Accès
+                                                            professionnel
+                                                        </a>
+                                                    </li>
+                                                    <li data-reactid="40">
+                                                        <a href="#" data-reactid="41">Connexion</a>
+                                                    </li>
+                                                </ul><!-- react-empty: 42 -->
+                                            </nav>
+                                        </div>
+                                        <div class="container-logo" data-reactid="43">
+                                            <a
+                                                    class="immoregionfr sc-bxivhb eKpyYk" href="/" data-reactid="44">
+                                                <img
+                                                        alt="immoregion fr annonces immobilières régionales en france"
+                                                        src="/portal/assets/images/fr/logo.svg" data-reactid="45"/>
+                                            </a>
+                                        </div>
+                                        <div class="container-dropdown" data-reactid="46"><!-- react-empty: 47 -->
+                                            <div class="container-connexion" data-reactid="48">
+                                                <ul class="sc-EHOje ifyhuW" data-reactid="49">
+                                                    <ul class="sc-EHOje ifyhuW" data-reactid="50">
+                                                        <li data-reactid="51">
+                                                            <a href="#" data-reactid="52">Connexion</a>
+                                                            <i
+                                                                    class="icon-user" data-reactid="53"></i>
+                                                        </li>
+                                                    </ul>
+                                                </ul>
+                                            </div>
+                                            <div class="sc-gzVnrw eDjnBZ" data-reactid="54">
+                                                <div class="ActionButtonsStyle__ActionButtons-s11qeoit-0 TRTS"
+                                                     data-reactid="55">
+                                                    <ul class="btn-group button-action-content" role="group"
+                                                        aria-label="interactive-buttons" data-reactid="56">
+                                                        <li data-reactid="57">
+                                                            <button data-reactid="58">
+                                                                <i
+                                                                        class="icon-interactive icon-favourite"
+                                                                        data-reactid="59"></i>
+                                                            </button>
+                                                        </li>
+                                                        <li data-reactid="60">
+                                                            <button data-reactid="61">
+                                                                <i class="icon-interactive icon-share"
+                                                                   data-reactid="62"></i>
+                                                            </button>
+                                                            <!-- react-empty: 63 -->
+                                                        </li><!-- react-text: 64 -->
+                                                        <!-- /react-text --><!-- react-text: 65 --><!-- /react-text -->
+                                                        <li data-reactid="66">
+                                                            <label
+                                                                    class="btn btn-interactive modal-label modal-bg modal-error-label"
+                                                                    aria-label="error" for="modal-error"
+                                                                    data-reactid="67">
+                                                                <i
+                                                                        class="icon-interactive icon-info"
+                                                                        data-reactid="68"></i>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="navigation row" data-reactid="69">
+                                        <nav class="sc-htoDjs lfaAcY" data-reactid="70">
+                                            <ul data-reactid="71">
+                                                <li class="buy active" data-reactid="72">
+                                                    <a href="/vente" data-reactid="73">Acheter</a>
+                                                </li>
+                                                <li class="rent" data-reactid="74">
+                                                    <a href="/location" data-reactid="75">Louer</a>
+                                                </li>
+                                                <li class="publish" data-reactid="76">
+                                                    <a href="/publier" data-reactid="77">Publier</a>
+                                                </li>
+                                                <li class="commercial-&amp;-offices" data-reactid="78">
+                                                    <a
+                                                            href="https://www.atoffice.lu/" target="_blank"
+                                                            data-reactid="79">Commerces
+                                                    </a>
+                                                </li>
+                                                <li class="agencies" data-reactid="80">
+                                                    <a
+                                                            href="/lorraine/agences-immobilieres" data-reactid="81">
+                                                        Agences
+                                                    </a>
+                                                </li>
+                                                <li class="service-move" data-reactid="82">
+                                                    <a href="/demenager"
+                                                       data-reactid="83">Déménager
+                                                    </a>
+                                                </li>
+                                                <li class="blog" data-reactid="84">
+                                                    <a href="/blog"
+                                                       data-reactid="85">Blog
+                                                    </a>
+                                                </li>
+                                                <li class="publish" data-reactid="86">
+                                                    <a href="/publier" role="button"
+                                                       class="publish-btn"
+                                                       data-reactid="87">Publier
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </header><!-- react-empty: 88 -->
+                            </div>
+                            <div class="sc-hzDkRC dUzbgM" data-reactid="89">
+                                <script type="application/ld+json" data-reactid="90">
+                                    {"@context":"http://schema.org","@type":"Organization","name":"immoRegion.fr","logo":"/portal/assets/images/fr/logo.svg","url":"/vente/maison/longwy/id-6006524.html","sameAs":["https://www.facebook.com/immoRegion","https://twitter.com/immoRegion","https://www.youtube.com/user/immoregion10","https://plus.google.com/+ImmoregionFr1","https://www.linkedin.com/company/immoregion","https://www.instagram.com/immoregion/"]}
+                                </script>
+                                <div class="BreadcrumbStyle__BreadcrumbContainer-s1ggs7by-0 WUMbD" data-reactid="91">
+                                    <ol class="BreadcrumbStyle__Breadcrumb-s1ggs7by-2 kaQAHb" itemscope=""
+                                        itemtype="http://schema.org/BreadcrumbList" data-reactid="92">
+                                        <li itemprop="itemListElement" itemscope=""
+                                            itemtype="http://schema.org/ListItem"
+                                            data-reactid="93">
+                                            <a href="/" class="link" itemprop="item"
+                                               data-reactid="94">
+                                                <span itemprop="name" data-reactid="95">Accueil</span>
+                                            </a>
+                                            <meta itemprop="position" content="1" data-reactid="96"/>
+                                        </li>
+                                        <li itemprop="itemListElement" itemscope=""
+                                            itemtype="http://schema.org/ListItem"
+                                            data-reactid="97">
+                                            <a href="/vente" class="link" itemprop="item"
+                                               data-reactid="98">
+                                                <span itemprop="name" data-reactid="99">Acheter</span>
+                                            </a>
+                                            <meta itemprop="position" content="2" data-reactid="100"/>
+                                        </li>
+                                        <li itemprop="itemListElement" itemscope=""
+                                            itemtype="http://schema.org/ListItem"
+                                            data-reactid="101">
+                                            <a href="/vente/maison" class="link" itemprop="item"
+                                               data-reactid="102">
+                                                <span itemprop="name"
+                                                      data-reactid="103">Maison
+                                                </span>
+                                            </a>
+                                            <meta itemprop="position" content="3" data-reactid="104"/>
+                                        </li><!-- react-text: 105 --><!-- /react-text -->
+                                        <li itemprop="itemListElement" itemscope=""
+                                            itemtype="http://schema.org/ListItem"
+                                            data-reactid="106">
+                                            <a href="/vente/maison/longwy" class="link"
+                                               data-reactid="107">
+                                                <span itemprop="name"
+                                                      data-reactid="108"><!-- react-text: 109 -->
+                                                    <!-- /react-text --><!-- react-text: 110 -->Longwy
+                                                    <!-- /react-text --></span>
+                                            </a>
+                                            <meta itemprop="position" content="4" data-reactid="111"/>
+                                        </li><!-- react-text: 112 --><!-- /react-text -->
+                                        <li itemprop="itemListElement" itemscope=""
+                                            itemtype="http://schema.org/ListItem"
+                                            data-reactid="113">
+                                            <span itemprop="name" data-reactid="114"><!-- react-text: 115 -->Réf
+                                                <!-- /react-text --><!-- react-text: 116 --> <!-- /react-text -->
+                                                <!-- react-text: 117 -->6006524<!-- /react-text --></span>
+                                            <meta itemprop="position" content="5" data-reactid="118"/>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="GalleryTheme__PictureGallery-s14vxo1i-0 jXRYuP" data-reactid="119">
+                                <div class="GalleryTheme__GalleryContainer-s14vxo1i-1 fUKQMh" data-reactid="120">
+                                    <div class="GalleryTheme__GalleryContent-s14vxo1i-2 iEnHkW" data-reactid="121">
+                                        <div data-reactid="122"><!-- react-text: 123 --><!-- /react-text -->
+                                            <ul class="GalleryTheme__GalleryList-s14vxo1i-4 dPSqnm" data-reactid="124">
+                                                <li data-count="4" data-reactid="125">
+                                                    <div class="square" data-reactid="126">
+                                                        <a rel="nofollow"
+                                                           href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-photo&amp;content=/cf/6a/b5/e7dfd807e29288825e82d2e65002cd5a2f76edf8.jpg"
+                                                           data-reactid="127">
+                                                            <picture data-reactid="128">
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/e7dfd807e29288825e82d2e65002cd5a2f76edf8.jpg"
+                                                                        media="" data-reactid="129"/>
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/e7dfd807e29288825e82d2e65002cd5a2f76edf8.jpg"
+                                                                        media="" data-reactid="130"/>
+                                                                <img src="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/e7dfd807e29288825e82d2e65002cd5a2f76edf8.jpg"
+                                                                     alt="acheter maison 6 pièces 105 m² longwy photo 1"
+                                                                     data-reactid="131"/>
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li data-count="4" data-reactid="132">
+                                                    <div class="square" data-reactid="133">
+                                                        <a rel="nofollow"
+                                                           href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-photo&amp;content=/cf/6a/b5/bdcfaa6a4dd8a707770e0a485009d431d756c846.jpg"
+                                                           data-reactid="134">
+                                                            <picture data-reactid="135">
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/bdcfaa6a4dd8a707770e0a485009d431d756c846.jpg"
+                                                                        media="" data-reactid="136"/>
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/bdcfaa6a4dd8a707770e0a485009d431d756c846.jpg"
+                                                                        media="" data-reactid="137"/>
+                                                                <img src="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/bdcfaa6a4dd8a707770e0a485009d431d756c846.jpg"
+                                                                     alt="acheter maison 6 pièces 105 m² longwy photo 2"
+                                                                     data-reactid="138"/>
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li data-count="4" data-reactid="139">
+                                                    <div class="square" data-reactid="140">
+                                                        <a rel="nofollow"
+                                                           href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-photo&amp;content=/cf/6a/b5/403a59982940294e8e7612539b124acf53889f9c.jpg"
+                                                           data-reactid="141">
+                                                            <picture data-reactid="142">
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/403a59982940294e8e7612539b124acf53889f9c.jpg"
+                                                                        media="" data-reactid="143"/>
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/403a59982940294e8e7612539b124acf53889f9c.jpg"
+                                                                        media="" data-reactid="144"/>
+                                                                <img src="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/403a59982940294e8e7612539b124acf53889f9c.jpg"
+                                                                     alt="acheter maison 6 pièces 105 m² longwy photo 3"
+                                                                     data-reactid="145"/>
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li data-count="4" data-reactid="146">
+                                                    <div class="square" data-reactid="147">
+                                                        <a rel="nofollow"
+                                                           href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-photo&amp;content=/cf/6a/b5/1d0ea667428f2f584ab1e9f574b66a03a40a73d7.jpg"
+                                                           data-reactid="148">
+                                                            <picture data-reactid="149">
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/1d0ea667428f2f584ab1e9f574b66a03a40a73d7.jpg"
+                                                                        media="" data-reactid="150"/>
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/1d0ea667428f2f584ab1e9f574b66a03a40a73d7.jpg"
+                                                                        media="" data-reactid="151"/>
+                                                                <img src="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/1d0ea667428f2f584ab1e9f574b66a03a40a73d7.jpg"
+                                                                     alt="acheter maison 6 pièces 105 m² longwy photo 4"
+                                                                     data-reactid="152"/>
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li data-count="4" data-reactid="153">
+                                                    <div class="square" data-reactid="154">
+                                                        <a rel="nofollow"
+                                                           href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-photo&amp;content=/cf/6a/b5/4da139c49ccbf897b9d475463528ea28c3947922.jpg"
+                                                           data-reactid="155">
+                                                            <picture data-reactid="156">
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/4da139c49ccbf897b9d475463528ea28c3947922.jpg"
+                                                                        media="" data-reactid="157"/>
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/4da139c49ccbf897b9d475463528ea28c3947922.jpg"
+                                                                        media="" data-reactid="158"/>
+                                                                <img src="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/4da139c49ccbf897b9d475463528ea28c3947922.jpg"
+                                                                     alt="acheter maison 6 pièces 105 m² longwy photo 5"
+                                                                     data-reactid="159"/>
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li data-count="4" data-reactid="160">
+                                                    <div class="square" data-reactid="161">
+                                                        <a rel="nofollow"
+                                                           href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-photo&amp;content=/cf/6a/b5/342c032564ff6211a56e5f76b4bae74ea75a9fc5.jpg"
+                                                           data-reactid="162">
+                                                            <picture data-reactid="163">
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/342c032564ff6211a56e5f76b4bae74ea75a9fc5.jpg"
+                                                                        media="" data-reactid="164"/>
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/342c032564ff6211a56e5f76b4bae74ea75a9fc5.jpg"
+                                                                        media="" data-reactid="165"/>
+                                                                <img src="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/342c032564ff6211a56e5f76b4bae74ea75a9fc5.jpg"
+                                                                     alt="acheter maison 6 pièces 105 m² longwy photo 6"
+                                                                     data-reactid="166"/>
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li data-count="4" data-reactid="167">
+                                                    <div class="square" data-reactid="168">
+                                                        <a rel="nofollow"
+                                                           href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-photo&amp;content=/cf/6a/b5/f7f7d0b715b79de9e1891d51f391fe09f2ad3460.jpg"
+                                                           data-reactid="169">
+                                                            <picture data-reactid="170">
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/f7f7d0b715b79de9e1891d51f391fe09f2ad3460.jpg"
+                                                                        media="" data-reactid="171"/>
+                                                                <source srcset="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/f7f7d0b715b79de9e1891d51f391fe09f2ad3460.jpg"
+                                                                        media="" data-reactid="172"/>
+                                                                <img src="https://i1.static.athome.eu/images/annonces2/image_/cf/6a/b5/f7f7d0b715b79de9e1891d51f391fe09f2ad3460.jpg"
+                                                                     alt="acheter maison 6 pièces 105 m² longwy photo 7"
+                                                                     data-reactid="173"/>
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="GalleryTheme__PhotosCount-s14vxo1i-9 gloKSO" data-reactid="174">
+                                        <!-- react-text: 175 -->1<!-- /react-text --><!-- react-text: 176 -->/
+                                        <!-- /react-text --><!-- react-text: 177 -->9<!-- /react-text --></div>
+                                </div>
+                                <div class="GalleryTheme__MediaIconsContainer-s14vxo1i-5 kmLDzX" data-reactid="178">
+                                    <div class="GalleryTheme__GalleryMediaIcon-s14vxo1i-6 hmbrKI" data-reactid="179">
+                                        <ul data-reactid="180">
+                                            <li data-reactid="181">
+                                                <a rel="nofollow"
+                                                   href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-photo&amp;content=/cf/6a/b5/e7dfd807e29288825e82d2e65002cd5a2f76edf8.jpg"
+                                                   class="" title="Photos" data-reactid="182">
+                                                    <i
+                                                            class="icon-photo" data-reactid="183"></i>
+                                                </a>
+                                            </li>
+                                            <li data-reactid="184">
+                                                <a rel="nofollow"
+                                                   href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-map"
+                                                   class="select" title="Carte" data-reactid="185">
+                                                    <i
+                                                            class="icon-map" data-reactid="186"></i>
+                                                </a>
+                                            </li>
+                                            <li data-reactid="187">
+                                                <a rel="nofollow"
+                                                   href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-streetview"
+                                                   class="select" title="Streetview"
+                                                   data-reactid="188">
+                                                    <i class="icon-streetview"
+                                                       data-reactid="189"></i>
+                                                </a>
+                                            </li>
+                                            <li data-reactid="190">
+                                                <a rel="nofollow" href="#" class=" not-active"
+                                                   title="Visite virtuelle" data-reactid="191">
+                                                    <i
+                                                            class="icon-360" data-reactid="192"></i>
+                                                </a>
+                                            </li>
+                                            <li data-reactid="193">
+                                                <a rel="nofollow" href="#" class=" not-active"
+                                                   title="Vidéo" data-reactid="194">
+                                                    <i class="icon-video"
+                                                       data-reactid="195"></i>
+                                                </a>
+                                            </li>
+                                            <li data-reactid="196">
+                                                <a rel="nofollow" href="#" class=" not-active"
+                                                   title="Plan" data-reactid="197">
+                                                    <i class="icon-plan"
+                                                       data-reactid="198"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ActionButtonsStyle__ActionButtons-s11qeoit-0 TRTS" data-reactid="199">
+                                        <ul class="btn-group button-action-content" role="group"
+                                            aria-label="interactive-buttons" data-reactid="200">
+                                            <li data-reactid="201">
+                                                <button data-reactid="202">
+                                                    <i class="icon-interactive icon-favourite"
+                                                       data-reactid="203"></i>
+                                                </button>
+                                            </li>
+                                            <li data-reactid="204">
+                                                <button data-reactid="205">
+                                                    <i class="icon-interactive icon-share"
+                                                       data-reactid="206"></i>
+                                                </button>
+                                                <!-- react-empty: 207 -->
+                                            </li>
+                                            <li data-reactid="208">
+                                                <label
+                                                        class="btn btn-interactive modal-label modal-bg modal-alert-label"
+                                                        aria-label="alert" for="modal-alert" data-reactid="209">
+                                                    <i
+                                                            class="icon-interactive icon-alert" data-reactid="210"></i>
+                                                </label>
+                                            </li>
+                                            <li data-reactid="211">
+                                                <a
+                                                        href="https://www.immoregion.fr/annonce/downloadpdf/id/6006524/format/portrait/lang/fr"
+                                                        rel="noopener noreferrer" target="_blank"
+                                                        class="btn btn-interactive pdf-button" data-reactid="212">
+                                                    <i
+                                                            class="icon-interactive icon-pdf" data-reactid="213"></i>
+                                                </a>
+                                            </li>
+                                            <li data-reactid="214">
+                                                <label
+                                                        class="btn btn-interactive modal-label modal-bg modal-error-label"
+                                                        aria-label="error" for="modal-error" data-reactid="215">
+                                                    <i
+                                                            class="icon-interactive icon-info" data-reactid="216"></i>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <article class="all-content" data-reactid="217">
+                                <div class="row" data-reactid="218">
+                                    <div class="content-body" data-reactid="219">
+                                        <section class="s7vp35h-2-section-LayoutTheme__KeyGeneral-hbgJJa xgSRn"
+                                                 data-reactid="220">
+                                            <div class="KeyInfoBlockStyle__BackgroundFluid-s1o1h56e-1 fihaeq"
+                                                 data-reactid="221"></div>
+                                            <h1 class="KeyInfoBlockStyle__PdpTitle-s1o1h56e-2 iFFIGy"
+                                                data-reactid="222">
+                                                <!-- react-text: 223 -->Maison 6 pièces à Longwy<!-- /react-text -->
+                                                <!-- react-text: 224 --> <!-- /react-text --><!-- react-text: 225 -->
+                                                <!-- /react-text --><!-- react-text: 226 --> <!-- /react-text -->
+                                                <span
+                                                        data-reactid="227"><!-- react-text: 228 -->
+                                                    Réf<!-- /react-text -->
+                                                    <!-- react-text: 229 --> <!-- /react-text --><!-- react-text: 230 -->
+                                                    6006524
+                                                    <!-- /react-text --></span>
+                                            </h1>
+                                            <div class="KeyInfoBlockStyle__KeyInfoContent-s1o1h56e-0 dsNPbW"
+                                                 data-reactid="231">
+                                                <div class="KeyInfoBlockStyle__PriceContainer-s1o1h56e-3 RchSO"
+                                                     data-reactid="232">
+                                                    <div class="KeyInfoBlockStyle__Price-s1o1h56e-4 kphcFy"
+                                                         data-reactid="233">
+                                                        <h2 data-reactid="234">107 000</h2>
+                                                        <!-- react-text: 235 --> <!-- /react-text -->
+                                                        <!-- react-text: 236 --><!-- /react-text -->
+                                                    </div>
+                                                    <!-- react-text: 237 --><!-- /react-text --><!-- react-text: 238 -->
+                                                    <!-- /react-text -->
+                                                    <div data-reactid="239"></div><!-- react-text: 240 -->
+                                                    <!-- /react-text -->
+                                                </div>
+                                                <div class="KeyInfoBlockStyle__InformationLogoContainer-s1o1h56e-9 kOIWou"
+                                                     data-reactid="241">
+                                                    <div class="KeyInfoBlockStyle__LogoContainer-s1o1h56e-10 cETxrx"
+                                                         data-reactid="242">
+                                                        <ul data-reactid="243">
+                                                            <li data-reactid="244">
+                                                                <i class="icon-room"
+                                                                   data-reactid="245"></i>
+                                                                <div data-reactid="246">
+                                                                    <span data-reactid="247">6</span>
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="248">
+                                                                <i class="icon-bed"
+                                                                   data-reactid="249"></i>
+                                                                <div data-reactid="250">
+                                                                    <span data-reactid="251">3</span>
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="252">
+                                                                <i class="icon-bath"
+                                                                   data-reactid="253"></i>
+                                                                <div data-reactid="254">
+                                                                    <span data-reactid="255">1</span>
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="256">
+                                                                <i class="icon-surface"
+                                                                   data-reactid="257"></i>
+                                                                <div data-reactid="258">
+                                                                    <span
+                                                                            data-reactid="259">105 m²
+                                                                    </span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="key-info-logo-warning KeyInfoBlockStyle__Error-s1o1h56e-11 jfmMoX"
+                                                         data-reactid="260">
+                                                        <label for="modal-error"
+                                                               class="modal-label modal-bg modal-error-label"
+                                                               data-reactid="261">
+                                                            <i class="icon-info"
+                                                               data-reactid="262"></i>
+                                                            <!-- react-text: 263 -->Signaler une
+                                                            erreur<!-- /react-text -->
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <div class="description s7vp35h-2-LayoutTheme__KeyGeneral-hbgJJa bQiyyb"
+                                             data-reactid="264">
+                                            <h2
+                                                    class="DescriptionStyle__DescriptionContainerTitle-dqxmgt-0 klsrhu"
+                                                    data-reactid="265">Description
+                                            </h2>
+                                            <div class="DescriptionStyle__DescriptionContent-dqxmgt-2 lnYIXT"
+                                                 data-reactid="266">
+                                                <div class="DescriptionStyle__DescriptionContentDropdown-dqxmgt-3 dyQEIL"
+                                                     data-reactid="267"><!-- react-text: 268 --><!-- /react-text -->
+                                                    <div class="collapsed" data-reactid="269"><!-- react-text: 270 -->
+                                                        <!-- /react-text --><!-- react-text: 271 --><!-- /react-text -->
+                                                        <p
+                                                                data-reactid="272">Maison de 105m2 avec grand jardin et
+                                                            garage!. En exclusivité Sandrine Hostein vous présente cette
+                                                            maison de 105m2 avec grand jardin et garage à Longwy bas
+                                                            proche
+                                                            toutes commodités et du Luxembourg.
+                                                            Elle vous offre un hall d'entrée, un spacieux salon-séjour
+                                                            de
+                                                            26m2 ouvert sur une cuisine équipée de 12m2, donnant accès à
+                                                            la
+                                                            terrasse, au jardin et au garage, une salle de bain avec
+                                                            douche,
+                                                            meuble vasque et un wc séparé.
+                                                            Au 1er étage l'espace nuit se compose de 2 chambres et d'une
+                                                            pièce pouvant faire office de bureau ou de dressing.
+                                                            Au 2ème étage, une grande chambre de 20m2 avec 2 pièces de
+                                                            rangement.
+                                                            Le sous sol se compose d'une cuisine d'été, d'une buanderie,
+                                                            d'une chaufferie, d'un atelier et de 2 caves.
+                                                            Un grand jardin avec arbres fruitiers se trouve juste en
+                                                            face de
+                                                            la maison!
+                                                            Chauffage au gaz de 2007, toiture en bon état et isolée,
+                                                            fenêtres DV.
+                                                            Maison à conforter avec beaucoup de potentiel!!
+                                                            A visiter rapidement!!
+                                                            Prix de vente : 107 000 euros Honoraires charge vendeur
+
+                                                            Contactez votre conseiller SAFTI : Sandrine HOSTEIN, Tél. :
+                                                            07
+                                                            83 35 85 88, E-mail : sandrine.hostein@safti.fr - Agent
+                                                            commercial immatriculé au RSAC de BRIEY sous le numéro 809
+                                                            786
+                                                            981
+                                                        </p>
+                                                    </div>
+                                                </div><!-- react-text: 273 --><!-- /react-text -->
+                                            </div>
+                                            <div class="DescriptionStyle__DescriptionMore-dqxmgt-8 hauByQ"
+                                                 data-reactid="274">
+                                                <div class="DescriptionStyle__DescriptionMoreInformations-dqxmgt-9 eIUJAO"
+                                                     data-reactid="275">
+                                                    <a role="button"
+                                                       class="s1wx5r2u-0-a-buttonAthome__ButtonDefault-bvwRGY kSwbpr"
+                                                       href="#" data-reactid="276">Demander plus d&#x27;infos
+                                                    </a>
+                                                </div>
+                                                <div class="DescriptionStyle__DescriptionMoreReferences-dqxmgt-10 lmAMwb"
+                                                     data-reactid="277">
+                                                    <p data-reactid="278">
+                                                        <span data-reactid="279"><!-- react-text: 280 -->Réf
+                                                            <!-- /react-text --><!-- react-text: 281 --> <!-- /react-text -->
+                                                            <!-- react-text: 282 -->
+                                                            immoRegion<!-- /react-text --></span>
+                                                        <!-- react-text: 283 --> <!-- /react-text --><!-- react-text: 284 -->
+                                                        6006524<!-- /react-text -->
+                                                    </p>
+                                                    <p data-reactid="285">
+                                                        <span data-reactid="286"><!-- react-text: 287 -->Réf
+                                                            <!-- /react-text --><!-- react-text: 288 --> <!-- /react-text -->
+                                                            <!-- react-text: 289 -->Agence<!-- /react-text --></span>
+                                                        <!-- react-text: 290 --> <!-- /react-text -->
+                                                        <!-- react-text: 291 -->284471<!-- /react-text -->
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="s7vp35h-2-LayoutTheme__KeyGeneral-hbgJJa jnzGey" data-reactid="292">
+                                            <h2
+                                                    data-reactid="293">Outils et simulateurs
+                                            </h2>
+                                            <div id="simulator" class="simulator" data-reactid="294"></div>
+                                        </div><!-- react-text: 295 --><!-- /react-text -->
+                                        <section class="feature s7vp35h-2-section-LayoutTheme__KeyGeneral-hbgJJa jJSHoI"
+                                                 data-reactid="296">
+                                            <div class="container-title" data-reactid="297">
+                                                <h2
+                                                        class="CharacteristicsStyle__CharacteristicsContainerTitle-s678tb5-0 dySgRj"
+                                                        data-reactid="298">Caractéristiques
+                                                </h2>
+                                            </div>
+                                            <div class="row-feature" data-reactid="299">
+                                                <div class="feature-bloc" data-reactid="300">
+                                                    <div class="feature-bloc-content-title-name" data-reactid="301">
+                                                        <i
+                                                                class="icon-car-detail" data-reactid="302"></i>
+                                                        <!-- react-text: 303 --> <!-- /react-text -->
+                                                        <!-- react-text: 304 -->Détails de la vente<!-- /react-text -->
+                                                    </div>
+                                                    <ul class="feature-bloc-content-specification" data-reactid="305">
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="306">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="307">Prix de vente
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="308">
+                                                                <div data-reactid="309">107 000 €</div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="310">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="311">Honoraires d&#x27;agence
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="312">
+                                                                <div data-reactid="313">7000 €</div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="314">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="315">Honoraires à la charge
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="316">
+                                                                <div data-reactid="317">NC</div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="318">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="319">Meublé
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="320">
+                                                                <div data-reactid="321">Non</div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="322">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="323">Tarifs de l&#x27;agence
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="324">
+                                                                <div data-reactid="325">
+                                                                    <a
+                                                                            href="https://i1.static.athome.eu/honorary/34088/honoraire.pdf?v=1495615395"
+                                                                            target="_blank">Détails
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <label for="feature-first-dropdown" class="feature-dropdown-label"
+                                                           data-reactid="326">
+                                                        <div class="feature-dropdown-more" data-reactid="327">
+                                                            <i
+                                                                    class="icon-chevron-down" data-reactid="328"></i>
+                                                            <div data-reactid="329">Voir tout</div>
+                                                        </div>
+                                                        <div class="feature-dropdown-less" data-reactid="330">
+                                                            <i
+                                                                    class="icon-chevron-up" data-reactid="331"></i>
+                                                            <div data-reactid="332">Voir moins</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="feature-bloc" data-reactid="333">
+                                                    <div class="feature-bloc-content-title-name" data-reactid="334">
+                                                        <i
+                                                                class="icon-car-general" data-reactid="335"></i>
+                                                        <!-- react-text: 336 --> <!-- /react-text -->
+                                                        <!-- react-text: 337 -->Général<!-- /react-text -->
+                                                    </div>
+                                                    <ul class="feature-bloc-content-specification" data-reactid="338">
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="339">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="340">Surface
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="341">
+                                                                <div data-reactid="342">105 m²</div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="343">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="344">Terrain
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="345">
+                                                                <div data-reactid="346">2,54 ares</div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="347">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="348">Nombre de pièces
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="349">
+                                                                <div data-reactid="350">6</div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="351">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="352">Nombre de chambres
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="353">
+                                                                <div data-reactid="354">3</div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="feature-bloc-content-specification-content"
+                                                            data-reactid="355">
+                                                            <div class="feature-bloc-content-specification-content-name"
+                                                                 data-reactid="356">Année de construction
+                                                            </div>
+                                                            <div class="feature-bloc-content-specification-content-response"
+                                                                 data-reactid="357">
+                                                                <div data-reactid="358">1930</div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <label for="feature-first-dropdown" class="feature-dropdown-label"
+                                                           data-reactid="359">
+                                                        <div class="feature-dropdown-more" data-reactid="360">
+                                                            <i
+                                                                    class="icon-chevron-down" data-reactid="361"></i>
+                                                            <div data-reactid="362">Voir tout</div>
+                                                        </div>
+                                                        <div class="feature-dropdown-less" data-reactid="363">
+                                                            <i
+                                                                    class="icon-chevron-up" data-reactid="364"></i>
+                                                            <div data-reactid="365">Voir moins</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="s7vp35h-2-section-LayoutTheme__KeyGeneral-hbgJJa fFeAvc"
+                                                 data-reactid="366">
+                                            <div class="container-title" data-reactid="367">
+                                                <h2 data-reactid="368">
+                                                    Localisation
+                                                </h2>
+                                            </div>
+                                            <div class="key-content" data-reactid="369">
+                                                <div class="block-localisation-map" data-reactid="370">
+                                                    <a rel="nofollow"
+                                                       href="/vente/maison/longwy/id-6006524-gallery.html?viewmode=gallery-map"
+                                                       data-reactid="371">
+                                                        <img
+                                                                class="staticMap" src="" alt="#" data-reactid="372"/>
+                                                    </a>
+                                                    <div class="pinpoint" data-reactid="373"></div>
+                                                </div>
+                                                <div class="block-localisation-footer" data-reactid="374">
+                                                    <div class="block-localisation-address" data-reactid="375">
+                                                        <div data-reactid="376">
+                                                            <i class="icon-map" data-reactid="377"></i>
+                                                            <!-- react-text: 378 --> <!-- /react-text -->
+                                                            <!-- react-text: 379 -->54400 Longwy<!-- /react-text -->
+                                                            <p
+                                                                    data-reactid="380">L&#x27;adresse exacte de ce bien
+                                                                n&#x27;est
+                                                                pas renseignée
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="block-localisation-action" data-reactid="381">
+                                                        <button role="button"
+                                                                class="s1wx5r2u-0-buttonAthome__ButtonDefault-bvwRGY dAJpQs"
+                                                                data-reactid="382">Demander l&#x27;adresse
+                                                        </button>
+                                                        <a href="https://www.immoRegion.fr/demenager"
+                                                           rel="noopener noreferrer" target="_blank"
+                                                           class="buttonAthome__ButtonGray-s1wx5r2u-1 fJtQeO"
+                                                           data-reactid="383">
+                                                            <span data-reactid="384">
+                                                                <i class="icon-mover"
+                                                                   data-reactid="385"></i>
+                                                                <!-- react-text: 386 -->Estimer votre déménagement
+                                                                <!-- /react-text -->
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div><!-- react-text: 387 --><!-- /react-text -->
+                                </div><!-- react-empty: 388 -->
+                                <section class="contact-form s7vp35h-2-section-LayoutTheme__KeyGeneral-hbgJJa hbgPgl"
+                                         id="full-contact-form" data-reactid="389">
+                                    <div class="informations agency FormAgencyInfoStyle__FormItem-s10hhmvq-0 gBJHZk"
+                                         data-reactid="390">
+                                        <div class="FormAgencyInfoStyle__InfoContainerBottom-s10hhmvq-3 kDsyOA"
+                                             data-reactid="391">
+                                            <div class="FormAgencyInfoStyle__LogoContainer-s10hhmvq-2 lfnHsE"
+                                                 data-reactid="392">
+                                                <a target="_blank"
+                                                   href="https://www.immoregion.fr/lorraine/agence-safti,a-metz-306254"
+                                                   data-reactid="393">
+                                                    <img alt="agence SAFTI Metz"
+                                                         src="https://i1.static.athome.eu/logoagences/1530088811_Safti_logo_ok.jpg"
+                                                         data-reactid="394"/>
+                                                </a>
+                                            </div>
+                                            <div class="FormAgencyInfoStyle__AgencyInfo-s10hhmvq-4 lbHDAJ"
+                                                 data-reactid="395">
+                                                <h3
+                                                        class="FormAgencyInfoStyle__AgencyName-s10hhmvq-5 gQCwNX"
+                                                        data-reactid="396">SAFTI
+                                                </h3>
+                                                <div class="FormAgencyInfoStyle__AgencyAdress-s10hhmvq-6 gCcWtw"
+                                                     data-reactid="397">
+                                                    <p data-reactid="398"><!-- react-text: 399 -->
+                                                        <!-- /react-text -->
+                                                        <br data-reactid="400"/><!-- react-text: 401 -->
+                                                        57000<!-- /react-text --><!-- react-text: 402 --> <!-- /react-text -->
+                                                        <!-- react-text: 403 -->Metz<!-- /react-text -->
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="informations-agency" data-reactid="404">
+                                            <div class="FormStyle__CommercialAgent-s2mxqza-6 cfdUPb" data-reactid="405">
+                                                <div class="picture" data-reactid="406">
+                                                    <img
+                                                            src="/portal/assets/images/avatar.png"
+                                                            alt="undefined Sandrine HOSTEIN" data-reactid="407"/>
+                                                </div>
+                                                <div class="name" data-reactid="408"><!-- react-text: 409 -->
+                                                    <!-- /react-text --><!-- react-text: 410 -->Sandrine HOSTEIN
+                                                    <!-- /react-text --></div>
+                                            </div>
+                                            <div class="mobile FormAgencyInfoStyle__AgencyNum-s10hhmvq-10 bUaqsg"
+                                                 data-reactid="411">
+                                                <button role="button"
+                                                        class="s1wx5r2u-0-buttonAthome__ButtonDefault-bvwRGY fKowRh"
+                                                        aria-label="Afficher le numéro de l&#x27;agence"
+                                                        data-reactid="412">
+                                                    Afficher le numéro
+                                                </button>
+                                                <div role="button" class="buttonAthome__ButtonDefault-bvwRGY jNMIMB"
+                                                     data-reactid="413">
+                                                    <div data-reactid="414"><!-- react-text: 415 -->
+                                                        Tél:<!-- /react-text -->
+                                                        <!-- react-text: 416 --> <!-- /react-text -->
+                                                        <!-- react-text: 417 -->0783358588<!-- /react-text --></div>
+                                                </div>
+                                                <a role="button" class="buttonAthome__ButtonDefault-bvwRGY ukWLu"
+                                                   data-reactid="418">Appeler
+                                                </a>
+                                                <a class="start-phone-call"
+                                                   href="tel:0783358588"
+                                                   data-reactid="419"></a>
+                                            </div>
+                                            <ul class="FormAgencyInfoStyle__AgencyWebsite-s10hhmvq-7 iqPDAl"
+                                                data-reactid="420">
+                                                <li data-reactid="421">
+                                                    <a target="_blank"
+                                                       href="https://www.immoregion.fr/lorraine/agence-safti,a-metz-306254"
+                                                       data-reactid="422"><!-- react-text: 423 -->
+                                                        <!-- /react-text --><!-- react-text: 424 -->Profil agence
+                                                        <!-- /react-text --></a>
+                                                </li>
+                                                <li data-reactid="425">
+                                                    <a target="_blank" href="https://www.safti.fr/"
+                                                       data-reactid="426"><!-- react-text: 427 -->
+                                                        <!-- /react-text --><!-- react-text: 428 -->Site internet
+                                                        <!-- /react-text --></a>
+                                                </li>
+                                            </ul>
+                                            <div class="FormAgencyInfoStyle__AnnoncesNumber-s10hhmvq-12 bZJVDv"
+                                                 data-reactid="429">
+                                                <i class="icon-listing" data-reactid="430"></i>
+                                                <p data-reactid="431"><!-- react-text: 432 -->Voir
+                                                    les<!-- /react-text -->
+                                                    <!-- react-text: 433 -->  <!-- /react-text -->
+                                                    <a
+                                                            href="https://www.immoregion.fr/lorraine/agence-safti,a-metz-306254#offers"
+                                                            data-reactid="434">274 annonces
+                                                    </a><!-- react-text: 435 -->
+                                                     
+                                                    <!-- /react-text --><!-- react-text: 436 -->de l&#x27;agence
+                                                    <!-- /react-text -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="form form-form" data-reactid="437">
+                                        <div class="first-container" data-reactid="438">
+                                            <div class="message-button FormStyle__Select-s2mxqza-2 kqUHJe"
+                                                 id="message-button-bottom" data-reactid="439">
+                                                <select name="form-contact"
+                                                        id="form-contact-full"
+                                                        data-reactid="440">
+                                                    <option value="0" data-reactid="441">Demander plus d&#x27;infos
+                                                    </option>
+                                                    <option value="1" data-reactid="442">Demander un rendez-vous
+                                                    </option>
+                                                    <option value="2" data-reactid="443">Demander à être rappelé(e)
+                                                    </option>
+                                                    <option value="3" data-reactid="444">Demander plus de photos
+                                                    </option>
+                                                    <option value="4" data-reactid="445">Demander l&#x27;adresse du bien
+                                                    </option>
+                                                    <option value="5" data-reactid="446">Demander le prix</option>
+                                                </select>
+                                                <div class="container-select" data-reactid="447">
+                                                    <div class="select" data-reactid="448">
+                                                        <span data-reactid="449">Demander plus d&#x27;infos</span>
+                                                        <i
+                                                                data-reactid="450"></i>
+                                                    </div><!-- react-text: 451 -->
+                                                    <!-- /react-text -->
+                                                </div>
+                                            </div>
+                                            <div class="s2mxqza-3-FormStyle__Textarea-eZnhmy cBFsYz"
+                                                 data-reactid="452">
+                                                <textarea id="formMessage" name="form-message" rows="8"
+                                                          data-reactid="453">Bonjour,
+
+                                                    Je suis intéressé(e) par votre annonce et je souhaiterais plus de
+                                                    renseignements sur ce bien. Pourriez-vous me recontacter à ce sujet
+                                                    ?
+
+                                                    Merci.
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="second-container" data-reactid="454">
+                                            <div data-reactid="455">
+                                                <input type="text"
+                                                       class="FormStyle__InputText-s2mxqza-0 bSVRBD"
+                                                       id="firstname" placeholder="Prénom *"
+                                                       data-reactid="456"/>
+                                                <p class="alert-message" data-reactid="457"></p>
+                                            </div>
+                                            <div data-reactid="458">
+                                                <input type="text"
+                                                       class="FormStyle__InputText-s2mxqza-0 bSVRBD"
+                                                       id="name" placeholder="Nom *"
+                                                       data-reactid="459"/>
+                                                <p class="alert-message" data-reactid="460"></p>
+                                            </div>
+                                            <div data-reactid="461">
+                                                <input type="text"
+                                                       class="FormStyle__InputText-s2mxqza-0 bSVRBD"
+                                                       id="email" placeholder="Adresse e-mail *"
+                                                       data-reactid="462"/>
+                                                <p class="alert-message" data-reactid="463"></p>
+                                            </div>
+                                            <div data-reactid="464">
+                                                <input type="text"
+                                                       class="FormStyle__InputText-s2mxqza-0 bSVRBD"
+                                                       id="telephone" placeholder="Téléphone"
+                                                       data-reactid="465"/>
+                                                <p class="alert-message" data-reactid="466"></p>
+                                            </div>
+                                            <div data-reactid="467">
+                                                <div class="FormStyle__AthomeCheckbox-s2mxqza-7 aCgWY"
+                                                     data-reactid="468">
+                                                    <input type="checkbox" id="checkbox-get-news-big-form"
+                                                           data-reactid="469"/>
+                                                    <label for="checkbox-get-news-big-form"
+                                                           data-reactid="470">Je souhaite
+                                                        recevoir des biens similaires
+                                                    </label>
+                                                </div>
+                                                <div class="FormStyle__AthomeCheckbox-s2mxqza-7 aCgWY"
+                                                     data-reactid="471">
+                                                    <input type="checkbox"
+                                                           id="checkbox-get-financial-simulation-big-form"
+                                                           data-reactid="472"/>
+                                                    <label
+                                                            for="checkbox-get-financial-simulation-big-form"
+                                                            data-reactid="473">Je
+                                                        souhaite recevoir une simulation financière
+                                                    </label>
+                                                </div>
+                                                <div data-reactid="474">
+                                                    <div class="FormStyle__AthomeCheckbox-s2mxqza-7 aCgWY"
+                                                         data-reactid="475">
+                                                        <input type="checkbox"
+                                                               name="contact-gdpr-checkbox"
+                                                               id="checkbox-get-gdpr-big-form"
+                                                               data-reactid="476"/>
+                                                        <label
+                                                                for="checkbox-get-gdpr-big-form" data-reactid="477">J&#x27;accepte
+                                                            que mes informations soient enregistrées puis utilisées par
+                                                            l&#x27;annonceur
+                                                            afin de répondre à ma demande.
+                                                        </label>
+                                                        <p class="alert-message" data-reactid="478"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="FormStyle__RequiredField-s2mxqza-4 biDkFo" data-reactid="479">
+                                                <span
+                                                        class="asterisk" data-reactid="480">*
+                                                </span><!-- react-text: 481 -->
+                                                Champs requis<!-- /react-text -->
+                                            </div>
+                                            <button role="button" type="submit"
+                                                    class="buttonAthome__ButtonDefault-bvwRGY hQTGqG"
+                                                    data-reactid="482">
+                                                Envoyer
+                                            </button>
+                                            <div class="error-message" data-reactid="483"></div>
+                                            <p class="bottom FormStyle__Legal-s2mxqza-5 dPgPJY" data-reactid="484">
+                                                Consultez
+                                                notre <a href="/legal/confidentialite" target="_blank">politique de
+                                                confidentialité
+                                            </a> pour connaître vos droits.
+                                            </p>
+                                        </div>
+                                    </form>
+                                </section>
+                                <input type="checkbox" id="modal-alert" class="checkbox-modal" data-reactid="485"/>
+                                <div class="modal modal-alert form-contact" data-reactid="486">
+                                    <label class="modal-alert-bg"
+                                           for="modal-alert"
+                                           data-reactid="487"></label>
+                                    <div class="modal-inner" data-reactid="488">
+                                        <label class="modal-close" for="modal-alert"
+                                               data-reactid="489"></label>
+                                        <div class="modal-alert-content form-contact form-modal" data-reactid="490">
+                                            <div class="container" data-reactid="491">
+                                                <div class="modal-alert-title" data-reactid="492">
+                                                    <h2 data-reactid="493">
+                                                        Créez une alerte sur des annonces similaires
+                                                    </h2>
+                                                </div>
+                                                <div class="info" data-reactid="494"><!-- react-text: 495 -->Vous
+                                                    recevrez
+                                                    par e-mail des annonces similaires à :<!-- /react-text -->
+                                                    <br
+                                                            data-reactid="496"/>
+                                                    <br data-reactid="497"/>
+                                                    <div data-reactid="498">
+                                                        <div class="redLink" data-reactid="499">Maison 6 pièces à Longwy
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-alert-content form-contact form-modal"
+                                                     data-reactid="500">
+                                                    <form class="form form-form" data-reactid="501">
+                                                        <div class="form-input-content" data-reactid="502">
+                                                            <input
+                                                                    type="text" placeholder="Votre e-mail *" class=""
+                                                                    name="email" value="" data-reactid="503"/>
+                                                            <div class="error-message" data-reactid="504">
+                                                                <p
+                                                                        class="alert-message" data-reactid="505"></p>
+                                                            </div>
+                                                            <div class="FormStyle__AthomeCheckbox-s2mxqza-7 aCgWY"
+                                                                 data-reactid="506">
+                                                                <input type="checkbox"
+                                                                       id="accept-condition"
+                                                                       data-reactid="507"/>
+                                                                <label
+                                                                        for="accept-condition" class=""
+                                                                        data-reactid="508">
+                                                                    <div class="more-info" data-reactid="509">
+                                                                        <!-- react-text: 510 -->à l&#x27;envoi, vous
+                                                                        acceptez
+                                                                        les <!-- /react-text -->
+                                                                        <a href="/legal/confidentialite"
+                                                                           target="_blank"
+                                                                           class="redLink"
+                                                                           data-reactid="511">Conditions
+                                                                            d&#x27;utilisation
+                                                                        </a>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="FormStyle__RequiredField-s2mxqza-4 biDkFo"
+                                                             data-reactid="512">
+                                                            <span class="asterisk"
+                                                                  data-reactid="513">*
+                                                            </span>
+                                                            <!-- react-text: 514 -->Champ requis<!-- /react-text -->
+                                                        </div>
+                                                        <button class="alertButton" type="submit" data-reactid="515">
+                                                            Créer
+                                                            une alerte
+                                                        </button>
+                                                        <div class="error-message" data-reactid="516"></div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <section class="SimilarListingListStyle__SimilarListingContainer-s702spn-0 eKFTwG"
+                                         data-reactid="517">
+                                    <div class="background-fluid" data-reactid="518"></div>
+                                    <div class="similar-add-text" data-reactid="519">
+                                        <h2 data-reactid="520">Biens
+                                            similaires
+                                        </h2>
+                                        <p data-reactid="521">Ces annonces peuvent vous intéresser !</p>
+                                    </div>
+                                    <div class="similar-add-btn" data-reactid="522">
+                                        <label aria-label="alert"
+                                               for="modal-alert"
+                                               data-reactid="523">Créer une
+                                            alerte
+                                        </label>
+                                    </div>
+                                    <div class="similar-add-slider" data-reactid="524">
+                                        <div class="grey SimilarListingListStyle__PrevNextButtonContainer-s702spn-1 gVSfCa"
+                                             data-reactid="525">
+                                            <div class="previous-following" data-reactid="526">
+                                                <button class="before disabled" data-reactid="527">
+                                                    <i
+                                                            class="rotate-gallery-left icon-chevron-left"
+                                                            data-reactid="528"></i>
+                                                </button>
+                                                <button class="after disabled" data-reactid="529">
+                                                    <i
+                                                            class="rotate-gallery-right icon-chevron-right"
+                                                            data-reactid="530"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="similar-add-slider-container" data-reactid="531">
+                                            <div class="sliding-container" data-reactid="532">
+                                                <div class="similar-add-slider-content" data-reactid="533">
+                                                    <a
+                                                            href="/vente/maison/longwy/id-5937062.html"
+                                                            data-reactid="534">
+                                                        <div class="similar-add-slider-content-picture"
+                                                             data-reactid="535">
+                                                            <picture data-reactid="536">
+                                                                <img
+                                                                        src="https://i1.static.athome.eu/images/annonces2/image_/6a/79/a5/bfc8ea507b40a6d04d965325145d008e78694dfd_244x160.jpg"
+                                                                        data-reactid="537"/><!-- react-text: 538 -->
+                                                                <!-- /react-text -->
+                                                            </picture>
+                                                        </div>
+                                                        <div class="similar-add-slider-content-info" data-reactid="539">
+                                                            <div class="similar-add-slider-content-name"
+                                                                 data-reactid="540">
+                                                                Maison à Vendre
+                                                            </div>
+                                                            <div class="similar-add-slider-content-info-content"
+                                                                 data-reactid="541">
+                                                                <div class="similar-add-slider-content-city"
+                                                                     data-reactid="542">
+                                                                    Longwy
+                                                                </div>
+                                                                <div class="similar-add-slider-container-price"
+                                                                     data-reactid="543"><!-- react-text: 544 -->
+                                                                    <!-- /react-text -->
+                                                                    <div class="similar-add-slider-content-price"
+                                                                         data-reactid="545">110 000 €
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="similar-add-slider-content-icons" data-reactid="546">
+                                                        <div class="similar-add-slider-content-icons-info"
+                                                             data-reactid="547">
+                                                            <ul data-reactid="548"><!-- react-text: 549 -->
+                                                                <!-- /react-text -->
+                                                                <li data-reactid="550">
+                                                                    <i class="icon-room"
+                                                                       data-reactid="551"></i>
+                                                                    <div data-reactid="552">
+                                                                        <span
+                                                                                data-reactid="553">5
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                                <li data-reactid="554">
+                                                                    <i class="icon-surface"
+                                                                       data-reactid="555"></i>
+                                                                    <div data-reactid="556">
+                                                                        <span
+                                                                                data-reactid="557">120 m²
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="icon-favorite" data-reactid="558">
+                                                                <li data-reactid="559">
+                                                                    <button data-reactid="560">
+                                                                        <i
+                                                                                class="icon-interactive icon-favourite"
+                                                                                data-reactid="561"></i>
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="similar-add-slider-content" data-reactid="562">
+                                                    <a
+                                                            href="/vente/maison/saulnes/id-6026713.html"
+                                                            data-reactid="563">
+                                                        <div class="similar-add-slider-content-picture"
+                                                             data-reactid="564">
+                                                            <picture data-reactid="565">
+                                                                <img
+                                                                        src="https://i1.static.athome.eu/images/annonces2/image_/9d/5f/b5/787125d37ef575842a1a5f4cd5c7712499e3784d_244x160.jpg"
+                                                                        data-reactid="566"/><!-- react-text: 567 -->
+                                                                <!-- /react-text -->
+                                                            </picture>
+                                                        </div>
+                                                        <div class="similar-add-slider-content-info" data-reactid="568">
+                                                            <div class="similar-add-slider-content-name"
+                                                                 data-reactid="569">
+                                                                Maison à Vendre
+                                                            </div>
+                                                            <div class="similar-add-slider-content-info-content"
+                                                                 data-reactid="570">
+                                                                <div class="similar-add-slider-content-city"
+                                                                     data-reactid="571">
+                                                                    Saulnes
+                                                                </div>
+                                                                <div class="similar-add-slider-container-price"
+                                                                     data-reactid="572"><!-- react-text: 573 -->
+                                                                    <!-- /react-text -->
+                                                                    <div class="similar-add-slider-content-price"
+                                                                         data-reactid="574">106 000 €
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="similar-add-slider-content-icons" data-reactid="575">
+                                                        <div class="similar-add-slider-content-icons-info"
+                                                             data-reactid="576">
+                                                            <ul data-reactid="577"><!-- react-text: 578 -->
+                                                                <!-- /react-text -->
+                                                                <li data-reactid="579">
+                                                                    <i class="icon-room"
+                                                                       data-reactid="580"></i>
+                                                                    <div data-reactid="581">
+                                                                        <span
+                                                                                data-reactid="582">5
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                                <li data-reactid="583">
+                                                                    <i class="icon-surface"
+                                                                       data-reactid="584"></i>
+                                                                    <div data-reactid="585">
+                                                                        <span
+                                                                                data-reactid="586">90 m²
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="icon-favorite" data-reactid="587">
+                                                                <li data-reactid="588">
+                                                                    <button data-reactid="589">
+                                                                        <i
+                                                                                class="icon-interactive icon-favourite"
+                                                                                data-reactid="590"></i>
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="similar-add-slider-content" data-reactid="591">
+                                                    <a
+                                                            href="/vente/maison/longwy/id-5850317.html"
+                                                            data-reactid="592">
+                                                        <div class="similar-add-slider-content-picture"
+                                                             data-reactid="593">
+                                                            <picture data-reactid="594">
+                                                                <img
+                                                                        src="https://i1.static.athome.eu/images/annonces2/image_/dc/44/95/db5f09f2b8a7e5a5d5aca0228e594f74c8cffee5_244x160.jpg"
+                                                                        data-reactid="595"/><!-- react-text: 596 -->
+                                                                <!-- /react-text -->
+                                                            </picture>
+                                                        </div>
+                                                        <div class="similar-add-slider-content-info" data-reactid="597">
+                                                            <div class="similar-add-slider-content-name"
+                                                                 data-reactid="598">
+                                                                Maison à Vendre
+                                                            </div>
+                                                            <div class="similar-add-slider-content-info-content"
+                                                                 data-reactid="599">
+                                                                <div class="similar-add-slider-content-city"
+                                                                     data-reactid="600">
+                                                                    Longwy
+                                                                </div>
+                                                                <div class="similar-add-slider-container-price"
+                                                                     data-reactid="601"><!-- react-text: 602 -->
+                                                                    <!-- /react-text -->
+                                                                    <div class="similar-add-slider-content-price"
+                                                                         data-reactid="603">112 000 €
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="similar-add-slider-content-icons" data-reactid="604">
+                                                        <div class="similar-add-slider-content-icons-info"
+                                                             data-reactid="605">
+                                                            <ul data-reactid="606"><!-- react-text: 607 -->
+                                                                <!-- /react-text -->
+                                                                <li data-reactid="608">
+                                                                    <i class="icon-room"
+                                                                       data-reactid="609"></i>
+                                                                    <div data-reactid="610">
+                                                                        <span
+                                                                                data-reactid="611">6
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                                <li data-reactid="612">
+                                                                    <i class="icon-surface"
+                                                                       data-reactid="613"></i>
+                                                                    <div data-reactid="614">
+                                                                        <span
+                                                                                data-reactid="615">100 m²
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="icon-favorite" data-reactid="616">
+                                                                <li data-reactid="617">
+                                                                    <button data-reactid="618">
+                                                                        <i
+                                                                                class="icon-interactive icon-favourite"
+                                                                                data-reactid="619"></i>
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </article>
+                            <section class="FloatingAgentStyle__FloatingAgentContainer-s6okz15-0 dZGPab"
+                                     data-reactid="620">
+                                <button class="btn-floating-agent" data-reactid="621">
+                                    <div class="question" data-reactid="622">
+                                        <span data-reactid="623">
+                                            <b data-reactid="624">Poser une question à l&#x27;agent</b>
+                                        </span>
+                                        <div class="picture-agency-agent" data-reactid="625">
+                                            <img
+                                                    src="/portal/assets/images/avatar.png" alt="" data-reactid="626"/>
+                                        </div>
+                                    </div>
+                                </button><!-- react-empty: 627 -->
+                            </section><!-- react-empty: 628 -->
+                            <footer class="sc-cvbbAY fXyhPU" data-reactid="629">
+                                <div class="footer-link" data-reactid="630">
+                                    <div class="sc-brqgnP gHvmhi" data-reactid="631">
+                                        <div class="sc-cMljjf gbyXLQ" data-reactid="632">
+                                            <ul data-reactid="633">
+                                                <li data-reactid="634">
+                                                    <a href="https://www.facebook.com/immoRegion"
+                                                       class="btn-social-network facebook" rel="nofollow"
+                                                       target="_blank" data-reactid="635">
+                                                        <i
+                                                                class="icon-social icon-facebook"
+                                                                data-reactid="636"></i>
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="637">
+                                                    <a href="https://twitter.com/immoRegion"
+                                                       class="btn-social-network twitter" rel="nofollow"
+                                                       target="_blank" data-reactid="638">
+                                                        <i
+                                                                class="icon-social icon-twitter" data-reactid="639"></i>
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="640">
+                                                    <a href="https://www.youtube.com/user/immoregion10"
+                                                       class="btn-social-network youtube" rel="nofollow"
+                                                       target="_blank" data-reactid="641">
+                                                        <i
+                                                                class="icon-social icon-youtube" data-reactid="642"></i>
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="643">
+                                                    <a href="https://plus.google.com/+ImmoregionFr1"
+                                                       class="btn-social-network googleplus"
+                                                       rel="nofollow" target="_blank" data-reactid="644">
+                                                        <i
+                                                                class="icon-social icon-googleplus"
+                                                                data-reactid="645"></i>
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="646">
+                                                    <a href="https://www.linkedin.com/company/immoregion"
+                                                       class="btn-social-network linkedin" rel="nofollow"
+                                                       target="_blank" data-reactid="647">
+                                                        <i
+                                                                class="icon-social icon-linkedin"
+                                                                data-reactid="648"></i>
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="649">
+                                                    <a href="https://www.instagram.com/immoregion/"
+                                                       class="btn-social-network instagram"
+                                                       rel="nofollow" target="_blank" data-reactid="650">
+                                                        <i
+                                                                class="icon-social icon-instagram"
+                                                                data-reactid="651"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="sc-jAaTju dsUOsy" data-reactid="652">
+                                            <ul data-reactid="653">
+                                                <li data-reactid="654">
+                                                    <a href="http://www.athomegroup.eu/" target="_blank"
+                                                       data-reactid="655">atHomeGroup
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="656">
+                                                    <a
+                                                            href="https://www.immoRegion.fr/legal/contact/lang/fr"
+                                                            rel="nofollow" origin="legacy" data-reactid="657">Contact
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="658">
+                                                    <a href="/legal/partenaires" rel="nofollow"
+                                                       data-reactid="659">Partenaires
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="660">
+                                                    <a href="http://solutions.athome.lu/" target="_blank"
+                                                       data-reactid="661">Annonceurs
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="662">
+                                                    <a href="/legal/confidentialite" rel="nofollow"
+                                                       data-reactid="663">Vie privée
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="664">
+                                                    <a href="/legal/cookies" rel="nofollow"
+                                                       data-reactid="665">Cookie
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="666">
+                                                    <a href="/legal/cyber-criminalite" rel="nofollow"
+                                                       data-reactid="667">Cybercriminalité
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="668">
+                                                    <a href="/legal/responsabilite" rel="nofollow"
+                                                       data-reactid="669">Responsabilité
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="670">
+                                                    <a href="/legal" rel="nofollow" data-reactid="671">Mentions
+                                                        légales
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="672">
+                                                    <a href="http://www.athomegroup.eu/carrieres/"
+                                                       target="_blank" data-reactid="673">Carrières
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="sc-jDwBTQ cubQkp" data-reactid="674">
+                                        <p data-reactid="675">
+                                            <!-- react-text: 676 -->© 2000
+                                            - <!-- /react-text --><!-- react-text: 677 -->2018
+                                            <!-- /react-text --><!-- react-text: 678 --> <!-- /react-text -->
+                                            <!-- react-text: 679 -->atHome Group S.à.r.l.<!-- /react-text --></p>
+                                        <p class="sc-iRbamj jFCMnG" data-reactid="680">1, place du Pont-à-Seille F-57045
+                                            METZ CEDEX 01
+                                        </p>
+                                    </div>
+                                    <div class="sc-jlyJG bgZZZA" data-reactid="681">
+                                        <div class="site-box " data-reactid="682">
+                                            <p class="site-box-titles"
+                                               data-reactid="683">
+                                                <!-- react-text: 684 -->Particulier<!-- /react-text -->
+                                                <i aria-hidden="true"
+                                                   class="hybrid-dropdown icon-chevron-down"
+                                                   data-reactid="685"></i>
+                                            </p>
+                                            <ul class="mobile-dropdown" data-reactid="686">
+                                                <li data-reactid="687">
+                                                    <a href="https://www.immoRegion.fr/publier/lang/fr"
+                                                       origin="legacy" data-reactid="688">Publiez votre
+                                                        bien
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="site-box " data-reactid="689">
+                                            <p class="site-box-titles"
+                                               data-reactid="690">
+                                                <!-- react-text: 691 -->Accès professionnel <!-- /react-text -->
+                                                <i
+                                                        aria-hidden="true" class="hybrid-dropdown icon-chevron-down"
+                                                        data-reactid="692"></i>
+                                            </p>
+                                            <ul class="mobile-dropdown" data-reactid="693">
+                                                <li data-reactid="694">
+                                                    <a href="https://www.immoRegion.fr/pro"
+                                                       target="_blank" origin="legacy"
+                                                       data-reactid="695">Accès professionnel
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="696">
+                                                    <a href="https://www.immoRegion.fr/pro/mobile"
+                                                       target="_blank" origin="legacy"
+                                                       data-reactid="697">Application mobile pro
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="698">
+                                                    <a href="http://solutions.athome.lu/" target="_blank"
+                                                       data-reactid="699">Publicité
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="site-box " data-reactid="700">
+                                            <p class="site-box-titles"
+                                               data-reactid="701">
+                                                <!-- react-text: 702 -->Sites internationaux<!-- /react-text -->
+                                                <i
+                                                        aria-hidden="true" class="hybrid-dropdown icon-chevron-down"
+                                                        data-reactid="703"></i>
+                                            </p>
+                                            <ul class="mobile-dropdown" data-reactid="704">
+                                                <li data-reactid="705">
+                                                    <a href="https://www.athome.de" target="_blank"
+                                                       data-reactid="706">Allemagne
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="707">
+                                                    <a href="https://www.athome.lu" target="_blank"
+                                                       data-reactid="708">Luxembourg
+                                                    </a>
+                                                </li>
+                                                <li data-reactid="709">
+                                                    <a href="http://www.casa.it" target="_blank"
+                                                       data-reactid="710">Italie
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="more-logo contact suggestion" data-reactid="711">
+                                        <div class="container-playstore-appstore" data-reactid="712">
+                                            <a
+                                                    href="https://itunes.apple.com/app/id726165660" target="_blank"
+                                                    data-reactid="713">
+                                                <img class="logo-appstore"
+                                                     src="/portal/assets/images/appstore.svg"
+                                                     data-reactid="714"/>
+                                            </a>
+                                            <a
+                                                    href="https://play.google.com/store/apps/details?id=fr.immoregion"
+                                                    target="_blank" data-reactid="715">
+                                                <img class="logo-playstore"
+                                                     src="/portal/assets/images/playstore.svg"
+                                                     data-reactid="716"/>
+                                            </a>
+                                        </div>
+                                        <!-- react-text: 717 --><!-- /react-text -->
+                                    </div>
+                                </div>
+                            </footer><!-- react-empty: 718 -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal modal-error form-contact" data-reactid="719">
+                    <label class="modal-error-bg"
+                           for="modal-error"
+                           data-reactid="720"></label>
+                    <div class="key-general modal-inner" data-reactid="721">
+                        <label class="modal-close" for="modal-error"
+                               data-reactid="722"></label>
+                        <div class="modal-error-title" data-reactid="723">
+                            <h2 data-reactid="724">Signaler une erreur</h2>
+                            <p data-reactid="725">Vous avez détecté une erreur dans cette annonce ? Signalez-la à notre
+                                service client.
+                            </p>
+                        </div>
+                        <div class="modal-error-content form-contact form-modal" data-reactid="726">
+                            <form class="form form-form" data-reactid="727">
+                                <div class="form-input-content" data-reactid="728">
+                                    <input type="text" placeholder="Prénom"
+                                           name="firstName" value=""
+                                           data-reactid="729"/>
+                                    <div class="error-message" data-reactid="730"></div>
+                                </div>
+                                <div class="form-input-content" data-reactid="731">
+                                    <input type="text" placeholder="Nom"
+                                           name="name" value=""
+                                           data-reactid="732"/>
+                                    <div class="error-message" data-reactid="733"></div>
+                                </div>
+                                <div class="form-input-content" data-reactid="734">
+                                    <input type="text"
+                                           placeholder="Adresse e-mail *"
+                                           class="" name="email" value=""
+                                           data-reactid="735"/>
+                                    <div class="error-message" data-reactid="736"></div>
+                                </div>
+                                <div class="form-form-select" data-reactid="737">
+                                    <div class="FormStyle__Select-s2mxqza-2 kqUHJe" data-reactid="738">
+                                        <div class="container-select" data-reactid="739">
+                                            <div class="select" data-reactid="740">
+                                                <span data-reactid="741">Bien déjà loué/vendu</span>
+                                                <i
+                                                        data-reactid="742"></i>
+                                            </div><!-- react-text: 743 -->
+                                            <!-- /react-text -->
+                                        </div>
+                                    </div>
+                                    <div class="error-message" data-reactid="744"></div>
+                                </div>
+                                <textarea name="message" rows="5" placeholder="Votre message"
+                                          data-reactid="745"></textarea>
+                                <div class="error-message" data-reactid="746"></div>
+                                <div class="FormStyle__AthomeCheckbox-s2mxqza-7 aCgWY" data-reactid="747">
+                                    <input
+                                            type="checkbox" class="error" id="error-gdpr-checkbox" name="checkbox"
+                                            data-reactid="748"/>
+                                    <label for="error-gdpr-checkbox" data-reactid="749">J&#x27;accepte
+                                        que mes informations soient enregistrées puis utilisées par l&#x27;annonceur
+                                        afin de
+                                        répondre à ma demande.
+                                    </label>
+                                </div>
+                                <div class="error-message" data-reactid="750"></div>
+                                <div class="action-container" data-reactid="751">
+                                    <div class="form-form-extra-info" data-reactid="752">
+                                        <div class="required-field" data-reactid="753">
+                                            <span class="asterisk"
+                                                  data-reactid="754">*
+                                            </span>
+                                            <!-- react-text: 755 -->Champ requis<!-- /react-text -->
+                                        </div>
+                                    </div>
+                                    <button class="" type="submit" data-reactid="756">Envoyer</button>
+                                </div>
+                                <p class="FormStyle__Legal-s2mxqza-5 dPgPJY" data-reactid="757">Consultez notre <a
+                                        href="/legal/confidentialite" target="_blank">politique de confidentialité
+                                </a> pour
+                                    connaître vos droits.
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal modal-energy" data-reactid="758">
+                    <label class="modal-label modal-energy-bg"
+                           for="modal-energy" data-reactid="759"></label>
+                    <div class="modal-inner" data-reactid="760">
+                        <label class="modal-label modal-close" for="modal-energy"
+                               data-reactid="761"></label>
+                        <div class="fancybox-modal" data-reactid="762">
+                            <div class="fancybox-content" data-reactid="763">
+                                <div class="modal-energy-title" data-reactid="764">Diagnostics</div>
+                                <div class="modal-energy-row" data-reactid="765">
+                                    <div class="modal-energy-row-content" data-reactid="766">
+                                        <div class="modal-energy-feature" data-reactid="767">
+                                            <div class="modal-energy-feature-title" data-reactid="768">DPE (Diagnostique
+                                                de
+                                                Performance Energétique) : E
+                                            </div>
+                                            <div class="modal-energy-feature-content" data-reactid="769">
+                                                <div class="modal-energy-feature-content-diagram" data-reactid="770">
+                                                    <div class="modal-energy-feature-content-diagram-analysis"
+                                                         data-reactid="771">Logement économe
+                                                    </div>
+                                                    <div class="modal-energy-feature-content-diagram-row"
+                                                         data-reactid="772">
+                                                        <div class="no-diagnostic none" data-reactid="773">
+                                                            <div class="no-diagnostic-content" data-reactid="774">Non
+                                                                Communiqué
+                                                            </div>
+                                                        </div>
+                                                        <ul class="energy-diagram fr-dpe" data-reactid="775">
+                                                            <li data-reactid="776">
+                                                                <div class="energy-value" data-reactid="777"></div>
+                                                                <div class="energy-class" data-reactid="778">&lt;= 50
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="779">
+                                                                <div class="energy-value" data-reactid="780"></div>
+                                                                <div class="energy-class" data-reactid="781">51 - 90
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="782">
+                                                                <div class="energy-value" data-reactid="783"></div>
+                                                                <div class="energy-class" data-reactid="784">91 - 150
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="785">
+                                                                <div class="energy-value" data-reactid="786"></div>
+                                                                <div class="energy-class" data-reactid="787">151 - 230
+                                                                </div>
+                                                            </li>
+                                                            <li class="energy-class-selected" data-reactid="788">
+                                                                <div class="energy-value" data-reactid="789"></div>
+                                                                <div class="energy-class" data-reactid="790">231 - 330
+                                                                </div>
+                                                                <div class="modal-energy-feature-content-diagram-analysis-selector"
+                                                                     data-reactid="791">
+                                                                    <span data-reactid="792">291</span>
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="793">
+                                                                <div class="energy-value" data-reactid="794"></div>
+                                                                <div class="energy-class" data-reactid="795">331 - 450
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="796">
+                                                                <div class="energy-value" data-reactid="797"></div>
+                                                                <div class="energy-class" data-reactid="798">&gt;= 451
+                                                                </div>
+                                                            </li><!-- react-text: 799 --> <!-- /react-text -->
+                                                        </ul>
+                                                    </div>
+                                                    <div class="modal-energy-feature-content-diagram-analysis"
+                                                         data-reactid="800">
+                                                        <div data-reactid="801">Logement énergivore</div>
+                                                        <div class="diagram-analysis-value" data-reactid="802">
+                                                            (kWh/m².an)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-energy-row-content" data-reactid="803">
+                                        <div class="modal-energy-feature" data-reactid="804">
+                                            <div class="modal-energy-feature-title" data-reactid="805">GES (Gaz à Effet
+                                                de
+                                                Serre) : F
+                                            </div>
+                                            <div class="modal-energy-feature-content" data-reactid="806">
+                                                <div class="modal-energy-feature-content-diagram" data-reactid="807">
+                                                    <div class="modal-energy-feature-content-diagram-analysis"
+                                                         data-reactid="808">Faible émission
+                                                    </div>
+                                                    <div class="modal-energy-feature-content-diagram-row"
+                                                         data-reactid="809">
+                                                        <div class="no-diagnostic " data-reactid="810">
+                                                            <div class="no-diagnostic-content" data-reactid="811">
+                                                                <div data-reactid="812">Non Communiqué</div>
+                                                            </div>
+                                                        </div>
+                                                        <ul class="energy-diagram fr-ges" data-reactid="813">
+                                                            <li data-reactid="814">
+                                                                <div class="energy-value" data-reactid="815"></div>
+                                                                <div class="energy-class" data-reactid="816">&lt;= 5
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="817">
+                                                                <div class="energy-value" data-reactid="818"></div>
+                                                                <div class="energy-class" data-reactid="819">6 - 10
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="820">
+                                                                <div class="energy-value" data-reactid="821"></div>
+                                                                <div class="energy-class" data-reactid="822">11 - 20
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="823">
+                                                                <div class="energy-value" data-reactid="824"></div>
+                                                                <div class="energy-class" data-reactid="825">21 - 35
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="826">
+                                                                <div class="energy-value" data-reactid="827"></div>
+                                                                <div class="energy-class" data-reactid="828">36 - 55
+                                                                </div>
+                                                            </li>
+                                                            <li class="energy-class-selected" data-reactid="829">
+                                                                <div class="energy-value" data-reactid="830"></div>
+                                                                <div class="energy-class" data-reactid="831">56 - 80
+                                                                </div>
+                                                                <div class="modal-energy-feature-content-diagram-analysis-selector"
+                                                                     data-reactid="832">
+                                                                    <span data-reactid="833"></span>
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="834">
+                                                                <div class="energy-value" data-reactid="835"></div>
+                                                                <div class="energy-class" data-reactid="836">&gt;= 81
+                                                                </div>
+                                                            </li><!-- react-text: 837 --> <!-- /react-text -->
+                                                        </ul>
+                                                    </div>
+                                                    <div class="modal-energy-feature-content-diagram-analysis"
+                                                         data-reactid="838">
+                                                        <div data-reactid="839">Forte émission</div>
+                                                        <div class="diagram-analysis-value" data-reactid="840">(en
+                                                            kgeqCO2 /
+                                                            m².an)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-energy-row-content" data-reactid="841">
+                                        <div class="modal-energy-feature" data-reactid="842">
+                                            <div class="modal-energy-feature-title" data-reactid="843">Classe d&#x27;isolation
+                                                thermique : A
+                                            </div>
+                                            <div class="modal-energy-feature-content" data-reactid="844">
+                                                <div class="modal-energy-feature-content-diagram" data-reactid="845">
+                                                    <div class="modal-energy-feature-content-diagram-analysis"
+                                                         data-reactid="846">Logement bien isolé
+                                                    </div>
+                                                    <div class="modal-energy-feature-content-diagram-row"
+                                                         data-reactid="847">
+                                                        <div class="no-diagnostic none" data-reactid="848">
+                                                            <div class="no-diagnostic-content" data-reactid="849">
+                                                                <div data-reactid="850">Non Communiqué</div>
+                                                            </div>
+                                                        </div>
+                                                        <ul class="energy-diagram fr-iso" data-reactid="851">
+                                                            <li class="energy-class-selected" data-reactid="852">
+                                                                <div class="energy-value" data-reactid="853"></div>
+                                                                <div class="energy-class" data-reactid="854">&lt;= 22
+                                                                </div>
+                                                                <div class="modal-energy-feature-content-diagram-analysis-selector"
+                                                                     data-reactid="855">
+                                                                    <span data-reactid="856"></span>
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="857">
+                                                                <div class="energy-value" data-reactid="858"></div>
+                                                                <div class="energy-class" data-reactid="859">23 - 43
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="860">
+                                                                <div class="energy-value" data-reactid="861"></div>
+                                                                <div class="energy-class" data-reactid="862">44 - 69
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="863">
+                                                                <div class="energy-value" data-reactid="864"></div>
+                                                                <div class="energy-class" data-reactid="865">70 - 86
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="866">
+                                                                <div class="energy-value" data-reactid="867"></div>
+                                                                <div class="energy-class" data-reactid="868">87 - 130
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="869">
+                                                                <div class="energy-value" data-reactid="870"></div>
+                                                                <div class="energy-class" data-reactid="871">131 - 170
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="872">
+                                                                <div class="energy-value" data-reactid="873"></div>
+                                                                <div class="energy-class" data-reactid="874">171 - 230
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="875">
+                                                                <div class="energy-value" data-reactid="876"></div>
+                                                                <div class="energy-class" data-reactid="877">231 - 295
+                                                                </div>
+                                                            </li>
+                                                            <li data-reactid="878">
+                                                                <div class="energy-value" data-reactid="879"></div>
+                                                                <div class="energy-class" data-reactid="880">&gt;= 296
+                                                                </div>
+                                                            </li><!-- react-text: 881 --> <!-- /react-text -->
+                                                        </ul>
+                                                    </div>
+                                                    <div class="modal-energy-feature-content-diagram-analysis"
+                                                         data-reactid="882">
+                                                        <div data-reactid="883">Logement peu isolé</div>
+                                                        <div class="diagram-analysis-value" data-reactid="884">
+                                                            (kWh/m².an)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/portal/manifest-8b137aba92175cccb917.js"></script>
+    <script src="/portal/vendor-814d2a5e99a6012d7e81.js"></script>
+    <script src="/portal/detail-66f3466f6cf9cd9d75f0.js"></script>
+    <script src="/portal/assets/js/objectFitPolyfill.min.js"></script>
+</body>
