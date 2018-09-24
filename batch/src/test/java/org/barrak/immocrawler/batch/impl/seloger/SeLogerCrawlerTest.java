@@ -5,16 +5,10 @@ import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.stream.Collectors;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -32,7 +26,7 @@ public class SeLogerCrawlerTest {
     @Before
     public void setUp() {
         ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource("searchResultPage1.html");
+        URL resource = classLoader.getResource("kenfen.html");
         File file = new File(resource.getPath());
 
 //        try (BufferedReader r = Files.newBufferedReader(Path.(resource.getPath(), Charset.forName("UTF-8"))) {

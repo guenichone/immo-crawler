@@ -22,9 +22,12 @@
 		<java.version>1.8</java.version>
 
         <selenium.version>3.14.0</selenium.version>
+        <assertj.version>3.11.1</assertj.version>
+        <jsoup.version>1.11.3</jsoup.version>
 	</properties>
 
 	<dependencies>
+        <!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -36,12 +39,14 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- INTERNAL -->
 		<dependency>
 			<groupId>org.barrak.crawler</groupId>
 			<artifactId>immo-crawler-database</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
+        <!-- EXTERNAL -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -52,6 +57,20 @@
 			<artifactId>selenium-firefox-driver</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
+
+        <!-- TEST -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
 
 	</dependencies>
 

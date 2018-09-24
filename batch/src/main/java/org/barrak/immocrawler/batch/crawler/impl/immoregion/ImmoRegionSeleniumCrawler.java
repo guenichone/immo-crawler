@@ -10,6 +10,7 @@ import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.DriverUtils;
 import org.barrak.immocrawler.batch.utils.URLUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,9 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
     @Value("${provider.website.immoregion}")
     private String immoregionUrl;
 
-    @Autowired
+    @Value("${webdriver.gecko.driver}")
+    private String geckodriverPath;
+
     private WebDriver driver;
 
     @Autowired
@@ -50,7 +53,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
     public List<SearchResultDocument> search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
         List<SearchResultDocument> results = new ArrayList<>();
 
-        openWebsite();
+        open();
 
         fillCriteria(criteria);
 
@@ -64,7 +67,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
             results.addAll(resultsPage);
         } while(loadNextResultsPage(criteria));
 
-        // driver.close();
+        close();
 
         LOGGER.info("results {}", results);
 
@@ -111,8 +114,15 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
         return true;
     }
 
-    private void openWebsite() {
+    private void open() {
+        System.setProperty("webdriver.gecko.driver", geckodriverPath);
+
+        driver = new FirefoxDriver();
         driver.get(immoregionUrl);
+    }
+
+    private void close() {
+        driver.close();
     }
 
     private void fillCriteria(SearchCriteria criteria) {

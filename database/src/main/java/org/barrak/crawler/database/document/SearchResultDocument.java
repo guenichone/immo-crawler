@@ -28,6 +28,9 @@ public class SearchResultDocument {
 
     private LocalDateTime created;
 
+    private boolean error;
+    private boolean moved;
+
     public SearchResultDocument() {
     }
 
@@ -121,6 +124,22 @@ public class SearchResultDocument {
 
     public LocalDateTime getCreated() {
         return created;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
+
+    public boolean isMoved() {
+        return moved;
+    }
+
+    public void setMoved(boolean moved) {
+        this.moved = moved;
     }
 
     @Override

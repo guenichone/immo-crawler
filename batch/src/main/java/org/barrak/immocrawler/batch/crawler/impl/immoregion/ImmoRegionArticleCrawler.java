@@ -1,61 +1,98 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
+import org.apache.http.HttpStatus;
+import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
+import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-import java.io.File;
 import java.io.IOException;
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-public class ImmoRegionArticleCrawler {
+@Component
+public class ImmoRegionArticleCrawler implements IDetailsCrawler {
 
-    private SearchResultDocument searchResult;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionArticleCrawler.class);
 
-    public ImmoRegionArticleCrawler(String url) {
-        Element page = getPage(url);
-
-        parsePage(page);
+    @Override
+    public SearchResultDetailsDocument getDetails(SearchResultDocument article) {
+        return parsePage(article);
     }
 
-    private Element getPage(String url) {
+    private SearchResultDetailsDocument parsePage(SearchResultDocument article) {
+        LOGGER.info("Parsing details for : {}", article.getUrl());
+
+        SearchResultDetailsDocument result = new SearchResultDetailsDocument();
+        result.setUrl(article.getUrl());
+        result.setCity(article.getCity());
+
         try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
+            Connection.Response response = Jsoup.connect(article.getUrl()).followRedirects(false).execute();
+            if (response.statusCode() == HttpStatus.SC_MOVED_PERMANENTLY) {
+                throw new NoSuchElementException();
+            }
+            Document doc = response.parse();
 
-            File fileXML = new File("test.xml");
-            Document xml = builder.parse(fileXML);
+            result.setDescription(getDescription(doc));
+            result.setPrice(getPrice(doc));
+            result.setImageUrls(getImages(doc));
+            result.setLandSurface(getNumericOnly(getGeneralInfo(doc, "Terrain")));
+            result.setHomeSurface((int) getNumericOnly(getGeneralInfo(doc, "Surface")));
+            result.setNbRooms((int) getNumericOnly(getGeneralInfo(doc, "Nombre de pièces")));
 
-            return xml.getDocumentElement();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
+            return result;
         } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
-    private void parsePage(Element page) {
+    private String getDescription(Document doc) {
+        Element description = doc.getElementsByClass("description")
+                .first().getElementsByTag("p").first();
+        return inlineText(description.text());
+    }
+
+    private int getPrice(Document doc) {
+        Element price =doc.getElementsByTag("h2").first();
+        return (int) getNumericOnly(price.text());
+    }
+
+    private Set<String> getImages(Document doc) {
+        return doc.getElementsByTag("source").stream()
+                .map(element -> element.attr("srcset"))
+                .collect(Collectors.toSet());
+    }
+
+    private String getGeneralInfo(Document doc, String label) {
+        return doc.getElementsByClass("feature-bloc-content-specification-content").stream()
+                .filter(elem -> {
+                    Element div = elem.getElementsByTag("div").first();
+                    return div != null && label.equals(div.text());
+                })
+                .map(elem -> elem.getElementsByTag("div").get(1).text())
+                .findFirst().orElse(null);
+    }
+
+    private String inlineText(String text) {
+        return text.replaceAll("\n", "").replaceAll("\t", "");
+    }
+
+    private double getNumericOnly(String text) {
         try {
-            XPath xPath = XPathFactory.newInstance().newXPath();
-
-            String description = xPath.evaluate("//div[contains(@class,'description')]/div/div/div/p/text()", page);
-
-            System.out.println("description : " + description);
-        } catch (XPathExpressionException ex) {
-
+            return Double.valueOf(text.replaceAll("[^\\d\\,]", "").replaceAll(",", "."));
+        } catch (NullPointerException ex) {
+            LOGGER.error("NullPointerException for '" + text + "'");
+        } catch (NumberFormatException ex) {
+            LOGGER.error("NumberFormatException for '" + text + "'", ex);
         }
-    }
-
-    public SearchResultDocument getSearchResult() {
-        return searchResult;
+        return -1;
     }
 }

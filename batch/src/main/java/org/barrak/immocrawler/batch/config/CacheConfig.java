@@ -1,6 +1,8 @@
 package org.barrak.immocrawler.batch.config;
 
+import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.crawler.database.repository.SearchResultDetailsRepository;
 import org.barrak.crawler.database.repository.SearchResultRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +19,22 @@ public class CacheConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(CacheConfig.class);
 
     @Bean
-    public Map<String, SearchResultDocument> getSearchResultCache(SearchResultRepository searchResultRepository) {
+    public Map<String, SearchResultDocument> getSearchResultCache(
+            SearchResultRepository searchResultRepository) {
+
         Map<String, SearchResultDocument> result = searchResultRepository.findAll().stream()
                 .collect(Collectors.toMap(SearchResultDocument::getUrl, Function.identity()));
-        LOGGER.info("Cache loading with {} entries", result.size());
+        LOGGER.info("Cache SearchResult loading with {} entries", result.size());
+        return result;
+    }
+
+    @Bean
+    public Map<String, SearchResultDetailsDocument> getSearchResultDetailsCache(
+            SearchResultDetailsRepository searchResultDetailsRepository) {
+
+        Map<String, SearchResultDetailsDocument> result = searchResultDetailsRepository.findAll().stream()
+                .collect(Collectors.toMap(SearchResultDetailsDocument::getUrl, Function.identity()));
+        LOGGER.info("Cache SearchResultDetails loading with {} entries", result.size());
         return result;
     }
 
