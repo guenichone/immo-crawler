@@ -28,7 +28,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionSeleniumCrawler.class);
@@ -45,14 +45,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
     private Map<String, SearchResultDocument> cache;
 
     @Override
-    public List<SearchResultDocument> search(SearchCriteria criteria) {
-        return search(criteria, null);
-    }
-
-    @Override
-    public List<SearchResultDocument> search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
-        List<SearchResultDocument> results = new ArrayList<>();
-
+    public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
         open();
 
         fillCriteria(criteria);
@@ -64,14 +57,9 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
             if (consumer != null) {
                 consumer.accept(resultsPage);
             }
-            results.addAll(resultsPage);
         } while(loadNextResultsPage(criteria));
 
         close();
-
-        LOGGER.info("results {}", results);
-
-        return results;
     }
 
     private boolean loadNextResultsPage(SearchCriteria criteria) {
@@ -87,8 +75,6 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
 
             List<NameValuePair> params = URLEncodedUtils.parse(new URI(driver.getCurrentUrl()), Charset.forName("UTF-8"));
             URLUtils.updateUrlParam(params, "page", pageProcess, "2");
-//            URLUtils.updateUrlParam(params, "price_min", "" + criteria.getMinPrice());
-//            URLUtils.updateUrlParam(params, "price_max", "" + criteria.getMaxPrice());
 
             String nextUrl ="https://www.immoregion.fr/srp/?" + URLEncodedUtils.format(params, Charset.forName("UTF-8"));
             LOGGER.info("To : {}", nextUrl);
@@ -132,7 +118,9 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
 
         DriverUtils.sendHumanKeys(qs, criteria.getCity());
 
-        driver.findElement(By.linkText("Crusnes (54680)")).click();
+        DriverUtils.sleep(500);
+
+        driver.findElement(By.xpath("//a[@title='Crusnes (FR)']")).click();
 
         DriverUtils.findByNormalizedText(driver, "15").click();
         DriverUtils.findByNormalizedText(driver, "OK").click();
@@ -162,9 +150,6 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
 
         LOGGER.info("Parsing page {}", driver.getCurrentUrl());
 
-//        String nbAnnonces = DriverUtils.waitUntil(driver, By.xpath("//span[contains(., 'annonces')]"), 20).getText();
-//        LOGGER.info(nbAnnonces);
-
         List<WebElement> articles = driver.findElements(By.xpath("//article"));
 
         return articles.stream()
@@ -190,6 +175,8 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
                 LOGGER.info("Already in cache, registered the {}", oldSearchResult.getCreated());
                 return null;
             }
+        } else {
+            LOGGER.info("Add new result {}", href);
         }
 
         SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION.toString(), criteria.getCity(), price);

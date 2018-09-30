@@ -4,6 +4,7 @@ import org.apache.http.HttpStatus;
 import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
+import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,8 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
@@ -44,9 +49,12 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
             result.setDescription(getDescription(doc));
             result.setPrice(getPrice(doc));
             result.setImageUrls(getImages(doc));
-            result.setLandSurface(getNumericOnly(getGeneralInfo(doc, "Terrain")));
-            result.setHomeSurface((int) getNumericOnly(getGeneralInfo(doc, "Surface")));
-            result.setNbRooms((int) getNumericOnly(getGeneralInfo(doc, "Nombre de pièces")));
+            result.setLandSurface(ParserUtils.getNumericOnly(getGeneralInfo(doc, "Terrain")));
+            if (result.getLandSurface() == -1) {
+                result.setLandSurface(findLandSurfaceInDescription(result.getDescription()));
+            }
+            result.setHomeSurface((int) ParserUtils.getNumericOnly(getGeneralInfo(doc, "Surface")));
+            result.setNbRooms((int) ParserUtils.getNumericOnly(getGeneralInfo(doc, "Nombre de pièces")));
 
             return result;
         } catch (IOException e) {
@@ -57,12 +65,27 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
     private String getDescription(Document doc) {
         Element description = doc.getElementsByClass("description")
                 .first().getElementsByTag("p").first();
-        return inlineText(description.text());
+        return ParserUtils.inlineText(description.text());
+    }
+
+    private int findLandSurfaceInDescription(String description) {
+        List<String> allMatches = new ArrayList<>();
+        Matcher m = Pattern.compile("[0-9]+([,.][0-9]{1,2})? ares").matcher(description);
+        while (m.find()) {
+            allMatches.add(m.group());
+        }
+        if (allMatches.size() == 1) {
+            return (int) ParserUtils.getNumericOnly(allMatches.get(0));
+        } else if (allMatches.size() > 1) {
+            return allMatches.stream().mapToInt(val -> (int) ParserUtils.getNumericOnly(val)).sum();
+        } else {
+            return -1;
+        }
     }
 
     private int getPrice(Document doc) {
-        Element price =doc.getElementsByTag("h2").first();
-        return (int) getNumericOnly(price.text());
+        Element price = doc.getElementsByTag("h2").first();
+        return (int) ParserUtils.getNumericOnly(price.text());
     }
 
     private Set<String> getImages(Document doc) {
@@ -81,18 +104,5 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
                 .findFirst().orElse(null);
     }
 
-    private String inlineText(String text) {
-        return text.replaceAll("\n", "").replaceAll("\t", "");
-    }
 
-    private double getNumericOnly(String text) {
-        try {
-            return Double.valueOf(text.replaceAll("[^\\d\\,]", "").replaceAll(",", "."));
-        } catch (NullPointerException ex) {
-            LOGGER.error("NullPointerException for '" + text + "'");
-        } catch (NumberFormatException ex) {
-            LOGGER.error("NumberFormatException for '" + text + "'", ex);
-        }
-        return -1;
-    }
 }

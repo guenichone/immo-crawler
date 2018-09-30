@@ -2,11 +2,13 @@ package org.barrak.crawler.database.document;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
+import org.springframework.data.mongodb.core.mapping.event.BeforeSaveEvent;
 
 import java.time.LocalDateTime;
 
 @Document(collection = "searchResults")
-public class SearchResultDocument {
+public class SearchResultDocument extends AbstractMongoEventListener {
 
     @Id
     private String url;
@@ -39,6 +41,10 @@ public class SearchResultDocument {
         this.internalProvider = provider;
         this.city = city;
         this.price = price;
+    }
+
+    @Override
+    public void onBeforeSave(BeforeSaveEvent event) {
         this.created = LocalDateTime.now();
     }
 

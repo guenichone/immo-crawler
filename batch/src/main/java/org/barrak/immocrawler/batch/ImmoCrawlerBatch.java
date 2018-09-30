@@ -39,8 +39,8 @@ public class ImmoCrawlerBatch {
 			Collection<IPagedCrawler> crawlers = ctx.getBeansOfType(IPagedCrawler.class).values();
 
 			// Clean repo for fresh import
-			searchResultRepository.deleteAll();
-			cache.clear();
+//			searchResultRepository.deleteAll();
+//			cache.clear();
 
 			for (IPagedCrawler crawler : crawlers) {
                 crawler.search(searchCriteria, searchResults -> searchResultRepository.insert(searchResults));

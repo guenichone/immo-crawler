@@ -19,7 +19,7 @@ public class URLUtils {
     }
 
     public static void updateUrlParam(List<NameValuePair> params, String paramName,
-                              Function<NameValuePair, NameValuePair> processParam, String value) {
+                              Function<NameValuePair, NameValuePair> processParam, String valueIfAbsent) {
 
         Optional<NameValuePair> optNameParam = params.stream()
                 .filter(kvp -> paramName.equals(kvp.getName()))
@@ -32,8 +32,8 @@ public class URLUtils {
                 params.add(processParam.apply(nameParam));
             }
         } else {
-            if (value != null) {
-                params.add(new BasicNameValuePair(paramName, value));
+            if (valueIfAbsent != null) {
+                params.add(new BasicNameValuePair(paramName, valueIfAbsent));
             }
         }
     }

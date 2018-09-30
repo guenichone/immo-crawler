@@ -1,10 +1,13 @@
 package org.barrak.crawler.database.document;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
+import org.springframework.data.mongodb.core.mapping.event.BeforeSaveEvent;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
-public class SearchResultDetailsDocument {
+public class SearchResultDetailsDocument extends AbstractMongoEventListener {
 
     @Id
     private String url;
@@ -20,6 +23,16 @@ public class SearchResultDetailsDocument {
     private int homeSurface;
 
     private Set<String> imageUrls;
+
+    private int internalReference;
+    private int externalReference;
+
+    private LocalDateTime created;
+
+    @Override
+    public void onBeforeSave(BeforeSaveEvent event) {
+        this.created = LocalDateTime.now();
+    }
 
     public String getUrl() {
         return url;

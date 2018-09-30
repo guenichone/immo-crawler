@@ -1,20 +1,31 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
-import org.openqa.selenium.WebDriver;
+import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
+import org.barrak.immocrawler.batch.crawler.ProviderEnum;
+import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
+import org.barrak.immocrawler.batch.utils.ParserUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class ImmoRegionRestCrawler {
+@Component
+public class ImmoRegionRestCrawler implements IPagedCrawler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionSeleniumCrawler.class);
 
@@ -22,41 +33,122 @@ public class ImmoRegionRestCrawler {
     private String immoregionUrl;
 
     @Autowired
-    private WebDriver driver;
+    private Map<String, SearchResultDocument> cache;
 
     @Autowired
     private RestTemplate restTemplate;
 
-    private void openWebsiteWithCriterias() {
-        driver.get("https://www.immoregion.fr/srp/?distance=49.434418,5.921767,15&tr=buy&price_min=100000&price_max=500000&q=13bfe2b9&loc=L9-crusnes&ptypes=house,ground&page=30");
+    @Override
+    public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
+        try {
+            String url = buildSearchUrl(criteria, 1);
 
-        // https://www.immoregion.fr/srp/
-        // ?distance=49.434418,5.921767,15
-        // &tr=buy
-        // &price_min=100000
-        // &price_max=500000
-        // &q=13bfe2b9
-        // &loc=L9-crusnes
-        // &ptypes=house,ground
-        // &page=30
+            Document document = Jsoup.connect(url).followRedirects(false).get();
+
+            Element header = document.getElementsByClass("intro").first();
+            String resultText = header.getElementsByTag("h2").first().text();
+            int total = (int) ParserUtils.getNumericOnly(resultText);
+
+            Elements articles = document.getElementsByTag("article");
+            int nbByPage = articles.size();
+
+            int numberOfPages = total  / nbByPage;
+            if (total % nbByPage != 0) {
+                numberOfPages++;
+            }
+
+            consumer.accept(parseArticles(criteria, articles));
+
+            LOGGER.info("Found {} results in {} pages of results", total, numberOfPages);
+
+            if (numberOfPages > 1) {
+                IntStream.rangeClosed(2, numberOfPages).parallel().forEach(page -> {
+                    try {
+                        consumer.accept(parseResultPage(criteria, page));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
     }
 
-    private void openResultPage(String resultLink) {
-        // https://www.immoregion.fr/vente/maison/crusnes/id-5995352.html
+    public List<SearchResultDocument> parseResultPage(SearchCriteria criteria, int pageNumber) throws IOException {
+        String url = buildSearchUrl(criteria, pageNumber);
 
-        // String result = restTemplate.getForObject(resultLink, String.class);
+        Document document = Jsoup.connect(url).followRedirects(false).get();
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(resultLink);
+        return parseArticles(criteria, document.getElementsByTag("article"));
+    }
 
-        } catch (ParserConfigurationException e) {
-            LOGGER.error(e.getMessage(), e);
-        } catch (SAXException e) {
-            LOGGER.error(e.getMessage(), e);
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
+    public List<SearchResultDocument> parseArticles(SearchCriteria criteria, Elements articles) {
+        return articles.stream().map(article -> parseArticle(criteria, article)).collect(Collectors.toList());
+    }
+
+    public SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
+
+        Element a = article.getElementsByClass("mainInfos").first().getElementsByTag("a").first();
+        String href = immoregionUrl + a.attr("href");
+        int price = (int) ParserUtils.getNumericOnly(a.text());
+
+        if (cache.containsKey(href)) {
+            SearchResultDocument oldSearchResult = cache.get(href);
+            if (oldSearchResult.getPrice() != price) {
+                LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
+            } else {
+                LOGGER.info("Already in cache, registered the {}", oldSearchResult.getCreated());
+                return null;
+            }
+        } else {
+            LOGGER.info("Add new result {}", href);
         }
+
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION.toString(), criteria.getCity(), price);
+        searchResult.setTitle(getTitle(article, href));
+        searchResult.setImageUrl(getImgUrl(article, href));
+
+        return searchResult;
+    }
+
+    private String getTitle(Element article, String href) {
+        return article.getElementsByTag("a").first().attr("title");
+    }
+
+    private String getImgUrl(Element article, String url) {
+        try {
+            Element img = article.getElementsByTag("img").first();
+            return img.attr("src");
+        } catch (Exception ex) {
+            // Fallback on no script node
+            try {
+                return article.getElementsByTag("noscript").first().text().replaceAll("\"", "");
+            } catch (Exception ex2) {
+                LOGGER.error("Error when retrieving image for {}", url);
+                return null;
+            }
+        }
+    }
+
+    private String buildSearchUrl(SearchCriteria criteria, int pageNumber) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(immoregionUrl + "/srp/")
+                .queryParam("distance", "49.434418,5.921767,15")
+                .queryParam("tr", "buy");
+        if (criteria.getMinPrice() > 0) {
+            builder.queryParam("price_min", criteria.getMinPrice());
+        }
+        if (criteria.getMaxPrice() > 0) {
+            builder.queryParam("price_max", criteria.getMaxPrice());
+        }
+        builder.queryParam("q", "13bfe2b9")
+                .queryParam("loc", "L9-crusnes")
+                .queryParam("page", pageNumber)
+                .queryParam("ptypes", "ground,house");
+        return builder.toUriString();
+    }
+
+    public String findCity(String cityName) {
+        return "";
     }
 }

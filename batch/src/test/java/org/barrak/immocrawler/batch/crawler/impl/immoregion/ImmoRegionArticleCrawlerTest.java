@@ -2,18 +2,45 @@ package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
 import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import java.io.File;
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mock;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(Jsoup.class)
 public class ImmoRegionArticleCrawlerTest {
 
-    private ImmoRegionArticleCrawler crawler = new ImmoRegionArticleCrawler();
+    @InjectMocks
+    private ImmoRegionArticleCrawler crawler;
 
     @Test
-    public void testKenfen() {
+    public void testKanfen() throws IOException {
 
         String url = "https://www.immoregion.fr/vente/maison/kanfen/id-5995430.html";
+
+        Connection connection = mock(Connection.class);
+        PowerMockito.mockStatic(Jsoup.class);
+        PowerMockito.when(Jsoup.connect(Mockito.anyString())).thenReturn(connection);
+
+        Connection.Response response = mock(Connection.Response.class);
+        Document document = loadDocument(url, "kanfen.html");
+
+        when(response.parse()).thenReturn(document);
+        when(connection.execute()).thenReturn(response);
 
         SearchResultDocument article = new SearchResultDocument();
         article.setUrl(url);
@@ -75,6 +102,51 @@ public class ImmoRegionArticleCrawlerTest {
         assertThat(details.getLandSurface()).isEqualTo(-1);
         assertThat(details.getHomeSurface()).isEqualTo(100);
         assertThat(details.getNbRooms()).isEqualTo(5);
+    }
+
+    @Test
+    public void testFillieres() {
+        String url = "https://www.immoregion.fr/vente/maison/serrouville/id-5943181.html";
+
+        SearchResultDocument article = new SearchResultDocument();
+        article.setUrl(url);
+        article.setCity("serrouville");
+        article.setTitle("Maison mitoyenne 5 pièces à Serrouville");
+
+        SearchResultDetailsDocument details = crawler.getDetails(article);
+
+        assertThat(details).isNotNull();
+        assertThat(details.getUrl()).isEqualTo(url);
+        assertThat(details.getCity()).isEqualTo("serrouville");
+        assertThat(details.getPrice()).isEqualTo(148000);
+        assertThat(details.getDescription()).isEqualTo("A VOIR ! Maison mitoyenne rénovée en partie, d'environ 100m². " +
+                "Composée: " +
+                "d’une jolie entrée, " +
+                "d'un grand espace de vie de 52m², comprenant une grande cuisine équipée avec îlot central, idéal pour les petits-déjeuners en famille et d' un salon séjour avec accès sur la terrasse et le jardin, " +
+                "d’une salle de bain avec douche italienne, " +
+                "d'un wc séparé. " +
+                "Au premier étage, d'une grande mezzanine de 16m² pouvant servir d'espace bureau ou espace détente, " +
+                "d'une chambre de 14m² avec son dressing de 4m². " +
+                "Au deuxième étage, de 2 chambres de 10 et 15,8m², et d'un petit bureau. " +
+                "D’un grand garage motorisé, isolé, de 54m2. " +
+                "Et d’un jardin sur l’arrière de la maison. " +
+                "Des travaux ont été effectués dans la maison : toiture, isolation, chauffage, électricité, sanitaires et carrelages rez-de-chaussée. " +
+                "Quelques travaux de finitions sont à prévoir. " +
+                "Chauffage au fioul. " +
+                "Double vitrage sur toute la maison, avec volets roulants. " +
+                "A 5 minutes de toutes commodités commerces, écoles et services médicaux. " +
+                "A 15 minutes du Luxembourg (Esch/Alzette) et 15 minutes de Thionville. " +
+                "PROCHE ACCÈS AUTOROUTIERS (5min). " +
+                "FRAIS D’AGENCE A CHARGE VENDEUR.");
+        assertThat(details.getLandSurface()).isEqualTo(-1);
+        assertThat(details.getHomeSurface()).isEqualTo(100);
+        assertThat(details.getNbRooms()).isEqualTo(5);
+    }
+
+    private Document loadDocument(String url, String filePath) throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File input = new File(classLoader.getResource(filePath).getFile());
+        return Jsoup.parse(input, "UTF-8", url);
     }
 
 }

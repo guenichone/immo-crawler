@@ -26,7 +26,7 @@ public class SeLogerCrawlerTest {
     @Before
     public void setUp() {
         ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource("kenfen.html");
+        URL resource = classLoader.getResource("kanfen.html");
         File file = new File(resource.getPath());
 
 //        try (BufferedReader r = Files.newBufferedReader(Path.(resource.getPath(), Charset.forName("UTF-8"))) {
