@@ -1,4 +1,4 @@
-package org.barrak.immocrawler.batch.crawler.impl.seloger;
+package org.barrak.immocrawler.batch.crawler.impl.seloger.params;
 
 public enum NaturesEnum {
 

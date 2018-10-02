@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
  @Component
-public class ImmoRegionRestCrawler implements IPagedCrawler {
+public class ImmoRegionCrawler implements IPagedCrawler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionSeleniumCrawler.class);
 

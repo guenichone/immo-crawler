@@ -2,6 +2,10 @@ package org.barrak.crawler.database.document;
 
 public enum ProviderEnum {
 
+    // CRAWLER
     IMMOREGION,
-    PANETTA_IMMO
+    SELOGER,
+    // PRIVATE
+    PANETTA_IMMO,
+    IMMO_CASCIOLA,
 }

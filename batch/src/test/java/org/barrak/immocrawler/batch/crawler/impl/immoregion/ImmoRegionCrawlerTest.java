@@ -12,25 +12,25 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ImmoRegionRestCrawlerTest {
+public class ImmoRegionCrawlerTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionRestCrawlerTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionCrawlerTest.class);
 
-    private ImmoRegionRestCrawler restCrawler = new ImmoRegionRestCrawler();
+    private ImmoRegionCrawler crawler = new ImmoRegionCrawler();
 
     @Test
     public void search() throws IOException {
         RestTemplate restTemplate = new RestTemplateBuilder().build();
 
-        Whitebox.setInternalState(restCrawler, "restTemplate", restTemplate);
-        Whitebox.setInternalState(restCrawler, "immoregionUrl", "https://www.immoregion.fr/srp/");
-        Whitebox.setInternalState(restCrawler, "cache", new HashMap<String, SearchResultDocument>());
+        Whitebox.setInternalState(crawler, "restTemplate", restTemplate);
+        Whitebox.setInternalState(crawler, "immoregionUrl", "https://www.immoregion.fr/srp/");
+        Whitebox.setInternalState(crawler, "cache", new HashMap<String, SearchResultDocument>());
 
         SearchCriteria criteria = new SearchCriteria("crusnes");
         criteria.setMinPrice(100000);
         criteria.setMaxPrice(500000);
 
-        restCrawler.search(criteria, searchResultDocuments -> LOGGER.info(
+        crawler.search(criteria, searchResultDocuments -> LOGGER.info(
                 "Found {} results : {}", searchResultDocuments.size(), searchResultDocuments));
     }
 }
