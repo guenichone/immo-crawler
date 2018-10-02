@@ -2,7 +2,7 @@ package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
-import org.barrak.immocrawler.batch.crawler.ProviderEnum;
+import org.barrak.crawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.jsoup.Jsoup;
@@ -20,11 +20,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@Component
+ @Component
 public class ImmoRegionRestCrawler implements IPagedCrawler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionSeleniumCrawler.class);
@@ -66,7 +67,7 @@ public class ImmoRegionRestCrawler implements IPagedCrawler {
                     try {
                         consumer.accept(parseResultPage(criteria, page));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LOGGER.error(e.getMessage(), e);
                     }
                 });
             }
@@ -84,7 +85,10 @@ public class ImmoRegionRestCrawler implements IPagedCrawler {
     }
 
     public List<SearchResultDocument> parseArticles(SearchCriteria criteria, Elements articles) {
-        return articles.stream().map(article -> parseArticle(criteria, article)).collect(Collectors.toList());
+        return articles.stream()
+                .map(article -> parseArticle(criteria, article))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     public SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
@@ -105,7 +109,7 @@ public class ImmoRegionRestCrawler implements IPagedCrawler {
             LOGGER.info("Add new result {}", href);
         }
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION.toString(), criteria.getCity(), price);
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, criteria.getCity(), price);
         searchResult.setTitle(getTitle(article, href));
         searchResult.setImageUrl(getImgUrl(article, href));
 
@@ -146,9 +150,5 @@ public class ImmoRegionRestCrawler implements IPagedCrawler {
                 .queryParam("page", pageNumber)
                 .queryParam("ptypes", "ground,house");
         return builder.toUriString();
-    }
-
-    public String findCity(String cityName) {
-        return "";
     }
 }

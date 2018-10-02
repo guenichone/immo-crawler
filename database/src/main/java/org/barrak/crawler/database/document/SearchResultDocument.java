@@ -2,18 +2,16 @@ package org.barrak.crawler.database.document;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
-import org.springframework.data.mongodb.core.mapping.event.BeforeSaveEvent;
 
 import java.time.LocalDateTime;
 
 @Document(collection = "searchResults")
-public class SearchResultDocument extends AbstractMongoEventListener {
+public class SearchResultDocument {
 
     @Id
     private String url;
 
-    private String internalProvider;
+    private ProviderEnum internalProvider;
     private String externalProvider;
 
     private String title;
@@ -36,16 +34,11 @@ public class SearchResultDocument extends AbstractMongoEventListener {
     public SearchResultDocument() {
     }
 
-    public SearchResultDocument(String url, String provider, String city, int price) {
+    public SearchResultDocument(String url, ProviderEnum provider, String city, int price) {
         this.url = url;
         this.internalProvider = provider;
         this.city = city;
         this.price = price;
-    }
-
-    @Override
-    public void onBeforeSave(BeforeSaveEvent event) {
-        this.created = LocalDateTime.now();
     }
 
     public String getUrl() {
@@ -56,11 +49,11 @@ public class SearchResultDocument extends AbstractMongoEventListener {
         this.url = url;
     }
 
-    public String getInternalProvider() {
+    public ProviderEnum getInternalProvider() {
         return internalProvider;
     }
 
-    public void setInternalProvider(String internalProvider) {
+    public void setInternalProvider(ProviderEnum internalProvider) {
         this.internalProvider = internalProvider;
     }
 
@@ -146,6 +139,10 @@ public class SearchResultDocument extends AbstractMongoEventListener {
 
     public void setMoved(boolean moved) {
         this.moved = moved;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     @Override

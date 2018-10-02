@@ -5,7 +5,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
-import org.barrak.immocrawler.batch.crawler.ProviderEnum;
+import org.barrak.crawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.DriverUtils;
 import org.barrak.immocrawler.batch.utils.URLUtils;
@@ -15,12 +15,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,7 +26,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * Technical POC for selenium crawling, but not efficient without possible parallelization or retry
+ */
 //@Component
+@Deprecated
 public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionSeleniumCrawler.class);
@@ -179,7 +181,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
             LOGGER.info("Add new result {}", href);
         }
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION.toString(), criteria.getCity(), price);
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, criteria.getCity(), price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article, href));
 

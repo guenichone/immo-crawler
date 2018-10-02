@@ -1,6 +1,7 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
 import org.apache.http.HttpStatus;
+import org.barrak.crawler.database.document.ProviderEnum;
 import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
@@ -14,12 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
@@ -51,7 +48,7 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
             result.setImageUrls(getImages(doc));
             result.setLandSurface(ParserUtils.getNumericOnly(getGeneralInfo(doc, "Terrain")));
             if (result.getLandSurface() == -1) {
-                result.setLandSurface(findLandSurfaceInDescription(result.getDescription()));
+                result.setLandSurface(ParserUtils.findLandSurfaceInDescription(result.getDescription()));
             }
             result.setHomeSurface((int) ParserUtils.getNumericOnly(getGeneralInfo(doc, "Surface")));
             result.setNbRooms((int) ParserUtils.getNumericOnly(getGeneralInfo(doc, "Nombre de pièces")));
@@ -66,21 +63,6 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
         Element description = doc.getElementsByClass("description")
                 .first().getElementsByTag("p").first();
         return ParserUtils.inlineText(description.text());
-    }
-
-    private int findLandSurfaceInDescription(String description) {
-        List<String> allMatches = new ArrayList<>();
-        Matcher m = Pattern.compile("[0-9]+([,.][0-9]{1,2})? ares").matcher(description);
-        while (m.find()) {
-            allMatches.add(m.group());
-        }
-        if (allMatches.size() == 1) {
-            return (int) ParserUtils.getNumericOnly(allMatches.get(0));
-        } else if (allMatches.size() > 1) {
-            return allMatches.stream().mapToInt(val -> (int) ParserUtils.getNumericOnly(val)).sum();
-        } else {
-            return -1;
-        }
     }
 
     private int getPrice(Document doc) {
@@ -104,5 +86,8 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
                 .findFirst().orElse(null);
     }
 
-
+    @Override
+    public ProviderEnum getInternalProvider() {
+        return ProviderEnum.IMMOREGION;
+    }
 }
