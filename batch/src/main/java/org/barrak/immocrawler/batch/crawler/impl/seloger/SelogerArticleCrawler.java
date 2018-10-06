@@ -1,7 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
 import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
@@ -24,34 +23,30 @@ public class SelogerArticleCrawler implements IDetailsCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(SelogerArticleCrawler.class);
 
     @Override
-    public SearchResultDetailsDocument getDetails(SearchResultDocument article) {
+    public void updateDetails(SearchResultDocument article) {
         try {
-            Document document = Jsoup.connect(article.getUrl())
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36")
-                    .get();
+            Document document = Jsoup.connect(article.getUrl()).get();
 
             // TODO handle incorrect links
-
-            SearchResultDetailsDocument result = new SearchResultDetailsDocument(article);
 
             String id = ParserUtils.matchesByRegexGroup(article.getUrl(), "(?<id>[0-9]+).htm", "id").get(0).get("id");
             Map<String, Object> details = getDetails(id);
 
             String description = (String) details.get("descriptif");
-            result.setDescription(ParserUtils.inlineText(description)
+            article.setDescription(ParserUtils.inlineText(description)
                     .replaceAll("\\\\r",  " ")
                     .replaceAll("\\\\n",  "")
                     .replaceAll("\\\\t",  " "));
 
-            if (result.getLandSurface() == -1) {
-                result.setLandSurface(ParserUtils.findLandSurfaceInDescription(description));
+            if (article.getLandSurface() == -1) {
+                article.setLandSurface(ParserUtils.findLandSurfaceInDescription(description));
             }
-            result.setImageUrls(getImageUrls(document));
+            article.setImageUrls(getImageUrls(document));
+            article.setExternalReference(document.getElementsByClass("ref").text().replaceAll("Réf: ", ""));
 
-            return result;
+            article.setDetailsParsed(true);
         } catch (Exception ex) {
-            LOGGER.error(ex.getMessage(), ex);
-            return null;
+            throw new RuntimeException(ex);
         }
     }
 
@@ -82,14 +77,14 @@ public class SelogerArticleCrawler implements IDetailsCrawler {
 //                .collect(Collectors.toMap(o -> o[0], o -> o[1], (o1, o2) -> o1));
 //    }
 
-    @Override
-    public ProviderEnum getInternalProvider() {
-        return ProviderEnum.SELOGER;
-    }
-
     private Map<String, Object> getDetails(String id) throws IOException {
         String json = Jsoup.connect("https://www.seloger.com/detail,json,caracteristique_bien.json?idannonce=" + id).get().text();
         JsonParser parser = new BasicJsonParser();
         return parser.parseMap(json);
+    }
+
+    @Override
+    public ProviderEnum getInternalProvider() {
+        return ProviderEnum.SELOGER;
     }
 }

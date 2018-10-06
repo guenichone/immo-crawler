@@ -1,6 +1,5 @@
 package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
-import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.junit.Test;
@@ -23,10 +22,10 @@ public class SelogerArticleCrawlerTest {
         article.setCity("kanfen");
         article.setTitle("Maison 6 pièces à Kanfen");
 
-        SearchResultDetailsDocument result = crawler.getDetails(article);
+        crawler.updateDetails(article);
 
-        assertThat(result).isNotNull();
-        assertThat(result.getDescription()).isEqualTo("AUDUN LE ROMAN A 10 mn A PROXIMITÉ DES ÉCOLES, COLLÈGE, COMMERCES Pavillon neuf LABEL BBC 6 pièces de 115 m² habitable Maison de 1/2 niveau 90 m² + 25 m² de combles aménageables  4 chambres, cuisine ouverte sur le salon séjour de 50 m², salle de bain avec douche à l'italienne 120X120 et baignoire, 1/2 sous-sol 50 m² avec 2 places de garage, buanderie, 2 places de parking. Chauffage au gaz au sol Sur un terrain d'environ 5 ares. A proximité: THIONVILLE, LONGWY, BEUVILLERS, AUMETZ, BOULANGE, AUDUN LE TICHE, LANDRES, TRIEUX, FONTOY Possibilitée de financement total sans apport  Prêt à taux 0% Pas d'acompte à la réservation Frais de notaire réduit  Prix: 179900euros Pour plus de renseignements ou RDV TEL.");
+        assertThat(article).isNotNull();
+        assertThat(article.getDescription()).isEqualTo("AUDUN LE ROMAN A 10 mn A PROXIMITÉ DES ÉCOLES, COLLÈGE, COMMERCES Pavillon neuf LABEL BBC 6 pièces de 115 m² habitable Maison de 1/2 niveau 90 m² + 25 m² de combles aménageables  4 chambres, cuisine ouverte sur le salon séjour de 50 m², salle de bain avec douche à l'italienne 120X120 et baignoire, 1/2 sous-sol 50 m² avec 2 places de garage, buanderie, 2 places de parking. Chauffage au gaz au sol Sur un terrain d'environ 5 ares. A proximité: THIONVILLE, LONGWY, BEUVILLERS, AUMETZ, BOULANGE, AUDUN LE TICHE, LANDRES, TRIEUX, FONTOY Possibilitée de financement total sans apport  Prêt à taux 0% Pas d'acompte à la réservation Frais de notaire réduit  Prix: 179900euros Pour plus de renseignements ou RDV TEL.");
     }
 
     @Test

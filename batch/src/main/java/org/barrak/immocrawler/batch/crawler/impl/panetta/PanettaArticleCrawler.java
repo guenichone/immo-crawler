@@ -1,7 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.panetta;
 
 import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
@@ -20,33 +19,30 @@ public class PanettaArticleCrawler implements IDetailsCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(PanettaArticleCrawler.class);
 
     @Override
-    public SearchResultDetailsDocument getDetails(SearchResultDocument article) {
+    public void updateDetails(SearchResultDocument article) {
         try {
             Document document = Jsoup.connect(article.getUrl()).followRedirects(false).get();
 
             // TODO handle invalid link
 
-            SearchResultDetailsDocument result = new SearchResultDetailsDocument(article);
-
             String description = getDescription(document);
-            result.setDescription(description);
+            article.setDescription(description);
 
             if (article.getLandSurface() >= 0) {
-                result.setLandSurface(article.getLandSurface());
+                article.setLandSurface(article.getLandSurface());
             } else {
                 ParserUtils.findLandSurfaceInDescription(description);
             }
-            result.setHomeSurface(article.getHomeSurface());
-            result.setNbRooms(article.getNbRooms());
+            article.setHomeSurface(article.getHomeSurface());
+            article.setNbRooms(article.getNbRooms());
 
             Element gallery = document.getElementById("gallery");
-            result.setImageUrls(gallery.getElementsByTag("img").stream()
+            article.setImageUrls(gallery.getElementsByTag("img").stream()
                     .map(img -> img.attr("src")).collect(Collectors.toSet()));
 
-            return result;
+            article.setDetailsParsed(true);
         } catch (Exception ex) {
-            LOGGER.error(ex.getMessage(), ex);
-            return null;
+            throw new RuntimeException(ex);
         }
     }
 

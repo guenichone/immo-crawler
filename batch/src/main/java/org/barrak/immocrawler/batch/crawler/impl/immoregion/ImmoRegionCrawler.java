@@ -27,7 +27,7 @@ import java.util.stream.IntStream;
  @Component
 public class ImmoRegionCrawler implements IPagedCrawler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionSeleniumCrawler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionCrawler.class);
 
     @Value("${provider.website.immoregion}")
     private String immoregionUrl;
@@ -68,7 +68,7 @@ public class ImmoRegionCrawler implements IPagedCrawler {
                 });
             }
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -104,8 +104,11 @@ public class ImmoRegionCrawler implements IPagedCrawler {
             LOGGER.info("Add new result {}", href);
         }
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, criteria.getCity(), price);
-        searchResult.setTitle(getTitle(article, href));
+        String title = getTitle(article, href);
+        String city = title.split("à")[1].trim().toLowerCase();
+
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, city, price);
+        searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article, href));
 
         return searchResult;
@@ -146,4 +149,9 @@ public class ImmoRegionCrawler implements IPagedCrawler {
                 .queryParam("ptypes", "ground,house");
         return builder.toUriString();
     }
+
+     @Override
+     public ProviderEnum getInternalProvider() {
+         return ProviderEnum.IMMOREGION;
+     }
 }

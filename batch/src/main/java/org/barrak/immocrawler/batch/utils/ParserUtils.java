@@ -42,7 +42,7 @@ public class ParserUtils {
     }
 
     public static int findLandSurfaceInDescription(String description) {
-        List<String> allMatches = matchesByRegex(description, "[0-9]+([,.][0-9]{1,2})? ares");
+        List<String> allMatches = matchesByRegex(description, "[0-9]+([,.][0-9]{1,2})? (ares|ARES)");
         if (allMatches.size() == 1) {
             return (int) ParserUtils.getNumericOnly(allMatches.get(0));
         } else if (allMatches.size() > 1) {

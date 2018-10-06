@@ -12,6 +12,6 @@ export class AppComponent {
   details: ArticleDetails[];
 
   public constructor(private articleDetailsService: ArticleDetailsService) {
-    articleDetailsService.getArticleDetailsBySurfaceGreaterThan(10).subscribe(details => this.details = details);
+    articleDetailsService.getArticleDetailsByLandSurfaceGreaterThan(10).subscribe(details => this.details = details);
   }
 }

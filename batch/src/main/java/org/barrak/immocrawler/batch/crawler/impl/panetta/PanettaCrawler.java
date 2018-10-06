@@ -67,7 +67,7 @@ public class PanettaCrawler implements IPagedCrawler {
                 });
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -118,6 +118,7 @@ public class PanettaCrawler implements IPagedCrawler {
             landSurface = landSurface.substring(0, landSurface.indexOf("."));
             searchResult.setLandSurface((int) ParserUtils.getNumericOnly(landSurface));
         }
+        searchResult.setInternalReference(getValueByKey(article, "reference"));
 
         String nbRooms = getValueByKey(article, "room");
         searchResult.setNbRooms((int) ParserUtils.getNumericOnly(nbRooms));
@@ -143,5 +144,10 @@ public class PanettaCrawler implements IPagedCrawler {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    @Override
+    public ProviderEnum getInternalProvider() {
+        return ProviderEnum.PANETTA_IMMO;
     }
 }

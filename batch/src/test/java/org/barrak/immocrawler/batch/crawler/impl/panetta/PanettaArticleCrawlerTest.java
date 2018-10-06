@@ -1,6 +1,5 @@
 package org.barrak.immocrawler.batch.crawler.impl.panetta;
 
-import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.junit.Test;
 
@@ -17,10 +16,10 @@ public class PanettaArticleCrawlerTest {
         article.setCity("kanfen");
         article.setTitle("Maison 6 pièces à Kanfen");
 
-        SearchResultDetailsDocument result = crawler.getDetails(article);
+        crawler.updateDetails(article);
 
-        assertThat(result).isNotNull();
-        assertThat(result.getDescription()).isEqualToIgnoringNewLines("Dans un petit lotissement, proche de la frontière, beau pavillon individuel T7 sur 4 ares. " +
+        assertThat(article).isNotNull();
+        assertThat(article.getDescription()).isEqualToIgnoringNewLines("Dans un petit lotissement, proche de la frontière, beau pavillon individuel T7 sur 4 ares. " +
                 "RDC : Sas d'entrée extérieur avec sbaie coulissante, Grand hall d’entrée, WC indépendants,, accès garage 2 voitures sortant sur la terrasse arrière et le jardin, cuisine entièrement équipée séparée du séjour-salon traversant donnant sur deux terrasses dont une couverte sur l'arrière et grade cour sur l'avant. " +
                 "1er étage : Halle de nuit desservant quatre chambres et un bureau, salle de bain avec douche, vasque, WC indépendants. " +
                 "Combles non aménageables au dessus " +

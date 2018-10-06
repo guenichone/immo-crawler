@@ -2,7 +2,6 @@ package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
 import org.apache.http.HttpStatus;
 import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.SearchResultDetailsDocument;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
@@ -10,10 +9,12 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.print.Doc;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -25,15 +26,7 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionArticleCrawler.class);
 
     @Override
-    public SearchResultDetailsDocument getDetails(SearchResultDocument article) {
-        return parsePage(article);
-    }
-
-    private SearchResultDetailsDocument parsePage(SearchResultDocument article) {
-        LOGGER.info("Parsing details for : {}", article.getUrl());
-
-        SearchResultDetailsDocument result = new SearchResultDetailsDocument(article);
-
+    public void updateDetails(SearchResultDocument article) {
         try {
             Connection.Response response = Jsoup.connect(article.getUrl()).followRedirects(false).execute();
             if (response.statusCode() == HttpStatus.SC_MOVED_PERMANENTLY) {
@@ -41,26 +34,29 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
             }
             Document doc = response.parse();
 
-            result.setDescription(getDescription(doc));
-            result.setPrice(getPrice(doc));
-            result.setImageUrls(getImages(doc));
-            result.setLandSurface(ParserUtils.getNumericOnly(getGeneralInfo(doc, "Terrain")));
-            if (result.getLandSurface() == -1) {
-                result.setLandSurface(ParserUtils.findLandSurfaceInDescription(result.getDescription()));
+            Element description = doc.getElementsByClass("description").first();
+            Elements p = description.getElementsByTag("p");
+
+            article.setDescription(ParserUtils.inlineText(p.get(0).text()));
+            article.setInternalReference(ParserUtils.inlineText(p.get(1).textNodes().get(1).text()));
+            try {
+                article.setExternalReference(ParserUtils.inlineText(p.get(2).textNodes().get(1).text()));
+            } catch (Exception ex) {
+                // Nothing
             }
-            result.setHomeSurface((int) ParserUtils.getNumericOnly(getGeneralInfo(doc, "Surface")));
-            result.setNbRooms((int) ParserUtils.getNumericOnly(getGeneralInfo(doc, "Nombre de pièces")));
+            article.setPrice(getPrice(doc));
+            article.setImageUrls(getImages(doc));
+            article.setLandSurface((int) ParserUtils.getNumericOnly(getGeneralInfo(doc, "Terrain")));
+            if (article.getLandSurface() == -1) {
+                article.setLandSurface(ParserUtils.findLandSurfaceInDescription(article.getDescription()));
+            }
+            article.setHomeSurface((int) ParserUtils.getNumericOnly(getGeneralInfo(doc, "Surface")));
+            article.setNbRooms((int) ParserUtils.getNumericOnly(getGeneralInfo(doc, "Nombre de pièces")));
 
-            return result;
-        } catch (IOException e) {
-            return null;
+            article.setDetailsParsed(true);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
-    }
-
-    private String getDescription(Document doc) {
-        Element description = doc.getElementsByClass("description")
-                .first().getElementsByTag("p").first();
-        return ParserUtils.inlineText(description.text());
     }
 
     private int getPrice(Document doc) {

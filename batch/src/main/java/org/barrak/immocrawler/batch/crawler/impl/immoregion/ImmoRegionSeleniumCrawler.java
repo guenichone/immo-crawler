@@ -214,4 +214,9 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
             }
         }
     }
+
+    @Override
+    public ProviderEnum getInternalProvider() {
+        return ProviderEnum.IMMOREGION;
+    }
 }

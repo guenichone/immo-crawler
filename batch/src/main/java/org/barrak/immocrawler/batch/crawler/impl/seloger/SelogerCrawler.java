@@ -5,6 +5,7 @@ import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -44,7 +45,10 @@ public class SelogerCrawler implements IPagedCrawler {
         try {
             String url = buildSearchUrl(criteria, 1);
 
-            Document document = Jsoup.connect(url).get();
+            Document document = Jsoup.connect(url)
+                    .header("Host", "www.seloger.com")
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36")
+                    .get();
 
             String strTotal = document.getElementsByClass("title_nbresult").first().text();
             int total = (int) ParserUtils.getNumericOnly(strTotal);
@@ -70,8 +74,8 @@ public class SelogerCrawler implements IPagedCrawler {
                     }
                 });
             }
-        } catch (Exception ex) {
-            LOGGER.error(ex.getMessage(), ex);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -108,7 +112,7 @@ public class SelogerCrawler implements IPagedCrawler {
 
         String city = article.getElementsByClass("c-pa-city").text();
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.SELOGER, city, price);
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.SELOGER, city.toLowerCase(), price);
 
         searchResult.setTitle(getTitle(article));
         searchResult.setNbRooms(getCriterionValue(article, "[0-9]+ p"));
@@ -156,8 +160,10 @@ public class SelogerCrawler implements IPagedCrawler {
                 .queryParam("projects", "2") // bind projects ?
                 .queryParam("proximity","0,10") // TODO around
                 .queryParam("qsversion", "1.0")
-                .queryParam("types", "2,4")
-                .queryParam("LISTING-LISTpg", pageNumber);
+                .queryParam("types", "2,4");
+        if (pageNumber > 1) {
+            builder.queryParam("LISTING-LISTpg", pageNumber);
+        }
 
         String uri = builder.toUriString();
 
@@ -193,4 +199,9 @@ public class SelogerCrawler implements IPagedCrawler {
 //
 //        return cityParam;
 //    }
+
+    @Override
+    public ProviderEnum getInternalProvider() {
+        return ProviderEnum.SELOGER;
+    }
 }

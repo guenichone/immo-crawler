@@ -14,7 +14,7 @@ export class ArticleDetailsService {
         return this.httpClient.get<ArticleDetails[]>('/details/top20');
     }
 
-    public getArticleDetailsBySurfaceGreaterThan(surface: number): Observable<ArticleDetails[]> {
-        return this.httpClient.get<ArticleDetails[]>('/details/surfaceGreaterThan/' + surface);
+    public getArticleDetailsByLandSurfaceGreaterThan(surface: number): Observable<ArticleDetails[]> {
+        return this.httpClient.get<ArticleDetails[]>('/search/landSurfaceGreaterThan/' + surface);
     }
 }
