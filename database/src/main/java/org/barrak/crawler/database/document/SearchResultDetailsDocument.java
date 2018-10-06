@@ -7,6 +7,19 @@ import java.util.Set;
 
 public class SearchResultDetailsDocument {
 
+    public SearchResultDetailsDocument() {
+    }
+
+    public SearchResultDetailsDocument(SearchResultDocument searchResultDocument) {
+        setInternalReference(searchResultDocument.getInternalProvider());
+        setUrl(searchResultDocument.getUrl());
+        setCity(searchResultDocument.getCity());
+        setPrice(searchResultDocument.getPrice());
+        setHomeSurface(searchResultDocument.getHomeSurface());
+        setLandSurface(searchResultDocument.getLandSurface());
+        setNbRooms(searchResultDocument.getNbRooms());
+    }
+
     @Id
     private String url;
 
@@ -24,6 +37,9 @@ public class SearchResultDetailsDocument {
 
     private ProviderEnum internalReference;
     private int externalReference;
+
+    private char dpe;
+    private char ges;
 
     private LocalDateTime created;
 
@@ -109,5 +125,21 @@ public class SearchResultDetailsDocument {
 
     public void setExternalReference(int externalReference) {
         this.externalReference = externalReference;
+    }
+
+    public char getDpe() {
+        return dpe;
+    }
+
+    public void setDpe(char dpe) {
+        this.dpe = dpe;
+    }
+
+    public char getGes() {
+        return ges;
+    }
+
+    public void setGes(char ges) {
+        this.ges = ges;
     }
 }
