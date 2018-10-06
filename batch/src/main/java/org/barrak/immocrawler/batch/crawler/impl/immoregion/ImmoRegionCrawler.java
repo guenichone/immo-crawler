@@ -1,8 +1,8 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
+import org.barrak.crawler.database.document.ProviderEnum;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
-import org.barrak.crawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.jsoup.Jsoup;
@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
@@ -35,9 +34,6 @@ public class ImmoRegionCrawler implements IPagedCrawler {
 
     @Autowired
     private Map<String, SearchResultDocument> cache;
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Override
     public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
@@ -60,7 +56,7 @@ public class ImmoRegionCrawler implements IPagedCrawler {
 
             consumer.accept(parseArticles(criteria, articles));
 
-            LOGGER.info("Found {} results in {} pages of results", total, numberOfPages);
+            LOGGER.info("{} : Found {} results in {} pages of results", ProviderEnum.IMMOREGION, total, numberOfPages);
 
             if (numberOfPages > 1) {
                 IntStream.rangeClosed(2, numberOfPages).parallel().forEach(page -> {
@@ -102,7 +98,6 @@ public class ImmoRegionCrawler implements IPagedCrawler {
             if (oldSearchResult.getPrice() != price) {
                 LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
             } else {
-                LOGGER.info("Already in cache, registered the {}", oldSearchResult.getCreated());
                 return null;
             }
         } else {

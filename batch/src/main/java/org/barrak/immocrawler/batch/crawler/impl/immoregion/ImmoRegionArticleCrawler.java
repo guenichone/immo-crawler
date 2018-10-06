@@ -32,9 +32,7 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
     private SearchResultDetailsDocument parsePage(SearchResultDocument article) {
         LOGGER.info("Parsing details for : {}", article.getUrl());
 
-        SearchResultDetailsDocument result = new SearchResultDetailsDocument();
-        result.setUrl(article.getUrl());
-        result.setCity(article.getCity());
+        SearchResultDetailsDocument result = new SearchResultDetailsDocument(article);
 
         try {
             Connection.Response response = Jsoup.connect(article.getUrl()).followRedirects(false).execute();

@@ -55,6 +55,8 @@ public class PanettaCrawler implements IPagedCrawler {
 
             consumer.accept(parseArticles(criteria, articles));
 
+            LOGGER.info("{} : Found {} results in {} pages of results", ProviderEnum.PANETTA_IMMO, total, numberOfPages);
+
             if (numberOfPages > 1) {
                 IntStream.rangeClosed(2, numberOfPages).parallel().forEach(page -> {
                     try {
@@ -96,7 +98,6 @@ public class PanettaCrawler implements IPagedCrawler {
             if (oldSearchResult.getPrice() != price) {
                 LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
             } else {
-                LOGGER.info("Already in cache, registered the {}", oldSearchResult.getCreated());
                 return null;
             }
         } else {

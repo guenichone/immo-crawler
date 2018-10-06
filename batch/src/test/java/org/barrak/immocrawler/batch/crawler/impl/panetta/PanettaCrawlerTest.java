@@ -5,6 +5,7 @@ import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.junit.Test;
 import org.powermock.reflect.Whitebox;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,6 +17,7 @@ public class PanettaCrawlerTest {
     @Test
     public void search() {
         Whitebox.setInternalState(crawler, "panettaImmoUrl", "http://www.panetta-immobilier.fr");
+        Whitebox.setInternalState(crawler, "cache", new HashMap<String, SearchResultDocument>());
 
         SearchCriteria criteria = new SearchCriteria(null);
         criteria.setMinPrice(100000);

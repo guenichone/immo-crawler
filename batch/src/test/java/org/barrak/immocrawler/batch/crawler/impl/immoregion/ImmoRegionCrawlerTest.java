@@ -19,7 +19,7 @@ public class ImmoRegionCrawlerTest {
     private ImmoRegionCrawler crawler = new ImmoRegionCrawler();
 
     @Test
-    public void search() throws IOException {
+    public void search() {
         RestTemplate restTemplate = new RestTemplateBuilder().build();
 
         Whitebox.setInternalState(crawler, "restTemplate", restTemplate);

@@ -15,16 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.BasicJsonParser;
 import org.springframework.boot.json.JsonParser;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -35,7 +32,7 @@ public class SelogerCrawler implements IPagedCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(SelogerCrawler.class);
 
     @Autowired
-    private RestTemplate restTemplate;
+    private Map<String, SearchResultDocument> cache;
 
     @Value("${provider.seloger.api}")
     private String selogerUrl;
@@ -47,10 +44,9 @@ public class SelogerCrawler implements IPagedCrawler {
         try {
             String url = buildSearchUrl(criteria, 1);
 
-            Document document = Jsoup.connect(url).followRedirects(false).get();
+            Document document = Jsoup.connect(url).get();
 
-            String strTotal = document.getElementsByClass("pagination-title").first()
-                    .getElementsByClass("u-500").text();
+            String strTotal = document.getElementsByClass("title_nbresult").first().text();
             int total = (int) ParserUtils.getNumericOnly(strTotal);
 
             Elements articles = document.getElementsByClass("c-pa-list");
@@ -63,7 +59,7 @@ public class SelogerCrawler implements IPagedCrawler {
 
             consumer.accept(parseArticles(criteria, articles));
 
-            LOGGER.info("Found {} results in {} pages of results", total, numberOfPages);
+            LOGGER.info("{} : Found {} results in {} pages of results", ProviderEnum.SELOGER, total, numberOfPages);
 
             if (numberOfPages > 1) {
                 IntStream.rangeClosed(2, numberOfPages).parallel().forEach(page -> {
@@ -99,9 +95,45 @@ public class SelogerCrawler implements IPagedCrawler {
         String priceStr = article.getElementsByClass("c-pa-cprice").text();
         int price = (int) ParserUtils.getNumericOnly(priceStr);
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.SELOGER, criteria.getCity(), price);
+        if (cache.containsKey(href)) {
+            SearchResultDocument oldSearchResult = cache.get(href);
+            if (oldSearchResult.getPrice() != price) {
+                LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
+            } else {
+                return null;
+            }
+        } else {
+            LOGGER.info("Add new result {}", href);
+        }
+
+        String city = article.getElementsByClass("c-pa-city").text();
+
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.SELOGER, city, price);
+
+        searchResult.setTitle(getTitle(article));
+        searchResult.setNbRooms(getCriterionValue(article, "[0-9]+ p"));
+        searchResult.setHomeSurface(getCriterionValue(article, "[0-9]+ m²"));
+        searchResult.setImageUrl(getImageUrl(article));
 
         return searchResult;
+    }
+
+    private String getTitle(Element article) {
+        return article.getElementsByClass("c-pa-link").first().text();
+    }
+
+    private String getImageUrl(Element article) {
+        // Lazy load image
+        String json = article.getElementsByAttribute("data-lazy").first().attr("data-lazy");
+        JsonParser jsonParser = new BasicJsonParser();
+        Map<String, Object> jsonMap = jsonParser.parseMap(json);
+        return (String) jsonMap.get("url");
+    }
+
+    private int getCriterionValue(Element article, String regex) {
+        String criterion = article.getElementsByClass("c-pa-criterion").text();
+        String valueStr = ParserUtils.matchByRegex(criterion, regex);
+        return valueStr != null ? (int) ParserUtils.getNumericOnly(valueStr) : -1;
     }
 
     private String buildSearchUrl(SearchCriteria criteria, int pageNumber) {
@@ -127,34 +159,38 @@ public class SelogerCrawler implements IPagedCrawler {
                 .queryParam("types", "2,4")
                 .queryParam("LISTING-LISTpg", pageNumber);
 
-        return builder.toUriString();
+        String uri = builder.toUriString();
+
+        LOGGER.info("Builded url {}", uri);
+
+        return uri;
     }
 
-    private String getCityParam(List<String> cities) {
-        List<String> ciList = new ArrayList<>();
-        for (String city : cities) {
-            String cityUrl = cityApiUrl + "text=" + city.toLowerCase();
-
-            LOGGER.info("Calling cityApi : {}", cityUrl);
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("origin","https://www.seloger.com");
-            // headers.add("Referer", "https://www.seloger.com/list.htm?types=2%2C4&projects=2&enterprise=0&natures=1%2C2%2C4&proximity=0%2C10&places=%5B%7Bci%3A570041%7D%5D&qsVersion=1.0");
-            HttpEntity<String> entity = new HttpEntity<>("", headers);
-
-            ResponseEntity<String> response = restTemplate.exchange(cityUrl, HttpMethod.GET, entity, String.class);
-
-            JsonParser jsonParser = new BasicJsonParser();
-            List<Object> jsonObjects = jsonParser.parseList(response.getBody());
-
-            LOGGER.info("jsonobjects {}", jsonObjects);
-        }
-
-        // [{ci:570041}<,...>]
-        String cityParam = "[" + ciList.stream().collect(Collectors.joining(",")) + "]";
-
-        LOGGER.info("CityParam", cityParam);
-
-        return cityParam;
-    }
+//    private String getCityParam(List<String> cities) {
+//        List<String> ciList = new ArrayList<>();
+//        for (String city : cities) {
+//            String cityUrl = cityApiUrl + "text=" + city.toLowerCase();
+//
+//            LOGGER.info("Calling cityApi : {}", cityUrl);
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.add("origin","https://www.seloger.com");
+//            // headers.add("Referer", "https://www.seloger.com/list.htm?types=2%2C4&projects=2&enterprise=0&natures=1%2C2%2C4&proximity=0%2C10&places=%5B%7Bci%3A570041%7D%5D&qsVersion=1.0");
+//            HttpEntity<String> entity = new HttpEntity<>("", headers);
+//
+//            ResponseEntity<String> response = restTemplate.exchange(cityUrl, HttpMethod.GET, entity, String.class);
+//
+//            JsonParser jsonParser = new BasicJsonParser();
+//            List<Object> jsonObjects = jsonParser.parseList(response.getBody());
+//
+//            LOGGER.info("jsonobjects {}", jsonObjects);
+//        }
+//
+//        // [{ci:570041}<,...>]
+//        String cityParam = "[" + ciList.stream().collect(Collectors.joining(",")) + "]";
+//
+//        LOGGER.info("CityParam", cityParam);
+//
+//        return cityParam;
+//    }
 }

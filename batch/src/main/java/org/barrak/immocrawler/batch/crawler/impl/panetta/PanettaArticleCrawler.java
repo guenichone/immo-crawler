@@ -24,11 +24,9 @@ public class PanettaArticleCrawler implements IDetailsCrawler {
         try {
             Document document = Jsoup.connect(article.getUrl()).followRedirects(false).get();
 
-            SearchResultDetailsDocument result = new SearchResultDetailsDocument();
-            result.setInternalReference(ProviderEnum.PANETTA_IMMO);
-            result.setUrl(article.getUrl());
-            result.setCity(article.getCity());
-            result.setPrice(article.getPrice());
+            // TODO handle invalid link
+
+            SearchResultDetailsDocument result = new SearchResultDetailsDocument(article);
 
             String description = getDescription(document);
             result.setDescription(description);
