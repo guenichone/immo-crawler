@@ -18,7 +18,7 @@ public class ParserUtils {
         if (text != null) {
             return text
                     .replaceAll("\r", " ")
-                    .replaceAll("\n", " ")
+                    .replaceAll("\n", "")
                     .replaceAll("\t", " ")
                     .trim();
         } else {
