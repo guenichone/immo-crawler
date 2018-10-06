@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
-public class SelogerCrawler2 implements IPagedCrawler {
+public class SelogerCrawler implements IPagedCrawler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SelogerCrawler2.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SelogerCrawler.class);
 
     @Autowired
     private Map<String, SearchResultDocument> cache;

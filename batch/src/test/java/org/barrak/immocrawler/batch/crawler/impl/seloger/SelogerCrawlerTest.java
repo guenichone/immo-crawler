@@ -10,9 +10,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SelogerCrawler2Test {
+public class SelogerCrawlerTest {
 
-    private SelogerCrawler2 crawler = new SelogerCrawler2();
+    private SelogerCrawler crawler = new SelogerCrawler();
 
     // https://www.seloger.com/list.htm?enterprise=0&natures=1,2,4&places={ci:570041}&price=100000/500000&proximity=0/15&projects=2&types=2&LISTING-LISTpg=1&qsversion=1.0
     // https://www.seloger.com/list.htm?enterprise=0&natures=1,2,4&places={ci:570041}&price=100000/500000&projects=2&proximity=0,10&qsversion=1.0&types=2,4&bd=DetailToList_SL
