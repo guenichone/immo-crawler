@@ -60,10 +60,8 @@ public class ImmoCrawlerBatch {
             searchCriteria.setMaxPrice(500000);
 
 			Collection<IPagedCrawler> crawlers = ctx.getBeansOfType(IPagedCrawler.class).values();
-
-			for (IPagedCrawler crawler : crawlers) {
-                crawler.search(searchCriteria, searchResults -> searchResultRepository.saveAll(searchResults));
-			}
+            crawlers.stream().parallel()
+                    .forEach(crawler -> crawler.search(searchCriteria, searchResults -> searchResultRepository.saveAll(searchResults)));
 
 			findDetails(ctx);
 		};
@@ -75,11 +73,18 @@ public class ImmoCrawlerBatch {
                 .collect(Collectors.toMap(IDetailsCrawler::getInternalProvider, Function.identity()));
 
         searchResultRepository.findAll().parallelStream()
-                .filter(article -> !searchResultDetailsCache.containsKey(article.getUrl()))
+                .filter(article -> !searchResultDetailsCache.containsKey(article.getUrl()) && article.getInternalProvider() != ProviderEnum.PANETTA_IMMO)
                 .filter(article -> !article.isMoved() && !article.isError())
                 .map(article -> {
                     try {
-                        return crawlerMap.get(article.getInternalProvider()).getDetails(article);
+                        IDetailsCrawler crawler = crawlerMap.get(article.getInternalProvider());
+                        if (crawler != null) {
+                            LOGGER.info("Getting details for {}", article.getUrl());
+                            return crawler.getDetails(article);
+                        } else {
+                            LOGGER.warn("No crawler details found for {} and url {}", article.getInternalProvider(), article.getUrl());
+                            return null;
+                        }
                     } catch (NoSuchElementException ex) {
                         LOGGER.warn("Article moved permanently : " + article.getUrl());
                         article.setMoved(true);
