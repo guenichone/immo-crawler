@@ -1,17 +1,24 @@
 import { Article } from './models/article.model';
 import { ArticleService } from './services/article.service';
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  results: Article[];
+  displayedColumns: string[] = ['url', 'price', 'city', 'land', 'home'];
+  dataSource: MatTableDataSource;
+
+  @ViewChild(MatSort) sort: MatSort;
 
   public constructor(private articleService: ArticleService) {
-    articleService.getArticleByLandSurfaceGreaterThan(7).subscribe(results => this.results = results);
+    articleService.getArticleByLandSurfaceGreaterThan(7).subscribe(results => {
+      this.dataSource = new MatTableDataSource(results);
+      this.dataSource.sort = this.sort;
+    });
   }
 }
