@@ -38,7 +38,7 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
             Elements p = description.getElementsByTag("p");
 
             article.setDescription(ParserUtils.inlineText(p.get(0).text()));
-            article.setInternalReference(ParserUtils.inlineText(p.get(1).textNodes().get(1).text()));
+            article.setInternalReference(String.valueOf((int) ParserUtils.getNumericOnly(article.getUrl())));
             try {
                 article.setExternalReference(ParserUtils.inlineText(p.get(2).textNodes().get(1).text()));
             } catch (Exception ex) {

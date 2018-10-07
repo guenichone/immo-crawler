@@ -1,5 +1,6 @@
 package org.barrak.crawler.database.repository;
 
+import org.barrak.crawler.database.document.ProviderEnum;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -10,5 +11,7 @@ public interface SearchResultRepository extends MongoRepository<SearchResultDocu
     List<SearchResultDocument> findByLandSurfaceGreaterThan(int surface);
 
     List<SearchResultDocument> findByHomeSurfaceGreaterThan(int surface);
+
+    List<SearchResultDocument> findByInternalProvider(ProviderEnum provider);
 
 }

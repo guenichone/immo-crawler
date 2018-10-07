@@ -1,6 +1,7 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
 import org.barrak.crawler.database.document.ProviderEnum;
+import org.barrak.crawler.database.document.RealEstateType;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
@@ -104,18 +105,23 @@ public class ImmoRegionCrawler implements IPagedCrawler {
             LOGGER.info("Add new result {}", href);
         }
 
-        String title = getTitle(article, href);
-        String city = title.split("à")[1].trim().toLowerCase();
+        String title = getTitle(article);
+        String city = getCity(article);
+        RealEstateType type = title.startsWith("Maison individuelle") ? RealEstateType.HOUSE : RealEstateType.LAND;
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, city, price);
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, type, city, price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article, href));
 
         return searchResult;
     }
 
-    private String getTitle(Element article, String href) {
+    private String getTitle(Element article) {
         return article.getElementsByTag("a").first().attr("title");
+    }
+
+    private String getCity(Element article) {
+        return article.getElementsByAttributeValue("itemprop", "addressLocality").first().text().trim().toLowerCase();
     }
 
     private String getImgUrl(Element article, String url) {

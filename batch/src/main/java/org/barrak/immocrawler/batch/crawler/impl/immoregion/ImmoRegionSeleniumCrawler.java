@@ -3,6 +3,7 @@ package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
+import org.barrak.crawler.database.document.RealEstateType;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.crawler.database.document.ProviderEnum;
@@ -181,7 +182,8 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
             LOGGER.info("Add new result {}", href);
         }
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, criteria.getCity(), price);
+        // TODO RealEstate not set
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, RealEstateType.LAND, criteria.getCity(), price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article, href));
 

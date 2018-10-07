@@ -1,6 +1,7 @@
 package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
 import org.barrak.crawler.database.document.ProviderEnum;
+import org.barrak.crawler.database.document.RealEstateType;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
@@ -111,8 +112,10 @@ public class SelogerCrawler implements IPagedCrawler {
         }
 
         String city = article.getElementsByClass("c-pa-city").text();
+        RealEstateType type = article.getElementsByClass("c-pa-info").text().equals("Maison / Villa") ?
+                RealEstateType.HOUSE : RealEstateType.LAND;
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.SELOGER, city.toLowerCase(), price);
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.SELOGER, type, city.toLowerCase(), price);
 
         searchResult.setTitle(getTitle(article));
         searchResult.setNbRooms(getCriterionValue(article, "[0-9]+ p"));

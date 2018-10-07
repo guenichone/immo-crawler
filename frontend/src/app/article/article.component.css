@@ -1,3 +1,28 @@
 .image-gallery {
     display: flex;
 }
+
+.article {
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #eee;
+    border: solid;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.infos {
+    display: flex;
+    flex-direction: row;
+}
+
+.infos h3 {
+  margin: 5px;
+  border: solid;
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 4px 4px 0 0;
+}

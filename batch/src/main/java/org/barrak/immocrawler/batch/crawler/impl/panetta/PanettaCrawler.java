@@ -1,5 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.panetta;
 
+import org.barrak.crawler.database.document.RealEstateType;
 import org.barrak.crawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.crawler.database.document.ProviderEnum;
@@ -105,8 +106,10 @@ public class PanettaCrawler implements IPagedCrawler {
         }
 
         String city = link.getElementsByClass("city").first().text();
+        RealEstateType type = link.getElementsByClass("design-name").first().text().equals("Maison individuelle") ?
+                RealEstateType.HOUSE : RealEstateType.LAND;
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.PANETTA_IMMO, city, price);
+        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.PANETTA_IMMO, type, city, price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article));
 

@@ -19,6 +19,7 @@ public class PanettaArticleCrawlerTest {
         crawler.updateDetails(article);
 
         assertThat(article).isNotNull();
+        assertThat(article.getImageUrls()).hasSize(12);
         assertThat(article.getDescription()).isEqualToIgnoringNewLines("Dans un petit lotissement, proche de la frontière, beau pavillon individuel T7 sur 4 ares. " +
                 "RDC : Sas d'entrée extérieur avec sbaie coulissante, Grand hall d’entrée, WC indépendants,, accès garage 2 voitures sortant sur la terrasse arrière et le jardin, cuisine entièrement équipée séparée du séjour-salon traversant donnant sur deux terrasses dont une couverte sur l'arrière et grade cour sur l'avant. " +
                 "1er étage : Halle de nuit desservant quatre chambres et un bureau, salle de bain avec douche, vasque, WC indépendants. " +

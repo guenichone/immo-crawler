@@ -20,9 +20,6 @@ public class ImmoRegionCrawlerTest {
 
     @Test
     public void search() {
-        RestTemplate restTemplate = new RestTemplateBuilder().build();
-
-        Whitebox.setInternalState(crawler, "restTemplate", restTemplate);
         Whitebox.setInternalState(crawler, "immoregionUrl", "https://www.immoregion.fr/srp/");
         Whitebox.setInternalState(crawler, "cache", new HashMap<String, SearchResultDocument>());
 

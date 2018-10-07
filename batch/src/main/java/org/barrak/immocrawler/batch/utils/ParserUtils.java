@@ -27,16 +27,20 @@ public class ParserUtils {
     }
 
     public static double getNumericOnly(String text) {
-        return getNumericOnly(text, "none");
+        return getNumericOnly(text, null);
     }
 
     public static double getNumericOnly(String text, String context) {
         try {
             return Double.valueOf(text.replaceAll("[^\\d\\,]", "").replaceAll(",", "."));
         } catch (NullPointerException ex) {
-            LOGGER.error("NullPointerException for '" + text + "' from " + context);
+            if (context != null) {
+                LOGGER.error("NullPointerException for '" + text + "' from " + context);
+            }
         } catch (NumberFormatException ex) {
-            LOGGER.error("NumberFormatException for '" + text + "' from " + context , ex);
+            if (context != null) {
+                LOGGER.error("NumberFormatException for '" + text + "' from " + context, ex);
+            }
         }
         return -1;
     }

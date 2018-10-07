@@ -18,13 +18,15 @@ public class SelogerArticleCrawlerTest {
     @Test
     public void search() {
         SearchResultDocument article = new SearchResultDocument();
-        article.setUrl("https://www.seloger.com/annonces/achat/maison/audun-le-roman-54/134279313.htm?enterprise=0&natures=1,2,4&places=%5b%7bci%3a540149%7d%5d&projects=2,5&proximity=0,10&qsversion=1.0&types=1,2&bd=ListToDetail");
+        article.setUrl("https://www.seloger.com/annonces/achat/maison/audun-le-roman-54/136317365.htm?enterprise=0&LISTING-LISTpg=5&natures=1,2,4&places=%7bci%3a570041%7d&price=100000%2f500000&projects=2&proximity=0,10&qsversion=1.0&types=2,4&bd=ListToDetail");
         article.setCity("kanfen");
         article.setTitle("Maison 6 pièces à Kanfen");
 
         crawler.updateDetails(article);
 
         assertThat(article).isNotNull();
+
+        assertThat(article.getImageUrls()).hasSize(4);
         assertThat(article.getDescription()).isEqualTo("AUDUN LE ROMAN A 10 mn A PROXIMITÉ DES ÉCOLES, COLLÈGE, COMMERCES Pavillon neuf LABEL BBC 6 pièces de 115 m² habitable Maison de 1/2 niveau 90 m² + 25 m² de combles aménageables  4 chambres, cuisine ouverte sur le salon séjour de 50 m², salle de bain avec douche à l'italienne 120X120 et baignoire, 1/2 sous-sol 50 m² avec 2 places de garage, buanderie, 2 places de parking. Chauffage au gaz au sol Sur un terrain d'environ 5 ares. A proximité: THIONVILLE, LONGWY, BEUVILLERS, AUMETZ, BOULANGE, AUDUN LE TICHE, LANDRES, TRIEUX, FONTOY Possibilitée de financement total sans apport  Prêt à taux 0% Pas d'acompte à la réservation Frais de notaire réduit  Prix: 179900euros Pour plus de renseignements ou RDV TEL.");
     }
 

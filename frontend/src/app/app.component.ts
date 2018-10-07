@@ -1,5 +1,5 @@
-import { ArticleDetails } from './models/article-details.model';
-import { ArticleDetailsService } from './services/article-details.service';
+import { Article } from './models/article.model';
+import { ArticleService } from './services/article.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,9 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  details: ArticleDetails[];
+  results: Article[];
 
-  public constructor(private articleDetailsService: ArticleDetailsService) {
-    articleDetailsService.getArticleDetailsByLandSurfaceGreaterThan(10).subscribe(details => this.details = details);
+  public constructor(private articleService: ArticleService) {
+    articleService.getArticleByLandSurfaceGreaterThan(7).subscribe(results => this.results = results);
   }
 }

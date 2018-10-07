@@ -6,14 +6,17 @@ import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.json.BasicJsonParser;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,9 +54,23 @@ public class SelogerArticleCrawler implements IDetailsCrawler {
     }
 
     private Set<String> getImageUrls(Document article) {
-        return article.getElementsByClass("carrousel_image_visu").stream()
-                .map(img -> img.attr("src"))
-                .collect(Collectors.toSet());
+        return article.getElementsByClass("carrousel_slide").stream()
+            .map(div -> {
+                String dataLazy = div.attr("data-lazy");
+                if (StringUtils.isEmpty(dataLazy)) {
+                    Element img = div.getElementsByTag("img").first();
+                    if (img != null) {
+                        return img.attr("src");
+                    } else {
+                        return null;
+                    }
+                } else {
+                    JsonParser parser = new BasicJsonParser();
+                    return (String) parser.parseMap(dataLazy).get("url");
+                }
+            })
+            .filter(Objects::nonNull)
+            .collect(Collectors.toSet());
     }
 
 //    private Map<String, String> parseDataModel(Document article) {

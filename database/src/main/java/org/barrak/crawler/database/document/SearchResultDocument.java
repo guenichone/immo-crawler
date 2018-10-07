@@ -12,6 +12,8 @@ public class SearchResultDocument {
     @Id
     private String url;
 
+    private RealEstateType realEstateType;
+
     private String title;
 
     private String city;
@@ -45,9 +47,10 @@ public class SearchResultDocument {
     public SearchResultDocument() {
     }
 
-    public SearchResultDocument(String url, ProviderEnum provider, String city, int price) {
+    public SearchResultDocument(String url, ProviderEnum provider, RealEstateType realEstateType, String city, int price) {
         this.url = url;
         this.internalProvider = provider;
+        this.realEstateType = realEstateType;
         this.city = city;
         this.price = price;
     }
@@ -58,6 +61,14 @@ public class SearchResultDocument {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public RealEstateType getRealEstateType() {
+        return realEstateType;
+    }
+
+    public void setRealEstateType(RealEstateType realEstateType) {
+        this.realEstateType = realEstateType;
     }
 
     public String getTitle() {

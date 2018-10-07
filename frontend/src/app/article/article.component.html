@@ -1,11 +1,18 @@
-<h2><a [href]="article.url">{{article.url}}</a></h2>
+<div class="article">
+  <h2><a [href]="article.url">{{article.url}}</a></h2>
 
-<h3>Surface : {{article.landSurface}}</h3>
+  <div class="infos">
+    <h3>Land Surface : {{article.landSurface}}ares</h3>
+    <h3 *ngIf="article.homeSurface > 0">Home Surface : {{article.homeSurface}}m²</h3>
+    <h3>Price : {{article.price}}€</h3>
+    <h3>Price/ares : {{article.price / article.landSurface | number}}€/ares</h3>
+  </div>
 
-<div class="image-gallery">
-  <span *ngFor="let url of article.imageUrls">
-      <ngui-inview style="min-height: 300px; max-height: 300px">
-        <img *ngIf [src]="url" height="300px">
-      </ngui-inview>
-  </span>
+  <div class="image-gallery">
+    <span *ngFor="let url of article.imageUrls">
+        <ngui-inview style="min-height: 300px; max-height: 300px">
+          <img *ngIf [src]="url" height="300px">
+        </ngui-inview>
+    </span>
+  </div>
 </div>
