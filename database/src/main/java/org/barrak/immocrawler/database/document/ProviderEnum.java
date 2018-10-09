@@ -1,4 +1,4 @@
-package org.barrak.crawler.database.document;
+package org.barrak.immocrawler.database.document;
 
 public enum ProviderEnum {
 
@@ -9,6 +9,7 @@ public enum ProviderEnum {
     PANETTA_IMMO,
     LEBONCOIN_PARTICULIER,
     IMMO_CASCIOLA,
+    OPTIMHOME,
     ;
 
     private boolean isCrawler;

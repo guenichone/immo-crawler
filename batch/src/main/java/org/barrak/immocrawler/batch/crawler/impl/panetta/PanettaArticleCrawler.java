@@ -1,7 +1,7 @@
 package org.barrak.immocrawler.batch.crawler.impl.panetta;
 
-import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.jsoup.Jsoup;

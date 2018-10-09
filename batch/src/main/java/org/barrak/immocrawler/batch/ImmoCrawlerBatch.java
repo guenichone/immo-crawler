@@ -1,8 +1,8 @@
 package org.barrak.immocrawler.batch;
 
-import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.SearchResultDocument;
-import org.barrak.crawler.database.repository.SearchResultRepository;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.repository.SearchResultRepository;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
@@ -74,10 +74,10 @@ public class ImmoCrawlerBatch {
                     try {
                         IDetailsCrawler crawler = crawlerMap.get(article.getInternalProvider());
                         if (crawler != null) {
-                            LOGGER.info("Getting details for {}", article.getUrl());
+                            LOGGER.info("Getting details for {} {}", crawler.getInternalProvider(), article.getUrl());
                             crawler.updateDetails(article);
                         } else {
-                            LOGGER.warn("No crawler details found for {} and url {}", article.getInternalProvider(), article.getUrl());
+                            LOGGER.warn("No crawler details found for {} {}", article.getInternalProvider(), article.getUrl());
                             return null;
                         }
                     } catch (NoSuchElementException ex) {

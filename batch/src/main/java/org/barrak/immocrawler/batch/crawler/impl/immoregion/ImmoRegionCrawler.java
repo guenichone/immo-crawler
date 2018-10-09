@@ -1,8 +1,8 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
-import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.RealEstateType;
-import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.RealEstateType;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;

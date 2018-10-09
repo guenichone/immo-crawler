@@ -1,6 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.panetta;
 
-import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

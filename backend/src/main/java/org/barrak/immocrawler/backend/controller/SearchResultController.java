@@ -1,7 +1,7 @@
 package org.barrak.immocrawler.backend.controller;
 
-import org.barrak.crawler.database.document.SearchResultDocument;
-import org.barrak.crawler.database.repository.SearchResultRepository;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.repository.SearchResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

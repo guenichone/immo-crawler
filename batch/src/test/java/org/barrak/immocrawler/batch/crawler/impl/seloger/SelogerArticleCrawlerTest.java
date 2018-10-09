@@ -1,6 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
-import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.junit.Test;
 

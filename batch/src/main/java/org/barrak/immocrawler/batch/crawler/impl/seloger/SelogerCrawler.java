@@ -1,12 +1,11 @@
 package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
-import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.RealEstateType;
-import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.RealEstateType;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -169,8 +168,6 @@ public class SelogerCrawler implements IPagedCrawler {
         }
 
         String uri = builder.toUriString();
-
-        LOGGER.info("Builded url {}", uri);
 
         return uri;
     }

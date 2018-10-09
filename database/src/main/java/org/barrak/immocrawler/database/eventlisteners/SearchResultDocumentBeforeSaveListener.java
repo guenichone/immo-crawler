@@ -1,6 +1,6 @@
-package org.barrak.crawler.database.eventlisteners;
+package org.barrak.immocrawler.database.eventlisteners;
 
-import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.BeforeSaveEvent;
 import org.springframework.stereotype.Component;

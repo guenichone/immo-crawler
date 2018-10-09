@@ -1,7 +1,7 @@
-package org.barrak.crawler.database.repository;
+package org.barrak.immocrawler.database.repository;
 
-import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

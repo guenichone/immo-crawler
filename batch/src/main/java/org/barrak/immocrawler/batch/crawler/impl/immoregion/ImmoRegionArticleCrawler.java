@@ -1,8 +1,8 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
 import org.apache.http.HttpStatus;
-import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.jsoup.Connection;
@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.print.Doc;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Set;

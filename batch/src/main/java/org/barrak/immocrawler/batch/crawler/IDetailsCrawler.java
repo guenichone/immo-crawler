@@ -1,7 +1,7 @@
 package org.barrak.immocrawler.batch.crawler;
 
-import org.barrak.crawler.database.document.ProviderEnum;
-import org.barrak.crawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 
 /**
  * Classes that implements this interface must be able to retrieve the full data of a detailed article.

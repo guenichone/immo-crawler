@@ -1,3 +1,4 @@
+
 # Immo-Crawler
 
 ## Description
@@ -10,16 +11,20 @@ Leading you to check multiple website and manually browsing again and again the 
 Based on this Immo Crawler is born to be able to find the exact goods for you with less efforts as possible.
 
 ## Project content
-- batch : Website crawler that browse differents Real Estate websites and push the data in DB.
-- backend : Backend that exposes rest API to read and manipulate the data.
-- frontend : Simple web page used to view and maniulate the data.
-- database : Shared module between batch and backend used for model and database.
+- **batch** : Website crawler that browse differents Real Estate websites and push the data in DB.
+- **backend** : Backend that exposes rest API to read and manipulate the data.
+- **frontend** : Simple web page used to view and maniulate the data.
+- **database** : Shared module between batch and backend used for model and database.
 
 ## Get started
 
 ### Crawler
 
-Edit **application.properties** to set your own MongoDB connection.
+Download gecko driver to allow Selenium to use Firefox : https://github.com/mozilla/geckodriver/releases
+
+Edit **application.properties**
+- To set your own MongoDB connection : **spring.data.mongodb.<...>**
+- To set your gecko driver path : **webdriver.gecko.driver**
 
 Edit **ImmoCrawlerBatch** to set your own search criterias.
 
@@ -35,7 +40,7 @@ Run the **ImmoCrawlerBackendApp** java class. (Will run server on port **9090**)
 
 Run *npm start* from the **frontend**.
 
-That's it ! You can connect localhost:4200 with a brower and used your data.
+That's it ! You can connect localhost:4200 with a brower and use your data.
 
 # Known bugs
 

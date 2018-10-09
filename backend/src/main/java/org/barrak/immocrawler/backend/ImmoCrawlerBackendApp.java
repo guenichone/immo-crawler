@@ -1,6 +1,6 @@
 package org.barrak.immocrawler.backend;
 
-import org.barrak.crawler.database.repository.SearchResultRepository;
+import org.barrak.immocrawler.database.repository.SearchResultRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
