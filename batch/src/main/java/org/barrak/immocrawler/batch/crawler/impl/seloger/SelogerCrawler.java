@@ -130,10 +130,15 @@ public class SelogerCrawler implements IPagedCrawler {
 
     private String getImageUrl(Element article) {
         // Lazy load image
-        String json = article.getElementsByAttribute("data-lazy").first().attr("data-lazy");
-        JsonParser jsonParser = new BasicJsonParser();
-        Map<String, Object> jsonMap = jsonParser.parseMap(json);
-        return (String) jsonMap.get("url");
+        Element dataLazy = article.getElementsByAttribute("data-lazy").first();
+        if (dataLazy != null) {
+            String json = dataLazy.attr("data-lazy");
+            JsonParser jsonParser = new BasicJsonParser();
+            Map<String, Object> jsonMap = jsonParser.parseMap(json);
+            return (String) jsonMap.get("url");
+        } else {
+            return null;
+        }
     }
 
     private int getCriterionValue(Element article, String regex) {

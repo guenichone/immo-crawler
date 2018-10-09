@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -30,6 +31,9 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
 
             List<SearchResultDocument> resultDocuments = parseResultPage(criteria, document);
             int nbByPage = resultDocuments.size();
+            if (nbByPage == 0) {
+                throw new NoSuchElementException("No articles found for " + buildSearchUrl(criteria, 1));
+            }
 
             int numberOfPages = total  / nbByPage;
             if (total % nbByPage != 0) {
@@ -51,7 +55,7 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
                 });
             }
         } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
+            LOGGER.error(getInternalProvider() + " " + e.getMessage(), e);
         }
     }
 

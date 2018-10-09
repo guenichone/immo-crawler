@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -43,15 +44,26 @@ public class OptimHomeArticleCrawler implements IDetailsCrawler {
             if (article.getLandSurface() == -1) {
                 article.setLandSurface(ParserUtils.findLandSurfaceInDescription(article.getDescription()));
             }
+
+            article.setImageUrls(getImageUrls(document));
             
             String[] references = getReference(description);
             article.setInternalReference(references[0]);
             article.setExternalReference(references[1]);
 
-            article.setDetailsParsed(false);
+            article.setDetailsParsed(true);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    private Set<String> getImageUrls(Document document) {
+        return document.getElementById("carouselControls")
+                .getElementsByTag("a")
+                .stream()
+                .map(a -> a.attr("href"))
+                .filter(href -> !"#carouselControls".equals(href))
+                .collect(Collectors.toSet());
     }
 
     private String[] getReference(String description) {

@@ -36,5 +36,7 @@ public class OptimHomeArticleCrawlerTest {
         assertThat(article.getNbRooms()).isEqualTo(10);
         assertThat(article.getInternalReference()).isEqualTo("830035814201");
         assertThat(article.getExternalReference()).isEqualTo("403959");
+
+        assertThat(article.getImageUrls()).contains("https://s3-eu-west-1.amazonaws.com/housing-factory-data-v3/properties/tremplin/1177266/media/posting/media/picture_urls/main/8/c40966a7-36e6-4c3a-ba77-7eece5c42d45.jpg");
     }
 }
