@@ -21,6 +21,11 @@ public class ProviderController {
         return repository.findByInternalProvider(provider);
     }
 
+    @RequestMapping(path = "/{provider}/all", method = RequestMethod.DELETE)
+    public void deleteAll(@PathVariable("provider") ProviderEnum provider) {
+        repository.deleteByInternalProvider(provider);
+    }
+
     @RequestMapping(path = "/{provider}/cleanDetails", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public void cleanDetails(@PathVariable("provider") ProviderEnum provider) {

@@ -228,12 +228,12 @@ public class SearchResultDocument {
 
     @Override
     public String toString() {
-        return "SearchResultDocument{" +
+        return '[' +
                 "url='" + url + '\'' +
-                ", title='" + title + '\'' +
                 ", city='" + city + '\'' +
-                ", price=" + price + '\'' +
-                ", imageUrl=" + imageUrl +
-                '}';
+                ", landSurface=" + landSurface +
+                ", homeSurface=" + homeSurface +
+                ", price=" + price +
+                ']';
     }
 }

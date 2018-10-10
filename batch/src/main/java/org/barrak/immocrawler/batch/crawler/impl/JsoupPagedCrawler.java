@@ -3,6 +3,7 @@ package org.barrak.immocrawler.batch.crawler.impl;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -62,7 +63,11 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
     protected Document getDocumentPage(SearchCriteria criteria, int pageNumber) throws IOException {
         String url = buildSearchUrl(criteria, pageNumber);
 
-        return Jsoup.connect(url).followRedirects(false).get();
+        return addConnectionParams(Jsoup.connect(url)).get();
+    }
+
+    protected Connection addConnectionParams(Connection connection) {
+        return connection;
     }
 
     protected List<SearchResultDocument> parseResultPage(SearchCriteria criteria, Document document) {

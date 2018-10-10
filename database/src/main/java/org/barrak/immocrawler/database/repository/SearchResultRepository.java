@@ -14,4 +14,6 @@ public interface SearchResultRepository extends MongoRepository<SearchResultDocu
 
     List<SearchResultDocument> findByInternalProvider(ProviderEnum provider);
 
+    void deleteByInternalProvider(ProviderEnum provider);
+
 }

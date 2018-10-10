@@ -74,7 +74,7 @@ public class ImmoCrawlerBatch {
                     try {
                         IDetailsCrawler crawler = crawlerMap.get(article.getInternalProvider());
                         if (crawler != null) {
-                            LOGGER.info("Getting details for {} {}", crawler.getInternalProvider(), article.getUrl());
+                            LOGGER.info("Getting details for {} {}", crawler.getInternalProvider(), article);
                             crawler.updateDetails(article);
                         } else {
                             LOGGER.warn("No crawler details found for {} {}", article.getInternalProvider(), article.getUrl());
