@@ -6,6 +6,7 @@ import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -48,14 +49,18 @@ public class LeboncoinArticleCrawler implements IDetailsCrawler {
     }
 
     private Set<String> getImages(Document doc) {
-        return doc.getElementsByAttributeValue("data-qa-id", "slideshow_container").first()
-                .getElementsByAttributeValueContaining("style", "background-image: ").stream()
-                .map(element -> {
-                    String style = element.attr("style");
-                    style = style.replaceAll("background-image:url\\(", "");
-                    return style.substring(0, style.length() - 2);
-                })
-                .collect(Collectors.toSet());
+        Element slideShow = doc.getElementsByAttributeValue("data-qa-id", "slideshow_container").first();
+        if (slideShow != null) {
+            return slideShow.getElementsByAttributeValueContaining("style", "background-image: ").stream()
+                    .map(element -> {
+                        String style = element.attr("style");
+                        style = style.replaceAll("background-image:url\\(", "");
+                        return style.substring(0, style.length() - 2);
+                    })
+                    .collect(Collectors.toSet());
+        } else {
+            return null;
+        }
     }
 
     @Override

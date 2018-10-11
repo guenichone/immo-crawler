@@ -29,19 +29,19 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
             Document document = getDocumentPage(criteria, 1);
 
             int total = getTotal(document);
-
-            List<SearchResultDocument> resultDocuments = parseResultPage(criteria, document);
-            int nbByPage = resultDocuments.size();
-            if (nbByPage == 0) {
+            if (total == 0) {
                 throw new NoSuchElementException("No articles found for " + buildSearchUrl(criteria, 1));
             }
+
+            Elements articles = getArticles(document);
+            int nbByPage = articles.size();
 
             int numberOfPages = total  / nbByPage;
             if (total % nbByPage != 0) {
                 numberOfPages++;
             }
 
-            consumer.accept(resultDocuments);
+            consumer.accept(parseArticles(criteria, articles));
 
             LOGGER.info("{} : Found {} results in {} pages of results", getInternalProvider(), total, numberOfPages);
 

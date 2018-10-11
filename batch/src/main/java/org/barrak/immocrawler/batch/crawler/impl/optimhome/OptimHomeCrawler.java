@@ -14,6 +14,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +58,9 @@ public class OptimHomeCrawler extends JsoupPagedCrawler {
     protected Document getDocumentPage(SearchCriteria criteria, int pageNumber) {
         String url = buildSearchUrl(criteria, pageNumber);
 
-        WebDriver driver = new FirefoxDriver();
+        FirefoxOptions options = new FirefoxOptions();
+        options.setLogLevel(FirefoxDriverLogLevel.FATAL);
+        WebDriver driver = new FirefoxDriver(options);
         driver.get(url);
 
         try {

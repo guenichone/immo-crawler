@@ -5,6 +5,7 @@ import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.junit.Test;
 import org.powermock.reflect.Whitebox;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +17,7 @@ public class OptimHomeCrawlerTest {
     @Test
     public void search() {
         Whitebox.setInternalState(crawler, "optimhomeUrl", "https://www.optimhome.com/");
-        // Whitebox.setInternalState(crawler, "cache", new HashMap<String, SearchResultDocument>());
+        Whitebox.setInternalState(crawler, "cache", new HashMap<String, SearchResultDocument>());
 
         SearchCriteria criteria = new SearchCriteria("crusnes");
         criteria.setMinPrice(100000);
@@ -24,6 +25,6 @@ public class OptimHomeCrawlerTest {
 
         List<SearchResultDocument> resultDocumentList = crawler.search(criteria);
 
-        assertThat(resultDocumentList).hasSize(42);
+        assertThat(resultDocumentList).hasSize(41);
     }
 }

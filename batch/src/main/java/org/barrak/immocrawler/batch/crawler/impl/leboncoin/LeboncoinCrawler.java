@@ -10,6 +10,8 @@ import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -20,11 +22,10 @@ import java.util.Map;
 @Component
 public class LeboncoinCrawler extends JsoupPagedCrawler {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(LeboncoinCrawler.class);
+
     @Value("${provider.website.leboncoin}")
     private String leboncoinUrl;
-
-    @Value("${webdriver.gecko.driver}")
-    private String geckodriverPath;
 
     @Autowired
     private Map<String, SearchResultDocument> cache;
@@ -32,11 +33,6 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
     @Override
     protected Connection addConnectionParams(Connection connection) {
         return LeboncoinJsoupConnectionUpdater.addConnectionParams(connection);
-    }
-
-    @Autowired
-    public LeboncoinCrawler(@Value("${webdriver.gecko.driver}") String geckodriverPath) {
-        System.setProperty("webdriver.gecko.driver", geckodriverPath);
     }
 
     @Override
@@ -54,9 +50,21 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
     @Override
     protected SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
         String href = leboncoinUrl + article.getElementsByTag("a").first().attr("href");
-        String city = article.getElementsByAttributeValue("data-qa-id", "aditem_location").text();
         String priceStr = article.getElementsByAttributeValue("itemprop", "price").text();
         int price = (int) ParserUtils.getNumericOnly(priceStr);
+
+        if (cache.containsKey(href)) {
+            SearchResultDocument oldSearchResult = cache.get(href);
+            if (oldSearchResult.getPrice() != price) {
+                LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
+            } else {
+                return null;
+            }
+        } else {
+            LOGGER.info("Add new result {}", href);
+        }
+
+        String city = article.getElementsByAttributeValue("data-qa-id", "aditem_location").text();
 
         SearchResultDocument result = new SearchResultDocument(href, getInternalProvider(), RealEstateType.UNKNOW, city, price);
 
