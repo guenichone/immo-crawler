@@ -112,11 +112,17 @@ public class ImmoRegionCrawler implements IPagedCrawler {
         SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, type, city, price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article, href));
+        searchResult.setHomeSurface(getCharacteristic(article, "icon-surface"));
+        searchResult.setNbRooms(getCharacteristic(article, "icon-room"));
 
         return searchResult;
     }
 
-    private String getTitle(Element article) {
+     private int getCharacteristic(Element article, String clazz) {
+         return (int) ParserUtils.getNumericOnly(article.getElementsByClass(clazz).first().text());
+     }
+
+     private String getTitle(Element article) {
         return article.getElementsByTag("a").first().attr("title");
     }
 
