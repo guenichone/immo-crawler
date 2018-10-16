@@ -1,15 +1,19 @@
 package org.barrak.immocrawler.database.document;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.StringJoiner;
 
 @Document(collection = "searchResults")
 public class SearchResultDocument {
 
     @Id
+    private SearchResultDocumentKey id;
+
     private String url;
 
     private RealEstateType realEstateType;
@@ -18,11 +22,11 @@ public class SearchResultDocument {
 
     private String city;
 
-    private int price;
+    private int price = -1;
 
-    private int nbRooms;
-    private int landSurface;
-    private int homeSurface;
+    private int nbRooms = -1;
+    private int landSurface = -1;
+    private int homeSurface = -1;
 
     private String imageUrl;
 
@@ -36,23 +40,27 @@ public class SearchResultDocument {
     private boolean moved;
     private boolean detailsParsed;
 
-    private ProviderEnum internalProvider;
     private String externalProvider;
 
     private String internalReference;
     private String externalReference;
 
+    @CreatedDate
     private LocalDateTime created;
 
     public SearchResultDocument() {
     }
 
-    public SearchResultDocument(String url, ProviderEnum provider, RealEstateType realEstateType, String city, int price) {
+    public SearchResultDocument(String id, String url, ProviderEnum provider, RealEstateType realEstateType, String city, int price) {
+        this.id = new SearchResultDocumentKey(provider, id);
         this.url = url;
-        this.internalProvider = provider;
         this.realEstateType = realEstateType;
         this.city = city;
         this.price = price;
+    }
+
+    public SearchResultDocumentKey getId() {
+        return id;
     }
 
     public String getUrl() {
@@ -187,11 +195,7 @@ public class SearchResultDocument {
 
 
     public ProviderEnum getInternalProvider() {
-        return internalProvider;
-    }
-
-    public void setInternalProvider(ProviderEnum internalProvider) {
-        this.internalProvider = internalProvider;
+        return id.getInternalProvider();
     }
 
     public String getExternalProvider() {
@@ -222,18 +226,14 @@ public class SearchResultDocument {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
     @Override
     public String toString() {
-        return '[' +
-                "url='" + url + '\'' +
-                ", city='" + city + '\'' +
-                ", landSurface=" + landSurface +
-                ", homeSurface=" + homeSurface +
-                ", price=" + price +
-                ']';
+        return new StringJoiner(", ", "[", "]")
+                .add("id='" + id + "'")
+                .add("title='" + title + "'")
+                .add("city='" + city + "'")
+                .add("price=" + price)
+                .add("url='" + url + "'")
+                .toString();
     }
 }

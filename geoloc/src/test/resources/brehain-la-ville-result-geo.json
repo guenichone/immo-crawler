@@ -1,0 +1,479 @@
+{
+  "plus_code": {
+    "compound_code": "CVRJ+49 Bréhain-la-Ville, France",
+    "global_code": "8FX7CVRJ+49"
+  },
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "2A",
+          "short_name": "2A",
+          "types": [
+            "street_number"
+          ]
+        },
+        {
+          "long_name": "Route de Fillières",
+          "short_name": "Route de Fillières",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Bréhain-la-Ville",
+          "short_name": "Bréhain-la-Ville",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "54190",
+          "short_name": "54190",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "2A Route de Fillières, 54190 Bréhain-la-Ville, France",
+      "geometry": {
+        "location": {
+          "lat": 49.4402742,
+          "lng": 5.8809391
+        },
+        "location_type": "ROOFTOP",
+        "viewport": {
+          "northeast": {
+            "lat": 49.44162318029151,
+            "lng": 5.882288080291502
+          },
+          "southwest": {
+            "lat": 49.43892521970851,
+            "lng": 5.879590119708498
+          }
+        }
+      },
+      "place_id": "ChIJ0xqHXWfM6kcRjLtiuVNYZ3k",
+      "plus_code": {
+        "compound_code": "CVRJ+49 Bréhain-la-Ville, France",
+        "global_code": "8FX7CVRJ+49"
+      },
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "2",
+          "short_name": "2",
+          "types": [
+            "street_number"
+          ]
+        },
+        {
+          "long_name": "Route de Fillières",
+          "short_name": "Route de Fillières",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Bréhain-la-Ville",
+          "short_name": "Bréhain-la-Ville",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "54190",
+          "short_name": "54190",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "2 Route de Fillières, 54190 Bréhain-la-Ville, France",
+      "geometry": {
+        "location": {
+          "lat": 49.4395283,
+          "lng": 5.8817096
+        },
+        "location_type": "RANGE_INTERPOLATED",
+        "viewport": {
+          "northeast": {
+            "lat": 49.4408772802915,
+            "lng": 5.883058580291502
+          },
+          "southwest": {
+            "lat": 49.4381793197085,
+            "lng": 5.880360619708498
+          }
+        }
+      },
+      "place_id": "EjYyIFJvdXRlIGRlIEZpbGxpw6hyZXMsIDU0MTkwIEJyw6loYWluLWxhLVZpbGxlLCBGcmFuY2UiGhIYChQKEglRdouTXczqRxHihKh2hgH3LRAC",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Bréhain-la-Ville",
+          "short_name": "Bréhain-la-Ville",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Bréhain-la-Ville, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 49.456134,
+            "lng": 5.9198501
+          },
+          "southwest": {
+            "lat": 49.4195919,
+            "lng": 5.850641
+          }
+        },
+        "location": {
+          "lat": 49.44061,
+          "lng": 5.880224999999999
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 49.456134,
+            "lng": 5.9198501
+          },
+          "southwest": {
+            "lat": 49.4195919,
+            "lng": 5.850641
+          }
+        }
+      },
+      "place_id": "ChIJwSvhsl_M6kcRUAg7mrlfCgQ",
+      "types": [
+        "locality",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "54190",
+          "short_name": "54190",
+          "types": [
+            "postal_code"
+          ]
+        },
+        {
+          "long_name": "Villerupt",
+          "short_name": "Villerupt",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "54190 Villerupt, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 49.4854664,
+            "lng": 5.9425149
+          },
+          "southwest": {
+            "lat": 49.4197956,
+            "lng": 5.850943500000001
+          }
+        },
+        "location": {
+          "lat": 49.4501559,
+          "lng": 5.8783726
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 49.4854664,
+            "lng": 5.9425149
+          },
+          "southwest": {
+            "lat": 49.4197956,
+            "lng": 5.850943500000001
+          }
+        }
+      },
+      "place_id": "ChIJA3BGmobM6kcRwLVxAL1fChw",
+      "postcode_localities": [
+        "Bréhain-la-Ville",
+        "Tiercelet",
+        "Villerupt"
+      ],
+      "types": [
+        "postal_code"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Meurthe-et-Moselle, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 49.56326800000001,
+            "lng": 7.123213100000001
+          },
+          "southwest": {
+            "lat": 48.348987,
+            "lng": 5.426108
+          }
+        },
+        "location": {
+          "lat": 48.7997007,
+          "lng": 6.094701400000001
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 49.56326800000001,
+            "lng": 7.123213100000001
+          },
+          "southwest": {
+            "lat": 48.348987,
+            "lng": 5.426108
+          }
+        }
+      },
+      "place_id": "ChIJ2QzP5IHplEcR4Cg3mrlfCgM",
+      "types": [
+        "administrative_area_level_2",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Grand Est, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 50.169162,
+            "lng": 8.2335491
+          },
+          "southwest": {
+            "lat": 47.4202619,
+            "lng": 3.3836479
+          }
+        },
+        "location": {
+          "lat": 48.699803,
+          "lng": 6.1878074
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 50.169162,
+            "lng": 8.2335491
+          },
+          "southwest": {
+            "lat": 47.4202619,
+            "lng": 3.3836479
+          }
+        }
+      },
+      "place_id": "ChIJsbWPxd9VkUcR_RfRz30ZyLk",
+      "types": [
+        "administrative_area_level_1",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 51.1241999,
+            "lng": 9.6624999
+          },
+          "southwest": {
+            "lat": 41.31433,
+            "lng": -5.5591
+          }
+        },
+        "location": {
+          "lat": 46.227638,
+          "lng": 2.213749
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 51.1241999,
+            "lng": 9.6624999
+          },
+          "southwest": {
+            "lat": 41.31433,
+            "lng": -5.5591
+          }
+        }
+      },
+      "place_id": "ChIJMVd4MymgVA0R99lHx5Y__Ws",
+      "types": [
+        "country",
+        "political"
+      ]
+    }
+  ],
+  "status": "OK"
+}

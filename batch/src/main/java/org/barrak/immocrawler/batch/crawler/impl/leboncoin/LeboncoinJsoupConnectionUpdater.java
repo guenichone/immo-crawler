@@ -6,7 +6,6 @@ public class LeboncoinJsoupConnectionUpdater {
 
     public static Connection addConnectionParams(Connection connection) {
         return connection.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36")
-                .referrer("www.leboncoin.fr")
                 .header("connection", "keep-alive")
                 .header("upgrade-insecure-requests", "1")
                 .header("dnt", "1")

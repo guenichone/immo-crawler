@@ -1,11 +1,12 @@
 package org.barrak.immocrawler.batch.crawler.impl.leboncoin;
 
+import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
+import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.database.document.RealEstateType;
 import org.barrak.immocrawler.database.document.SearchResultDocument;
-import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
-import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
+import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,11 +29,11 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
     private String leboncoinUrl;
 
     @Autowired
-    private Map<String, SearchResultDocument> cache;
+    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
 
     @Override
     protected Connection addConnectionParams(Connection connection) {
-        return LeboncoinJsoupConnectionUpdater.addConnectionParams(connection);
+        return LeboncoinJsoupConnectionUpdater.addConnectionParams(connection).referrer("www.leboncoin.fr");
     }
 
     @Override
@@ -49,31 +50,52 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
 
     @Override
     protected SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
-        String href = leboncoinUrl + article.getElementsByTag("a").first().attr("href");
+        String href = article.getElementsByTag("a").first().attr("href");
+        String id = ParserUtils.getLastPart(href, "/")
+                .replaceAll(".htm", "");
+
         String priceStr = article.getElementsByAttributeValue("itemprop", "price").text();
         int price = (int) ParserUtils.getNumericOnly(priceStr);
+        String url = leboncoinUrl + href;
 
-        if (cache.containsKey(href)) {
-            SearchResultDocument oldSearchResult = cache.get(href);
+        SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
+        if (cache.containsKey(cacheKey)) {
+            SearchResultDocument oldSearchResult = cache.get(cacheKey);
             if (oldSearchResult.getPrice() != price) {
-                LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
+                LOGGER.info("New price for {}, previous {}, new {}", id, oldSearchResult.getPrice(), price);
             } else {
                 return null;
             }
         } else {
-            LOGGER.info("Add new result {}", href);
+            LOGGER.info("Add new result id {} : {}", id, url);
         }
 
         String city = article.getElementsByAttributeValue("data-qa-id", "aditem_location").text();
-
-        SearchResultDocument result = new SearchResultDocument(href, getInternalProvider(), RealEstateType.UNKNOW, city, price);
-
         String title = article.getElementsByAttributeValue("data-qa-id", "aditem_title").text();
+
+        RealEstateType type = getRealEstateType(title);
+
+        SearchResultDocument result = new SearchResultDocument(id, url, getInternalProvider(), type, city, price);
+
         result.setTitle(title);
+
         String imageUrl = article.getElementsByTag("img").attr("src");
         result.setImageUrl(imageUrl);
 
         return result;
+    }
+
+    private RealEstateType getRealEstateType(String title) {
+        if (title != null) {
+            String lowerCaseTitle = title.toLowerCase();
+            if (lowerCaseTitle.contains("maison")) {
+                return RealEstateType.HOUSE;
+            }
+            if (lowerCaseTitle.contains("terrain")) {
+                return RealEstateType.LAND;
+            }
+        }
+        return RealEstateType.UNKNOW;
     }
 
     @Override
@@ -81,15 +103,15 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
         // https://www.leboncoin.fr/recherche/
         // ?category=9
         // &lat=49.434418
-        // &lng=5.921767,15
+        // &lng=5.921767
         // &radius=20000
         // &owner_type=private
         // &price=min-400000
         // &real_estate_type=1,3
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(leboncoinUrl + "/recherche/")
-                .queryParam("lat", "49.434418")
-                .queryParam("lng", "5.921767")
+                .queryParam("lat", criteria.getLat())
+                .queryParam("lng", criteria.getLng())
                 .queryParam("owner_type", "private")
                 .queryParam("price", getPriceCriteria(criteria))
                 .queryParam("real_estate_type", "1,3")

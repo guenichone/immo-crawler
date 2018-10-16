@@ -1,9 +1,9 @@
 package org.barrak.immocrawler.batch.crawler.impl.optimhome;
 
-import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
+import org.barrak.immocrawler.batch.utils.Whitebox;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.junit.Test;
-import org.powermock.reflect.Whitebox;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +19,12 @@ public class OptimHomeCrawlerTest {
         Whitebox.setInternalState(crawler, "optimhomeUrl", "https://www.optimhome.com/");
         Whitebox.setInternalState(crawler, "cache", new HashMap<String, SearchResultDocument>());
 
-        SearchCriteria criteria = new SearchCriteria("crusnes");
+        SearchCriteria criteria = new SearchCriteria(49.434418, 5.921767, 15);
         criteria.setMinPrice(100000);
         criteria.setMaxPrice(500000);
 
         List<SearchResultDocument> resultDocumentList = crawler.search(criteria);
 
-        assertThat(resultDocumentList).hasSize(41);
+        assertThat(resultDocumentList).isNotEmpty();
     }
 }

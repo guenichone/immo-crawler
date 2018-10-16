@@ -2,10 +2,13 @@ package org.barrak.immocrawler.batch;
 
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
 import org.barrak.immocrawler.database.repository.SearchResultRepository;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
+import org.barrak.immocrawler.geoloc.IGeoLocService;
+import org.barrak.immocrawler.geoloc.model.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +36,10 @@ public class ImmoCrawlerBatch {
     private SearchResultRepository searchResultRepository;
 
     @Autowired
-    private Map<String, SearchResultDocument> searchResultCache;
+    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
+
+    @Autowired
+    private IGeoLocService geoLocService;
 
 	public static void main(String args[]) {
 		SpringApplication.run(ImmoCrawlerBatch.class, args);
@@ -44,15 +50,15 @@ public class ImmoCrawlerBatch {
 		return args -> {
 
             // Clean repo for fresh import
-//			searchResultRepository.deleteAll();
-//            searchResultCache.clear();
-//
-//            searchResultDetailsRepository.deleteAll();
-//            searchResultDetailsCache.clear();
+//			  searchResultRepository.deleteAll();
+//            cache.clear();
 
-			SearchCriteria searchCriteria = new SearchCriteria("crusnes ", 15);
-            searchCriteria.setMinPrice(100000);
-            searchCriteria.setMaxPrice(500000);
+            Location location = geoLocService.getLocation("crusnes");
+
+			SearchCriteria searchCriteria = new SearchCriteria(location.getLat(), location.getLng(), 15);
+            searchCriteria.setMinPrice(150000);
+            searchCriteria.setMaxPrice(450000);
+            searchCriteria.setPostalCode(location.getPostalCode());
 
 			Collection<IPagedCrawler> crawlers = ctx.getBeansOfType(IPagedCrawler.class).values();
             crawlers.stream().parallel()

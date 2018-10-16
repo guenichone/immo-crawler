@@ -1,0 +1,478 @@
+{
+  "plus_code": {
+    "compound_code": "CWM9+GV Crusnes, France",
+    "global_code": "8FX7CWM9+GV"
+  },
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "30",
+          "short_name": "30",
+          "types": [
+            "street_number"
+          ]
+        },
+        {
+          "long_name": "Rue de la Mairie",
+          "short_name": "Rue de la Mairie",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Crusnes",
+          "short_name": "Crusnes",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "54680",
+          "short_name": "54680",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "30 Rue de la Mairie, 54680 Crusnes, France",
+      "geometry": {
+        "location": {
+          "lat": 49.4337502,
+          "lng": 5.9197426
+        },
+        "location_type": "ROOFTOP",
+        "viewport": {
+          "northeast": {
+            "lat": 49.4350991802915,
+            "lng": 5.921091580291503
+          },
+          "southwest": {
+            "lat": 49.4324012197085,
+            "lng": 5.918393619708499
+          }
+        }
+      },
+      "place_id": "ChIJ6_rOlcbM6kcRtVonsUel0Pw",
+      "plus_code": {
+        "compound_code": "CWM9+GV Crusnes, France",
+        "global_code": "8FX7CWM9+GV"
+      },
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "30",
+          "short_name": "30",
+          "types": [
+            "street_number"
+          ]
+        },
+        {
+          "long_name": "Rue de la Mairie",
+          "short_name": "Rue de la Mairie",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Crusnes",
+          "short_name": "Crusnes",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "54680",
+          "short_name": "54680",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "30 Rue de la Mairie, 54680 Crusnes, France",
+      "geometry": {
+        "location": {
+          "lat": 49.4336767,
+          "lng": 5.9197441
+        },
+        "location_type": "RANGE_INTERPOLATED",
+        "viewport": {
+          "northeast": {
+            "lat": 49.4350256802915,
+            "lng": 5.921093080291502
+          },
+          "southwest": {
+            "lat": 49.4323277197085,
+            "lng": 5.918395119708498
+          }
+        }
+      },
+      "place_id": "EiozMCBSdWUgZGUgbGEgTWFpcmllLCA1NDY4MCBDcnVzbmVzLCBGcmFuY2UiGhIYChQKEglbxkG6xszqRxHc905kHa9qnRAe",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Crusnes",
+          "short_name": "Crusnes",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Crusnes, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 49.44927999999999,
+            "lng": 5.942524
+          },
+          "southwest": {
+            "lat": 49.417718,
+            "lng": 5.896758
+          }
+        },
+        "location": {
+          "lat": 49.434418,
+          "lng": 5.921767
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 49.44927999999999,
+            "lng": 5.942524
+          },
+          "southwest": {
+            "lat": 49.417718,
+            "lng": 5.896758
+          }
+        }
+      },
+      "place_id": "ChIJRSCNvcbM6kcRAAU7mrlfCgQ",
+      "types": [
+        "locality",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "54680",
+          "short_name": "54680",
+          "types": [
+            "postal_code"
+          ]
+        },
+        {
+          "long_name": "Crusnes",
+          "short_name": "Crusnes",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "54680 Crusnes, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 49.4492267,
+            "lng": 5.9424038
+          },
+          "southwest": {
+            "lat": 49.40572239999999,
+            "lng": 5.8707292
+          }
+        },
+        "location": {
+          "lat": 49.4233707,
+          "lng": 5.9035562
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 49.4492267,
+            "lng": 5.9424038
+          },
+          "southwest": {
+            "lat": 49.40572239999999,
+            "lng": 5.8707292
+          }
+        }
+      },
+      "place_id": "ChIJhzVOOubM6kcR0LVxAL1fChw",
+      "postcode_localities": [
+        "Crusnes",
+        "Errouville"
+      ],
+      "types": [
+        "postal_code"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Meurthe-et-Moselle, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 49.56326800000001,
+            "lng": 7.123213100000001
+          },
+          "southwest": {
+            "lat": 48.348987,
+            "lng": 5.426108
+          }
+        },
+        "location": {
+          "lat": 48.7997007,
+          "lng": 6.094701400000001
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 49.56326800000001,
+            "lng": 7.123213100000001
+          },
+          "southwest": {
+            "lat": 48.348987,
+            "lng": 5.426108
+          }
+        }
+      },
+      "place_id": "ChIJ2QzP5IHplEcR4Cg3mrlfCgM",
+      "types": [
+        "administrative_area_level_2",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Grand Est, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 50.169162,
+            "lng": 8.2335491
+          },
+          "southwest": {
+            "lat": 47.4202619,
+            "lng": 3.3836479
+          }
+        },
+        "location": {
+          "lat": 48.699803,
+          "lng": 6.1878074
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 50.169162,
+            "lng": 8.2335491
+          },
+          "southwest": {
+            "lat": 47.4202619,
+            "lng": 3.3836479
+          }
+        }
+      },
+      "place_id": "ChIJsbWPxd9VkUcR_RfRz30ZyLk",
+      "types": [
+        "administrative_area_level_1",
+        "political"
+      ]
+    },
+    {
+      "address_components": [
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 51.1241999,
+            "lng": 9.6624999
+          },
+          "southwest": {
+            "lat": 41.31433,
+            "lng": -5.5591
+          }
+        },
+        "location": {
+          "lat": 46.227638,
+          "lng": 2.213749
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 51.1241999,
+            "lng": 9.6624999
+          },
+          "southwest": {
+            "lat": 41.31433,
+            "lng": -5.5591
+          }
+        }
+      },
+      "place_id": "ChIJMVd4MymgVA0R99lHx5Y__Ws",
+      "types": [
+        "country",
+        "political"
+      ]
+    }
+  ],
+  "status": "OK"
+}

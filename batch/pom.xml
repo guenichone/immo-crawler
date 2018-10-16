@@ -17,14 +17,12 @@
 	</parent>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-
         <selenium.version>3.14.0</selenium.version>
         <assertj.version>3.11.1</assertj.version>
         <jsoup.version>1.11.3</jsoup.version>
         <powermock.version>1.7.4</powermock.version>
+
+		<immo-crawler.version>0.0.1-SNAPSHOT</immo-crawler.version>
 	</properties>
 
 	<dependencies>
@@ -44,7 +42,13 @@
 		<dependency>
 			<groupId>org.barrak.crawler</groupId>
 			<artifactId>immo-crawler-database</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${immo-crawler.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.barrak.crawler</groupId>
+			<artifactId>immo-crawler-geoloc</artifactId>
+			<version>${immo-crawler.version}</version>
 		</dependency>
 
         <!-- EXTERNAL -->
@@ -65,26 +69,6 @@
             <version>${jsoup.version}</version>
         </dependency>
 
-        <!-- TEST -->
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-module-junit4</artifactId>
-			<version>${powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-api-mockito</artifactId>
-			<version>${powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
     </dependencies>
 
 	<build>
@@ -95,6 +79,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>

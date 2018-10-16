@@ -6,6 +6,7 @@ import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
+import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -33,7 +34,7 @@ public class PanettaCrawler implements IPagedCrawler {
     private String panettaImmoUrl;
 
     @Autowired
-    private Map<String, SearchResultDocument> cache;
+    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
 
     @Override
     public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
@@ -89,27 +90,29 @@ public class PanettaCrawler implements IPagedCrawler {
 
     private SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
         Element link = article.getElementsByTag("a").first();
-        String title = link.text();
-        String href = panettaImmoUrl + link.attr("href");
+        String id = ParserUtils.getLastPart(link.attr("href"), "/");
         String priceStr = getValueByKey(article, "price");
         int price = (int) ParserUtils.getNumericOnly(priceStr);
+        String href = panettaImmoUrl + link.attr("href");
 
-        if (cache.containsKey(href)) {
-            SearchResultDocument oldSearchResult = cache.get(href);
+        SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
+        if (cache.containsKey(cacheKey)) {
+            SearchResultDocument oldSearchResult = cache.get(cacheKey);
             if (oldSearchResult.getPrice() != price) {
-                LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
+                LOGGER.info("New price for {}, previous {}, new {}", id, oldSearchResult.getPrice(), price);
             } else {
                 return null;
             }
         } else {
-            LOGGER.info("Add new result {}", href);
+            LOGGER.info("Add new result id {} : {}", id, href);
         }
 
         String city = link.getElementsByClass("city").first().text();
+        String title = link.text();
         RealEstateType type = link.getElementsByClass("design-name").first().text().equals("Maison individuelle") ?
                 RealEstateType.HOUSE : RealEstateType.LAND;
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.PANETTA_IMMO, type, city, price);
+        SearchResultDocument searchResult = new SearchResultDocument(id, href, ProviderEnum.PANETTA_IMMO, type, city, price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article));
 
@@ -136,6 +139,7 @@ public class PanettaCrawler implements IPagedCrawler {
 
     private String buildSearchUrl(SearchCriteria criteria, int i) {
         // http://www.panetta-immobilier.fr/offer/search/transaction/by/property_type/h/currentPage/1
+        // There is no way to check around a location by default, a solution would be to check all the available cities if they match ...
         return panettaImmoUrl + "/offer/search/transaction/by/property_type/h/currentPage/" + i;
     }
 

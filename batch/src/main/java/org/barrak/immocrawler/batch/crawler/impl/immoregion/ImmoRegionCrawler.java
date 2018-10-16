@@ -1,11 +1,12 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
-import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.RealEstateType;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.RealEstateType;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -34,7 +36,7 @@ public class ImmoRegionCrawler implements IPagedCrawler {
     private String immoregionUrl;
 
     @Autowired
-    private Map<String, SearchResultDocument> cache;
+    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
 
     @Override
     public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
@@ -91,25 +93,31 @@ public class ImmoRegionCrawler implements IPagedCrawler {
     public SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
 
         Element a = article.getElementsByClass("mainInfos").first().getElementsByTag("a").first();
-        String href = immoregionUrl + a.attr("href");
+        String href = a.attr("href");
+        String url = immoregionUrl + href;
+        String id = ParserUtils.getLastPart(href, "/")
+                .replaceAll("id-", "")
+                .replaceAll(".html", "");
+
         int price = (int) ParserUtils.getNumericOnly(a.text());
 
-        if (cache.containsKey(href)) {
-            SearchResultDocument oldSearchResult = cache.get(href);
+        SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
+        if (cache.containsKey(cacheKey)) {
+            SearchResultDocument oldSearchResult = cache.get(cacheKey);
             if (oldSearchResult.getPrice() != price) {
-                LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
+                LOGGER.info("New price for {}, previous {}, new {}", id, oldSearchResult.getPrice(), price);
             } else {
                 return null;
             }
         } else {
-            LOGGER.info("Add new result {}", href);
+            LOGGER.info("Add new result id {} : {}", id, url);
         }
 
         String title = getTitle(article);
         String city = getCity(article);
         RealEstateType type = title.startsWith("Maison individuelle") ? RealEstateType.HOUSE : RealEstateType.LAND;
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, type, city, price);
+        SearchResultDocument searchResult = new SearchResultDocument(id, url, ProviderEnum.IMMOREGION, type, city, price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article, href));
         searchResult.setHomeSurface(getCharacteristic(article, "icon-surface"));
@@ -119,7 +127,12 @@ public class ImmoRegionCrawler implements IPagedCrawler {
     }
 
      private int getCharacteristic(Element article, String clazz) {
-         return (int) ParserUtils.getNumericOnly(article.getElementsByClass(clazz).first().text());
+         Element characteristic = article.getElementsByClass(clazz).first();
+         if (characteristic != null) {
+             return (int) ParserUtils.getNumericOnly(characteristic.text());
+         } else {
+             return -1;
+         }
      }
 
      private String getTitle(Element article) {
@@ -147,19 +160,32 @@ public class ImmoRegionCrawler implements IPagedCrawler {
 
     private String buildSearchUrl(SearchCriteria criteria, int pageNumber) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(immoregionUrl + "/srp/")
-                .queryParam("distance", "49.434418,5.921767,15")
+                .queryParam("distance", getDistance(criteria))
                 .queryParam("tr", "buy");
+
         if (criteria.getMinPrice() > 0) {
             builder.queryParam("price_min", criteria.getMinPrice());
         }
+
         if (criteria.getMaxPrice() > 0) {
             builder.queryParam("price_max", criteria.getMaxPrice());
         }
-        builder.queryParam("q", "13bfe2b9")
-                .queryParam("loc", "L9-crusnes")
-                .queryParam("page", pageNumber)
-                .queryParam("ptypes", "ground,house");
+
+        builder.queryParam("ptypes", "ground,house")
+                .queryParam("page", pageNumber);
+
         return builder.toUriString();
+    }
+
+    private String getDistance(SearchCriteria criteria) {
+        if (criteria.getLat() == null) {
+            throw new IllegalArgumentException("Missing 'lat' in criteria");
+        }
+        if (criteria.getLng() == null) {
+            throw new IllegalArgumentException("Missing 'lng' in criteria");
+        }
+
+        return String.format(Locale.ROOT,"%f,%f,%d", criteria.getLat(), criteria.getLng(), criteria.getAround());
     }
 
      @Override

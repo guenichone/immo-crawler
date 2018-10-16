@@ -1,0 +1,74 @@
+{
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "Bréhain-la-Ville",
+          "short_name": "Bréhain-la-Ville",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Bréhain-la-Ville, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 49.456134,
+            "lng": 5.9198501
+          },
+          "southwest": {
+            "lat": 49.4195919,
+            "lng": 5.850641
+          }
+        },
+        "location": {
+          "lat": 49.44061,
+          "lng": 5.880224999999999
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 49.456134,
+            "lng": 5.9198501
+          },
+          "southwest": {
+            "lat": 49.4195919,
+            "lng": 5.850641
+          }
+        }
+      },
+      "place_id": "ChIJwSvhsl_M6kcRUAg7mrlfCgQ",
+      "types": [
+        "locality",
+        "political"
+      ]
+    }
+  ],
+  "status": "OK"
+}

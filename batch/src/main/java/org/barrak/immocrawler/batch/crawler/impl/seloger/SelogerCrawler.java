@@ -1,11 +1,12 @@
 package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
-import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.RealEstateType;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.RealEstateType;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -33,16 +34,18 @@ public class SelogerCrawler implements IPagedCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(SelogerCrawler.class);
 
     @Autowired
-    private Map<String, SearchResultDocument> cache;
+    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
 
     @Value("${provider.seloger.api}")
     private String selogerUrl;
-    @Value("${provider.seloger.cityApi}")
-    private String cityApiUrl;
 
     @Override
     public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
         try {
+            if (criteria.getPostalCode() == null) {
+                throw new IllegalArgumentException("Missing 'postalCode' in criteria");
+            }
+
             String url = buildSearchUrl(criteria, 1);
 
             Document document = Jsoup.connect(url)
@@ -95,26 +98,30 @@ public class SelogerCrawler implements IPagedCrawler {
     }
 
     private SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
-        String href = article.getElementsByTag("a").first().attr("href");
+        String id = article.getElementsByAttribute("data-publication-id").first()
+                .attr("data-publication-id");
         String priceStr = article.getElementsByClass("c-pa-cprice").text();
         int price = (int) ParserUtils.getNumericOnly(priceStr);
+        String href = article.getElementsByTag("a").first().attr("href");
 
-        if (cache.containsKey(href)) {
-            SearchResultDocument oldSearchResult = cache.get(href);
+        SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
+        if (cache.containsKey(cacheKey)) {
+            SearchResultDocument oldSearchResult = cache.get(cacheKey);
             if (oldSearchResult.getPrice() != price) {
-                LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
+                LOGGER.info("New price for {}, previous {}, new {}", id, oldSearchResult.getPrice(), price);
             } else {
                 return null;
             }
         } else {
-            LOGGER.info("Add new result {}", href);
+            LOGGER.info("Add new result id {} : {}", id, href);
         }
 
         String city = article.getElementsByClass("c-pa-city").text();
         RealEstateType type = article.getElementsByClass("c-pa-info").text().equals("Maison / Villa") ?
                 RealEstateType.HOUSE : RealEstateType.LAND;
 
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.SELOGER, type, city.toLowerCase(), price);
+        SearchResultDocument searchResult = new SearchResultDocument(
+                id, href, ProviderEnum.SELOGER, type, city.toLowerCase(), price);
 
         searchResult.setTitle(getTitle(article));
         searchResult.setNbRooms(getCriterionValue(article, "[0-9]+ p"));
@@ -162,48 +169,24 @@ public class SelogerCrawler implements IPagedCrawler {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(selogerUrl + "/list.htm")
                 .queryParam("enterprise", "0")
                 .queryParam("natures", "1,2,4") // bind natures ?
-                .queryParam("places", "{ci:570041}") // TODO city mapping in array ?
+                .queryParam("places", getPlaces(criteria))
                 .queryParam("price", criteria.getMinPrice() + "/" + criteria.getMaxPrice())
                 .queryParam("projects", "2") // bind projects ?
-                .queryParam("proximity","0,10") // TODO around
+                .queryParam("proximity","0," + criteria.getAround())
                 .queryParam("qsversion", "1.0")
                 .queryParam("types", "2,4");
         if (pageNumber > 1) {
             builder.queryParam("LISTING-LISTpg", pageNumber);
         }
 
-        String uri = builder.toUriString();
-
-        return uri;
+        return builder.toUriString();
     }
 
-//    private String getCityParam(List<String> cities) {
-//        List<String> ciList = new ArrayList<>();
-//        for (String city : cities) {
-//            String cityUrl = cityApiUrl + "text=" + city.toLowerCase();
-//
-//            LOGGER.info("Calling cityApi : {}", cityUrl);
-//
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.add("origin","https://www.seloger.com");
-//            // headers.add("Referer", "https://www.seloger.com/list.htm?types=2%2C4&projects=2&enterprise=0&natures=1%2C2%2C4&proximity=0%2C10&places=%5B%7Bci%3A570041%7D%5D&qsVersion=1.0");
-//            HttpEntity<String> entity = new HttpEntity<>("", headers);
-//
-//            ResponseEntity<String> response = restTemplate.exchange(cityUrl, HttpMethod.GET, entity, String.class);
-//
-//            JsonParser jsonParser = new BasicJsonParser();
-//            List<Object> jsonObjects = jsonParser.parseList(response.getBody());
-//
-//            LOGGER.info("jsonobjects {}", jsonObjects);
-//        }
-//
-//        // [{ci:570041}<,...>]
-//        String cityParam = "[" + ciList.stream().collect(Collectors.joining(",")) + "]";
-//
-//        LOGGER.info("CityParam", cityParam);
-//
-//        return cityParam;
-//    }
+    private String getPlaces(SearchCriteria criteria) {
+        return String.format("{ci:%s0%s}",
+                criteria.getPostalCode().substring(0, 2),
+                criteria.getPostalCode().substring(2, 5));
+    }
 
     @Override
     public ProviderEnum getInternalProvider() {

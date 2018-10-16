@@ -82,4 +82,14 @@ public class ParserUtils {
         }
         return allMatches;
     }
+
+    public static String getLastPart(String toSplit, String splitter) {
+        if (toSplit != null) {
+            String[] splitted = toSplit.split(splitter);
+            if (splitted.length > 0) {
+                return splitted[splitted.length - 1];
+            }
+        }
+        return null;
+    }
 }

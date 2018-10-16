@@ -1,0 +1,74 @@
+{
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "Crusnes",
+          "short_name": "Crusnes",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Meurthe-et-Moselle",
+          "short_name": "Meurthe-et-Moselle",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Grand Est",
+          "short_name": "Grand Est",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "France",
+          "short_name": "FR",
+          "types": [
+            "country",
+            "political"
+          ]
+        }
+      ],
+      "formatted_address": "Crusnes, France",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": 49.44927999999999,
+            "lng": 5.942524
+          },
+          "southwest": {
+            "lat": 49.417718,
+            "lng": 5.896758
+          }
+        },
+        "location": {
+          "lat": 49.434418,
+          "lng": 5.921767
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": 49.44927999999999,
+            "lng": 5.942524
+          },
+          "southwest": {
+            "lat": 49.417718,
+            "lng": 5.896758
+          }
+        }
+      },
+      "place_id": "ChIJRSCNvcbM6kcRAAU7mrlfCgQ",
+      "types": [
+        "locality",
+        "political"
+      ]
+    }
+  ],
+  "status": "OK"
+}

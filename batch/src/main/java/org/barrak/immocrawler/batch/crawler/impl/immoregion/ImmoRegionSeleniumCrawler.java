@@ -183,7 +183,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
         }
 
         // TODO RealEstate not set
-        SearchResultDocument searchResult = new SearchResultDocument(href, ProviderEnum.IMMOREGION, RealEstateType.LAND, criteria.getCity(), price);
+        SearchResultDocument searchResult = new SearchResultDocument(null, href, ProviderEnum.IMMOREGION, RealEstateType.LAND, criteria.getCity(), price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article, href));
 

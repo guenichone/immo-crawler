@@ -4,14 +4,17 @@ import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,7 +26,11 @@ public class LeboncoinArticleCrawler implements IDetailsCrawler {
     @Override
     public void updateDetails(SearchResultDocument article) {
         try {
-            Document document = LeboncoinJsoupConnectionUpdater.addConnectionParams(Jsoup.connect(article.getUrl())).get();
+            Connection.Response response = LeboncoinJsoupConnectionUpdater.addConnectionParams(Jsoup.connect(article.getUrl())).execute();
+            if (response.statusCode() == HttpStatus.GONE.value()) {
+                throw new NoSuchElementException("Article is gone : " + article.getUrl());
+            }
+            Document document = response.parse();
 
             String description = document.getElementsByAttributeValue("data-qa-id", "adview_description_container").text();
             article.setDescription(ParserUtils.inlineText(description.substring(0, description.length() - 16)));

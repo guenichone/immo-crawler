@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = GoogleMapGeoLocService.class, properties = "google.api.key=")
+@SpringBootTest(classes = GoogleMapGeoLocService.class)
 @RunWith(SpringRunner.class)
 public class GoogleMapGeoLocServiceTest {
 
@@ -36,5 +36,16 @@ public class GoogleMapGeoLocServiceTest {
         assertThat(result.getPostalCode()).isEqualTo("57710");
         assertThat(result.getLat()).isEqualTo(49.41791500000001);
         assertThat(result.getLng()).isEqualTo(5.9423784);
+    }
+
+    @Test
+    public void getBrehainLaVille() {
+        Location result = googleMapGeoLocService.getLocation("brehain-la-ville");
+
+        assertThat(result).isNotNull();
+        assertThat(result.getCity()).isEqualTo("Bréhain-la-Ville");
+        assertThat(result.getPostalCode()).isEqualTo("54190");
+        assertThat(result.getLat()).isEqualTo(49.4402742);
+        assertThat(result.getLng()).isEqualTo(5.8809391);
     }
 }

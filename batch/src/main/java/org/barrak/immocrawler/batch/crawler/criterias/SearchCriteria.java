@@ -1,11 +1,12 @@
 package org.barrak.immocrawler.batch.crawler.criterias;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SearchCriteria {
 
     private String city;
+    private String postalCode;
+    private Double lat;
+    private Double lng;
+
     private int around;
 
     private int minPrice;
@@ -17,12 +18,17 @@ public class SearchCriteria {
     private int minHouseSurface;
     private int maxHouseSurface;
 
-    public SearchCriteria(String city) {
-        this(city, 15);
+    public SearchCriteria() {
     }
 
-    public SearchCriteria(String city, int around) {
-        this.city = city;
+    public SearchCriteria(Double lat, Double lng) {
+        this.lat = lat;
+        this.lng = lng;
+    }
+
+    public SearchCriteria(Double lat, Double lng, int around) {
+        this.lat = lat;
+        this.lng = lng;
         this.around = around;
     }
 
@@ -32,6 +38,30 @@ public class SearchCriteria {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
     }
 
     public int getAround() {

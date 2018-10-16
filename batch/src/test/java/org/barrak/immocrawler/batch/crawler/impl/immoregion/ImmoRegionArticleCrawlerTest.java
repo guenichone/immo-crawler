@@ -1,20 +1,15 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
 import org.barrak.immocrawler.database.document.SearchResultDocument;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
 
 import java.io.File;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.mock;
 
 public class ImmoRegionArticleCrawlerTest {
 
@@ -27,15 +22,7 @@ public class ImmoRegionArticleCrawlerTest {
         // TODO : Fix me to allow mock response
         String url = "https://www.immoregion.fr/vente/maison/kanfen/id-5995430.html";
 
-        Connection connection = mock(Connection.class);
-        PowerMockito.mockStatic(Jsoup.class);
-        PowerMockito.when(Jsoup.connect(Mockito.anyString())).thenReturn(connection);
-
-        Connection.Response response = mock(Connection.Response.class);
         Document document = loadDocument(url, "kanfen.html");
-
-        when(response.parse()).thenReturn(document);
-        when(connection.execute()).thenReturn(response);
 
         SearchResultDocument article = new SearchResultDocument();
         article.setUrl(url);

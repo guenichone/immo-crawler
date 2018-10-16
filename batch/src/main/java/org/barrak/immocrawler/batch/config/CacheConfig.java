@@ -1,6 +1,7 @@
 package org.barrak.immocrawler.batch.config;
 
 import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
 import org.barrak.immocrawler.database.repository.SearchResultRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +18,11 @@ public class CacheConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(CacheConfig.class);
 
     @Bean
-    public Map<String, SearchResultDocument> getSearchResultCache(
+    public Map<SearchResultDocumentKey, SearchResultDocument> getSearchResultCache(
             SearchResultRepository searchResultRepository) {
 
-        Map<String, SearchResultDocument> result = searchResultRepository.findAll().stream()
-                .collect(Collectors.toMap(SearchResultDocument::getUrl, Function.identity()));
+        Map<SearchResultDocumentKey, SearchResultDocument> result = searchResultRepository.findAll().stream()
+                .collect(Collectors.toMap(SearchResultDocument::getId, Function.identity()));
         LOGGER.info("Cache SearchResult loading with {} entries", result.size());
         return result;
     }
