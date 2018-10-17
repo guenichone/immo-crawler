@@ -1,13 +1,14 @@
 package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
-import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
+import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
+import org.barrak.immocrawler.batch.crawler.impl.leboncoin.LeboncoinJsoupConnectionUpdater;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.database.document.RealEstateType;
 import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
-import org.jsoup.Jsoup;
+import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -20,16 +21,10 @@ import org.springframework.boot.json.JsonParser;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Component
-public class SelogerCrawler implements IPagedCrawler {
+public class SelogerCrawler extends JsoupPagedCrawler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SelogerCrawler.class);
 
@@ -40,64 +35,23 @@ public class SelogerCrawler implements IPagedCrawler {
     private String selogerUrl;
 
     @Override
-    public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
-        try {
-            if (criteria.getPostalCode() == null) {
-                throw new IllegalArgumentException("Missing 'postalCode' in criteria");
-            }
-
-            String url = buildSearchUrl(criteria, 1);
-
-            Document document = Jsoup.connect(url)
-                    .header("Host", "www.seloger.com")
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36")
-                    .get();
-
-            String strTotal = document.getElementsByClass("title_nbresult").first().text();
-            int total = (int) ParserUtils.getNumericOnly(strTotal);
-
-            Elements articles = document.getElementsByClass("c-pa-list");
-            int nbByPage = articles.size();
-
-            int numberOfPages = total  / nbByPage;
-            if (total % nbByPage != 0) {
-                numberOfPages++;
-            }
-
-            consumer.accept(parseArticles(criteria, articles));
-
-            LOGGER.info("{} : Found {} results in {} pages of results", ProviderEnum.SELOGER, total, numberOfPages);
-
-            if (numberOfPages > 1) {
-                IntStream.rangeClosed(2, numberOfPages).parallel().forEach(page -> {
-                    try {
-                        consumer.accept(parseResultPage(criteria, page));
-                    } catch (IOException e) {
-                        LOGGER.error(e.getMessage(), e);
-                    }
-                });
-            }
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
-        }
+    protected Connection addConnectionParams(Connection connection) {
+        return LeboncoinJsoupConnectionUpdater.addConnectionParams(connection).referrer("www.seloger.com");
     }
 
-    private List<SearchResultDocument> parseResultPage(SearchCriteria criteria, int pageNumber) throws IOException {
-        String url = buildSearchUrl(criteria, pageNumber);
-
-        Document document = Jsoup.connect(url).followRedirects(false).get();
-
-        return parseArticles(criteria, document.getElementsByClass("c-pa-list"));
+    @Override
+    protected int getTotal(Document document) {
+        String strTotal = document.getElementsByClass("title_nbresult").first().text();
+        return (int) ParserUtils.getNumericOnly(strTotal);
     }
 
-    public List<SearchResultDocument> parseArticles(SearchCriteria criteria, Elements articles) {
-        return articles.stream()
-                .map(article -> parseArticle(criteria, article))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+    @Override
+    protected Elements getArticles(Document document) {
+        return document.getElementsByClass("c-pa-list");
     }
 
-    private SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
+    @Override
+    protected SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
         String id = article.getElementsByAttribute("data-publication-id").first()
                 .attr("data-publication-id");
         String priceStr = article.getElementsByClass("c-pa-cprice").text();
@@ -154,7 +108,8 @@ public class SelogerCrawler implements IPagedCrawler {
         return valueStr != null ? (int) ParserUtils.getNumericOnly(valueStr) : -1;
     }
 
-    private String buildSearchUrl(SearchCriteria criteria, int pageNumber) {
+    @Override
+    protected String buildSearchUrl(SearchCriteria criteria, int pageNumber) {
         // https://www.seloger.com/list.htm
         // ?types=2,4
         // &projects=2

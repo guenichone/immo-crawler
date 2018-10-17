@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -41,23 +44,35 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
                 numberOfPages++;
             }
 
-            consumer.accept(parseArticles(criteria, articles));
+            AtomicInteger counter = new AtomicInteger(0);
+            consumer.accept(countResults(counter, parseArticles(criteria, articles)));
 
             LOGGER.info("{} : Found {} results in {} pages of results", getInternalProvider(), total, numberOfPages);
 
             if (numberOfPages > 1) {
-                IntStream.rangeClosed(2, numberOfPages).parallel().forEach(page -> {
+                ForkJoinPool pool = new ForkJoinPool(8);
+                IntStream.rangeClosed(2, numberOfPages).forEach(page -> pool.submit(() -> {
                     try {
                         Document doc = getDocumentPage(criteria, page);
-                        consumer.accept(parseResultPage(criteria, doc));
+                        consumer.accept(countResults(counter, parseResultPage(criteria, doc)));
                     } catch (IOException e) {
                         LOGGER.error(e.getMessage(), e);
                     }
-                });
+                }));
+
+                pool.shutdown();
+                pool.awaitTermination(2, TimeUnit.MINUTES);
             }
+
+            LOGGER.info("{} : Added {} new results", getInternalProvider(), counter.get());
         } catch (Exception e) {
             LOGGER.error(getInternalProvider() + " " + e.getMessage(), e);
         }
+    }
+
+    private List<SearchResultDocument> countResults(AtomicInteger counter, List<SearchResultDocument> results) {
+        counter.addAndGet(results.size());
+        return results;
     }
 
     protected Document getDocumentPage(SearchCriteria criteria, int pageNumber) throws IOException {

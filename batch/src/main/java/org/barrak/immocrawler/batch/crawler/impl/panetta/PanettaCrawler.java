@@ -1,11 +1,11 @@
 package org.barrak.immocrawler.batch.crawler.impl.panetta;
 
-import org.barrak.immocrawler.database.document.RealEstateType;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
-import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
+import org.barrak.immocrawler.database.document.ProviderEnum;
+import org.barrak.immocrawler.database.document.RealEstateType;
+import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -90,9 +90,9 @@ public class PanettaCrawler implements IPagedCrawler {
 
     private SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
         Element link = article.getElementsByTag("a").first();
-        String id = ParserUtils.getLastPart(link.attr("href"), "/");
-        String priceStr = getValueByKey(article, "price");
-        int price = (int) ParserUtils.getNumericOnly(priceStr);
+        String id = getId(link);
+        int price = getPrice(article);
+
         String href = panettaImmoUrl + link.attr("href");
 
         SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
@@ -132,6 +132,15 @@ public class PanettaCrawler implements IPagedCrawler {
         return searchResult;
     }
 
+    private String getId(Element link) {
+        String lastUrlPart = ParserUtils.getLastPart(link.attr("href"), "/");
+        return lastUrlPart.replaceAll("[^\\d]", "");
+    }
+
+    private int getPrice(Element article) {
+        String priceStr = getValueByKey(article, "price");
+        return (int) ParserUtils.getNumericOnly(priceStr);
+    }
 
     private String getImgUrl(Element article) {
         return article.getElementsByTag("img").first().attr("src");

@@ -229,7 +229,7 @@ public class SearchResultDocument {
     @Override
     public String toString() {
         return new StringJoiner(", ", "[", "]")
-                .add("id='" + id + "'")
+                .add("id='" + id.getId() + "'")
                 .add("title='" + title + "'")
                 .add("city='" + city + "'")
                 .add("price=" + price)
