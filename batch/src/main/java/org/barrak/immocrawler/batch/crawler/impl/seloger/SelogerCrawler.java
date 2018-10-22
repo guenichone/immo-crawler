@@ -2,7 +2,7 @@ package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
-import org.barrak.immocrawler.batch.crawler.impl.leboncoin.FakeBrowserConnectionUpdater;
+import org.barrak.immocrawler.batch.utils.FakeBrowserConnectionUtils;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.database.document.RealEstateType;
@@ -42,7 +42,7 @@ public class SelogerCrawler extends JsoupPagedCrawler {
 
     @Override
     protected Connection addConnectionParams(Connection connection) {
-        return FakeBrowserConnectionUpdater.addConnectionParams(connection)
+        return FakeBrowserConnectionUtils.addConnectionParams(connection)
                 .referrer("www.seloger.com")
                 .followRedirects(false);
     }

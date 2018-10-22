@@ -1,8 +1,8 @@
-package org.barrak.immocrawler.batch.crawler.impl.leboncoin;
+package org.barrak.immocrawler.batch.utils;
 
 import org.jsoup.Connection;
 
-public class FakeBrowserConnectionUpdater {
+public class FakeBrowserConnectionUtils {
 
     public static Connection addConnectionParams(Connection connection) {
         return connection.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36")

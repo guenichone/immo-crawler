@@ -1,6 +1,7 @@
 package org.barrak.immocrawler.batch.crawler.impl.leboncoin;
 
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
+import org.barrak.immocrawler.batch.utils.FakeBrowserConnectionUtils;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.database.document.SearchResultDocument;
@@ -26,7 +27,7 @@ public class LeboncoinArticleCrawler implements IDetailsCrawler {
     @Override
     public void updateDetails(SearchResultDocument article) {
         try {
-            Connection.Response response = FakeBrowserConnectionUpdater.addConnectionParams(Jsoup.connect(article.getUrl())).execute();
+            Connection.Response response = FakeBrowserConnectionUtils.addConnectionParams(Jsoup.connect(article.getUrl())).execute();
             if (response.statusCode() == HttpStatus.GONE.value()) {
                 throw new NoSuchElementException("Article is gone : " + article.getUrl());
             }

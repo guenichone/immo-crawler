@@ -1,13 +1,12 @@
 package org.barrak.immocrawler.batch.crawler.impl.panetta;
 
-import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
+import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.database.document.RealEstateType;
 import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -16,17 +15,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Component
-public class PanettaCrawler implements IPagedCrawler {
+public class PanettaCrawler extends JsoupPagedCrawler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PanettaCrawler.class);
 
@@ -37,58 +34,27 @@ public class PanettaCrawler implements IPagedCrawler {
     private Map<SearchResultDocumentKey, SearchResultDocument> cache;
 
     @Override
-    public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
-        try {
-            String url = buildSearchUrl(criteria, 1);
-
-            Document document = Jsoup.connect(url).followRedirects(false).get();
-
-            String announces = document.getElementsByClass("resume").first().text();
-            announces = announces.substring(announces.indexOf("sur "));
-            int total = (int) ParserUtils.getNumericOnly(announces);
-
-            Elements articles = document.getElementsByTag("article");
-            int nbByPage = articles.size();
-
-            int numberOfPages = total  / nbByPage;
-            if (total % nbByPage != 0) {
-                numberOfPages++;
-            }
-
-            consumer.accept(parseArticles(criteria, articles));
-
-            LOGGER.info("{} : Found {} results in {} pages of results", ProviderEnum.PANETTA_IMMO, total, numberOfPages);
-
-            if (numberOfPages > 1) {
-                IntStream.rangeClosed(2, numberOfPages).parallel().forEach(page -> {
-                    try {
-                        consumer.accept(parseResultPage(criteria, page));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
+    protected int getTotal(Document document) {
+        String announces = document.getElementsByClass("resume").first().text();
+        announces = announces.substring(announces.indexOf("sur "));
+        return (int) ParserUtils.getNumericOnly(announces);
     }
 
-    private List<SearchResultDocument> parseResultPage(SearchCriteria criteria, int pageNumber) throws IOException {
-        String url = buildSearchUrl(criteria, pageNumber);
-
-        Document document = Jsoup.connect(url).followRedirects(false).get();
-
-        return parseArticles(criteria, document.getElementsByTag("article"));
+    @Override
+    protected Elements getArticles(Document document) {
+        return document.getElementsByTag("article");
     }
 
-    private List<SearchResultDocument> parseArticles(SearchCriteria criteria, Elements articles) {
+    @Override
+    protected List<SearchResultDocument> parseArticles(SearchCriteria criteria, Elements articles) {
         return articles.stream()
                 .map(article -> parseArticle(criteria, article))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
-    private SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
+    @Override
+    protected SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
         Element link = article.getElementsByTag("a").first();
         String id = getId(link);
         int price = getPrice(article);
@@ -146,10 +112,17 @@ public class PanettaCrawler implements IPagedCrawler {
         return article.getElementsByTag("img").first().attr("src");
     }
 
-    private String buildSearchUrl(SearchCriteria criteria, int i) {
+    @Override
+    protected UriComponentsBuilder getSearchUrlBuilder(SearchCriteria criteria) {
+        return null;
+    }
+
+    @Override
+    protected String buildSearchUrl(UriComponentsBuilder builder, int page) {
         // http://www.panetta-immobilier.fr/offer/search/transaction/by/property_type/h/currentPage/1
         // There is no way to check around a location by default, a solution would be to check all the available cities if they match ...
-        return panettaImmoUrl + "/offer/search/transaction/by/property_type/h/currentPage/" + i;
+
+        return panettaImmoUrl + "/offer/search/transaction/by/property_type/h/currentPage/" + page;
     }
 
     private String getValueByKey(Element article, String key) {
