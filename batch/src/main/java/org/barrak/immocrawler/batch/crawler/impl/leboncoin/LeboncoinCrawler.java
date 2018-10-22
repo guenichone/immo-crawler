@@ -33,7 +33,7 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
 
     @Override
     protected Connection addConnectionParams(Connection connection) {
-        return LeboncoinJsoupConnectionUpdater.addConnectionParams(connection).referrer("www.leboncoin.fr");
+        return FakeBrowserConnectionUpdater.addConnectionParams(connection).referrer("www.leboncoin.fr");
     }
 
     @Override
@@ -99,7 +99,7 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
     }
 
     @Override
-    protected String buildSearchUrl(SearchCriteria criteria, int page) {
+    protected UriComponentsBuilder getSearchUrlBuilder(SearchCriteria criteria) {
         // https://www.leboncoin.fr/recherche/
         // ?category=9
         // &lat=49.434418
@@ -115,13 +115,16 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
                 .queryParam("owner_type", "private")
                 .queryParam("price", getPriceCriteria(criteria))
                 .queryParam("real_estate_type", "1,3")
-                .queryParam("category", "9")
-                .queryParam("page", page);
-
+                .queryParam("category", "9");
         if (criteria.getAround() > 0) {
             builder.queryParam("radius", criteria.getAround() * 1000);
         }
+        return builder;
+    }
 
+    @Override
+    protected String buildSearchUrl(UriComponentsBuilder builder, int page) {
+        builder.queryParam("page", page);
         return builder.toUriString();
     }
 

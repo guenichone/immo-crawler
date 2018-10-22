@@ -58,8 +58,8 @@ public class OptimHomeCrawler extends JsoupPagedCrawler {
     }
 
     @Override
-    protected Document getDocumentPage(SearchCriteria criteria, int pageNumber) {
-        String url = buildSearchUrl(criteria, pageNumber);
+    protected Document getDocumentPage(UriComponentsBuilder builder, int pageNumber) {
+        String url = buildSearchUrl(builder, pageNumber);
 
         FirefoxOptions options = new FirefoxOptions();
         options.setLogLevel(FirefoxDriverLogLevel.FATAL);
@@ -105,7 +105,6 @@ public class OptimHomeCrawler extends JsoupPagedCrawler {
             String city = article.getElementsByClass("property_city").text();
             city = city.substring(0, city.length() - 5); // 'City (54)'
 
-
             SearchResultDocument result = new SearchResultDocument(id, href, ProviderEnum.OPTIMHOME, RealEstateType.HOUSE, city, price);
 
             String img = article.getElementsByTag("img").get(1).attr("src");
@@ -120,20 +119,23 @@ public class OptimHomeCrawler extends JsoupPagedCrawler {
     }
 
     @Override
-    protected String buildSearchUrl(SearchCriteria criteria, int page) {
+    protected UriComponentsBuilder getSearchUrlBuilder(SearchCriteria criteria) {
         // https://www.optimhome.com/annonces/achat?affichage=grid-view
         // &rayon=20000
         // &geo=49.434418%2C5.921767000000045
         // &type=HOUSE
         // &budget=%3A500000
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(optimhomeUrl + "/annonces/achat?affichage=grid-view")
+        return UriComponentsBuilder.fromHttpUrl(optimhomeUrl + "/annonces/achat?affichage=grid-view")
                 .queryParam("budget",  getPriceOrEmpty(criteria.getMinPrice()) + ":" + getPriceOrEmpty(criteria.getMaxPrice()))
                 .queryParam("rayon", criteria.getAround() * 1000)
                 .queryParam("geo", getGeo(criteria))
                 .queryParam("type", "HOUSE");
         //        .queryParam("page", page); Direct page parameter is not used, JS triggered by link at the bottom do the change
+    }
 
+    @Override
+    protected String buildSearchUrl(UriComponentsBuilder builder, int page) {
         return builder.toUriString();
     }
 

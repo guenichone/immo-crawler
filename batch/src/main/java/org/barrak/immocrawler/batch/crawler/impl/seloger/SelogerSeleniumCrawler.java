@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.util.UriComponentsBuilder;
 
 // @Component
 public class SelogerSeleniumCrawler extends SelogerCrawler {
@@ -14,7 +15,8 @@ public class SelogerSeleniumCrawler extends SelogerCrawler {
     private String geckodriverPath;
 
     protected Document getDocumentPage(SearchCriteria criteria, int pageNumber) {
-        String url = buildSearchUrl(criteria, pageNumber);
+        UriComponentsBuilder builder = getSearchUrlBuilder(criteria);
+        String url = buildSearchUrl(builder, pageNumber);
 
         WebDriver driver = new FirefoxDriver();
         driver.get(url);

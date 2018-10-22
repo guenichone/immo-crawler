@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,11 +30,14 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
     @Override
     public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
         try {
-            Document document = getDocumentPage(criteria, 1);
+            UriComponentsBuilder urlBuilder = getSearchUrlBuilder(criteria);
+            Document document = getDocumentPage(urlBuilder, 1);
 
             int total = getTotal(document);
             if (total == 0) {
-                throw new NoSuchElementException("No articles found for " + buildSearchUrl(criteria, 1));
+                throw new NoSuchElementException("No articles found for " + buildSearchUrl(urlBuilder, 1));
+            } else if (total >= 1000) {
+                throw new IllegalArgumentException("There is too many results (" + total + "), please restrict your search.");
             }
 
             Elements articles = getArticles(document);
@@ -53,7 +57,7 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
                 ForkJoinPool pool = new ForkJoinPool(8);
                 IntStream.rangeClosed(2, numberOfPages).forEach(page -> pool.submit(() -> {
                     try {
-                        Document doc = getDocumentPage(criteria, page);
+                        Document doc = getDocumentPage(urlBuilder, page);
                         consumer.accept(countResults(counter, parseResultPage(criteria, doc)));
                     } catch (IOException e) {
                         LOGGER.error(e.getMessage(), e);
@@ -75,10 +79,14 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
         return results;
     }
 
-    protected Document getDocumentPage(SearchCriteria criteria, int pageNumber) throws IOException {
-        String url = buildSearchUrl(criteria, pageNumber);
+    protected Document getDocumentPage(UriComponentsBuilder builder, int pageNumber) throws IOException {
+        String url = buildSearchUrl(builder, pageNumber);
 
-        return addConnectionParams(Jsoup.connect(url)).get();
+        return getDocument(addConnectionParams(Jsoup.connect(url)));
+    }
+
+    protected Document getDocument(Connection connection) throws IOException {
+        return connection.get();
     }
 
     protected Connection addConnectionParams(Connection connection) {
@@ -102,5 +110,7 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
 
     protected abstract SearchResultDocument parseArticle(SearchCriteria criteria, Element article);
 
-    protected abstract String buildSearchUrl(SearchCriteria criteria, int page);
+    protected abstract UriComponentsBuilder getSearchUrlBuilder(SearchCriteria criteria);
+
+    protected abstract String buildSearchUrl(UriComponentsBuilder builder, int page);
 }

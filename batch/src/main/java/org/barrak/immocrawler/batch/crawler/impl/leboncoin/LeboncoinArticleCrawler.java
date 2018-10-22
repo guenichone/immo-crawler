@@ -26,7 +26,7 @@ public class LeboncoinArticleCrawler implements IDetailsCrawler {
     @Override
     public void updateDetails(SearchResultDocument article) {
         try {
-            Connection.Response response = LeboncoinJsoupConnectionUpdater.addConnectionParams(Jsoup.connect(article.getUrl())).execute();
+            Connection.Response response = FakeBrowserConnectionUpdater.addConnectionParams(Jsoup.connect(article.getUrl())).execute();
             if (response.statusCode() == HttpStatus.GONE.value()) {
                 throw new NoSuchElementException("Article is gone : " + article.getUrl());
             }

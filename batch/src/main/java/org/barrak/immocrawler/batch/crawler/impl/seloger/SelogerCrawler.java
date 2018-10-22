@@ -2,12 +2,13 @@ package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
-import org.barrak.immocrawler.batch.crawler.impl.leboncoin.LeboncoinJsoupConnectionUpdater;
+import org.barrak.immocrawler.batch.crawler.impl.leboncoin.FakeBrowserConnectionUpdater;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.database.document.RealEstateType;
 import org.barrak.immocrawler.database.document.SearchResultDocument;
 import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
+import org.barrak.immocrawler.geoloc.impl.OpendataSoftService;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,9 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.BasicJsonParser;
 import org.springframework.boot.json.JsonParser;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.util.Map;
 
 @Component
@@ -31,12 +34,26 @@ public class SelogerCrawler extends JsoupPagedCrawler {
     @Autowired
     private Map<SearchResultDocumentKey, SearchResultDocument> cache;
 
+    @Autowired
+    private OpendataSoftService opendataSoftService;
+
     @Value("${provider.seloger.api}")
     private String selogerUrl;
 
     @Override
     protected Connection addConnectionParams(Connection connection) {
-        return LeboncoinJsoupConnectionUpdater.addConnectionParams(connection).referrer("www.seloger.com");
+        return FakeBrowserConnectionUpdater.addConnectionParams(connection)
+                .referrer("www.seloger.com")
+                .followRedirects(false);
+    }
+
+    @Override
+    protected Document getDocument(Connection connection) throws IOException {
+        Connection.Response response = connection.execute();
+        if (response.statusCode() == HttpStatus.TEMPORARY_REDIRECT.value()) {
+            throw new  IllegalStateException("Temporary redirect.");
+        }
+        return response.parse();
     }
 
     @Override
@@ -52,11 +69,11 @@ public class SelogerCrawler extends JsoupPagedCrawler {
 
     @Override
     protected SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
-        String id = article.getElementsByAttribute("data-publication-id").first()
-                .attr("data-publication-id");
         String priceStr = article.getElementsByClass("c-pa-cprice").text();
         int price = (int) ParserUtils.getNumericOnly(priceStr);
         String href = article.getElementsByTag("a").first().attr("href");
+        String endHref = ParserUtils.getLastPart(href, "/");
+        String id = endHref.substring(0, endHref.indexOf("."));
 
         SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
         if (cache.containsKey(cacheKey)) {
@@ -109,7 +126,7 @@ public class SelogerCrawler extends JsoupPagedCrawler {
     }
 
     @Override
-    protected String buildSearchUrl(SearchCriteria criteria, int pageNumber) {
+    protected UriComponentsBuilder getSearchUrlBuilder(SearchCriteria criteria) {
         // https://www.seloger.com/list.htm
         // ?types=2,4
         // &projects=2
@@ -121,7 +138,7 @@ public class SelogerCrawler extends JsoupPagedCrawler {
         // &qsVersion=1.0
         // &LISTING-LISTpg=1
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(selogerUrl + "/list.htm")
+        return UriComponentsBuilder.fromHttpUrl(selogerUrl + "/list.htm")
                 .queryParam("enterprise", "0")
                 .queryParam("natures", "1,2,4") // bind natures ?
                 .queryParam("places", getPlaces(criteria))
@@ -130,17 +147,19 @@ public class SelogerCrawler extends JsoupPagedCrawler {
                 .queryParam("proximity","0," + criteria.getAround())
                 .queryParam("qsversion", "1.0")
                 .queryParam("types", "2,4");
-        if (pageNumber > 1) {
-            builder.queryParam("LISTING-LISTpg", pageNumber);
-        }
+    }
 
+    @Override
+    protected String buildSearchUrl(UriComponentsBuilder builder, int page) {
+        if (page > 1) {
+            builder.queryParam("LISTING-LISTpg", page);
+        }
         return builder.toUriString();
     }
 
     private String getPlaces(SearchCriteria criteria) {
-        return String.format("{ci:%s0%s}",
-                criteria.getPostalCode().substring(0, 2),
-                criteria.getPostalCode().substring(2, 5));
+        String communalCode = opendataSoftService.getCommunalCodeFromPostalCode(criteria.getPostalCode());
+        return String.format("{ci:%s0%s}", communalCode.substring(0, 2), communalCode.substring(2, 5));
     }
 
     @Override
