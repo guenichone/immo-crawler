@@ -1,4 +1,8 @@
 export class Article {
+
+    provider: string;
+    id: string;
+
     url: string;
 
     realEstateType: string;
@@ -18,10 +22,8 @@ export class Article {
     imageUrls: string[];
     description: string;
 
-    favorite: boolean;
     sold: boolean;
 
-    internalProvider: string;
     externalProvider: string
 
     internalReference: string;

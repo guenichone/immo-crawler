@@ -1,13 +1,12 @@
 package org.barrak.immocrawler.batch.crawler.impl.optimhome;
 
-import org.apache.tomcat.jni.Local;
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.RealEstateType;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.RealEstateTypeEnum;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
-import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
+import org.barrak.immocrawler.database.model.ArticleDocumentKey;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -40,7 +39,7 @@ public class OptimHomeCrawler extends JsoupPagedCrawler {
     private String geckodriverPath;
 
     @Autowired
-    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
+    private Map<ArticleDocumentKey, ArticleDocument> cache;
 
     @Autowired
     public OptimHomeCrawler(@Value("${webdriver.gecko.driver}") String geckodriverPath) {
@@ -84,15 +83,15 @@ public class OptimHomeCrawler extends JsoupPagedCrawler {
     }
 
     @Override
-    protected SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
+    protected ArticleDocument parseArticle(SearchCriteria criteria, Element article) {
         if (!article.classNames().contains("alerte_mail")) { // One article is a publicity
             String href = article.getElementsByTag("a").attr("href");
             String id = ParserUtils.getLastPart(href, "/").split("-")[0];
             int price = (int) ParserUtils.getNumericOnly(article.getElementsByClass("property_price").text()) * 1000;
 
-            SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
+            ArticleDocumentKey cacheKey = new ArticleDocumentKey(this.getInternalProvider(), id);
             if (cache.containsKey(cacheKey)) {
-                SearchResultDocument oldSearchResult = cache.get(cacheKey);
+                ArticleDocument oldSearchResult = cache.get(cacheKey);
                 if (oldSearchResult.getPrice() != price) {
                     LOGGER.info("New price for {}, previous {}, new {}", id, oldSearchResult.getPrice(), price);
                 } else {
@@ -105,7 +104,7 @@ public class OptimHomeCrawler extends JsoupPagedCrawler {
             String city = article.getElementsByClass("property_city").text();
             city = city.substring(0, city.length() - 5); // 'City (54)'
 
-            SearchResultDocument result = new SearchResultDocument(id, href, ProviderEnum.OPTIMHOME, RealEstateType.HOUSE, city, price);
+            ArticleDocument result = new ArticleDocument(id, href, ProviderEnum.OPTIMHOME, RealEstateTypeEnum.HOUSE, city, price);
 
             String img = article.getElementsByTag("img").get(1).attr("src");
             result.setImageUrl(img);

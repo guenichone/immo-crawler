@@ -4,7 +4,7 @@ import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.FakeBrowserConnectionUtils;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,7 +25,7 @@ public class LeboncoinArticleCrawler implements IDetailsCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(LeboncoinArticleCrawler.class);
 
     @Override
-    public void updateDetails(SearchResultDocument article) {
+    public void updateDetails(ArticleDocument article) {
         try {
             Connection.Response response = FakeBrowserConnectionUtils.addConnectionParams(Jsoup.connect(article.getUrl())).execute();
             if (response.statusCode() == HttpStatus.GONE.value()) {

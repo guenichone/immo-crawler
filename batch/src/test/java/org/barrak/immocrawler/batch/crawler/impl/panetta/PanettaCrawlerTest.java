@@ -2,7 +2,7 @@ package org.barrak.immocrawler.batch.crawler.impl.panetta;
 
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.Whitebox;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -17,13 +17,13 @@ public class PanettaCrawlerTest {
     @Test
     public void search() {
         Whitebox.setInternalState(crawler, "panettaImmoUrl", "http://www.panetta-immobilier.fr");
-        Whitebox.setInternalState(crawler, "cache", new HashMap<String, SearchResultDocument>());
+        Whitebox.setInternalState(crawler, "cache", new HashMap<String, ArticleDocument>());
 
         SearchCriteria criteria = new SearchCriteria(49.434418, 5.921767, 15);
         criteria.setMinPrice(100000);
         criteria.setMaxPrice(500000);
 
-        List<SearchResultDocument> resultDocumentList = crawler.search(criteria);
+        List<ArticleDocument> resultDocumentList = crawler.search(criteria);
 
         assertThat(resultDocumentList).isNotEmpty();
     }

@@ -3,7 +3,7 @@ package org.barrak.immocrawler.batch.crawler.impl.optimhome;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -24,7 +24,7 @@ public class OptimHomeArticleCrawler implements IDetailsCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(OptimHomeArticleCrawler.class);
 
     @Override
-    public void updateDetails(SearchResultDocument article) {
+    public void updateDetails(ArticleDocument article) {
         try {
             Document document = Jsoup.connect(article.getUrl()).get();
 

@@ -1,6 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.panetta;
 
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +11,7 @@ public class PanettaArticleCrawlerTest {
 
     @Test
     public void getDetails() {
-        SearchResultDocument article = new SearchResultDocument();
+        ArticleDocument article = new ArticleDocument();
         article.setUrl("http://www.panetta-immobilier.fr/neuf/maison/meurthe-et-moselle/briey/mont-saint-martin/6036985");
         article.setCity("kanfen");
         article.setTitle("Maison 6 pièces à Kanfen");

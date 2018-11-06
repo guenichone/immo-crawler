@@ -1,7 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.leboncoin;
 
-import org.barrak.immocrawler.batch.crawler.impl.optimhome.OptimHomeArticleCrawler;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +14,7 @@ public class LeboncoinArticleCrawlerTest {
 
         String url = "https://www.leboncoin.fr/ventes_immobilieres/1503402023.htm/";
 
-        SearchResultDocument article = new SearchResultDocument();
+        ArticleDocument article = new ArticleDocument();
         article.setUrl(url);
         article.setCity("herserange");
         article.setTitle("Maison Herserange");

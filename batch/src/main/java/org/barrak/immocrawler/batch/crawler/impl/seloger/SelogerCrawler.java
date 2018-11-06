@@ -5,9 +5,9 @@ import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
 import org.barrak.immocrawler.batch.utils.FakeBrowserConnectionUtils;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.RealEstateType;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
-import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
+import org.barrak.immocrawler.database.document.RealEstateTypeEnum;
+import org.barrak.immocrawler.database.model.ArticleDocument;
+import org.barrak.immocrawler.database.model.ArticleDocumentKey;
 import org.barrak.immocrawler.geoloc.impl.OpendataSoftService;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
@@ -32,7 +32,7 @@ public class SelogerCrawler extends JsoupPagedCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(SelogerCrawler.class);
 
     @Autowired
-    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
+    private Map<ArticleDocumentKey, ArticleDocument> cache;
 
     @Autowired
     private OpendataSoftService opendataSoftService;
@@ -68,16 +68,16 @@ public class SelogerCrawler extends JsoupPagedCrawler {
     }
 
     @Override
-    protected SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
+    protected ArticleDocument parseArticle(SearchCriteria criteria, Element article) {
         String priceStr = article.getElementsByClass("c-pa-cprice").text();
         int price = (int) ParserUtils.getNumericOnly(priceStr);
         String href = article.getElementsByTag("a").first().attr("href");
         String endHref = ParserUtils.getLastPart(href, "/");
         String id = endHref.substring(0, endHref.indexOf("."));
 
-        SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
+        ArticleDocumentKey cacheKey = new ArticleDocumentKey(this.getInternalProvider(), id);
         if (cache.containsKey(cacheKey)) {
-            SearchResultDocument oldSearchResult = cache.get(cacheKey);
+            ArticleDocument oldSearchResult = cache.get(cacheKey);
             if (oldSearchResult.getPrice() != price) {
                 LOGGER.info("New price for {}, previous {}, new {}", id, oldSearchResult.getPrice(), price);
             } else {
@@ -88,10 +88,10 @@ public class SelogerCrawler extends JsoupPagedCrawler {
         }
 
         String city = article.getElementsByClass("c-pa-city").text();
-        RealEstateType type = article.getElementsByClass("c-pa-info").text().equals("Maison / Villa") ?
-                RealEstateType.HOUSE : RealEstateType.LAND;
+        RealEstateTypeEnum type = article.getElementsByClass("c-pa-info").text().equals("Maison / Villa") ?
+                RealEstateTypeEnum.HOUSE : RealEstateTypeEnum.LAND;
 
-        SearchResultDocument searchResult = new SearchResultDocument(
+        ArticleDocument searchResult = new ArticleDocument(
                 id, href, ProviderEnum.SELOGER, type, city.toLowerCase(), price);
 
         searchResult.setTitle(getTitle(article));

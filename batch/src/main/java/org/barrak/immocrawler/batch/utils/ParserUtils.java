@@ -46,6 +46,8 @@ public class ParserUtils {
     }
 
     public static int findLandSurfaceInDescription(String description) {
+        // TODO bug 4 ares : https://www.seloger.com/annonces/achat/maison/fontoy-57/140444811.htm?enterprise=0&LISTING-LISTpg=2,3,5,4,6,7,8,9,10&natures=1,2,4&places=%7bci%3a540149%7d&price=150000%2f450000&projects=2&proximity=0,15&qsversion=1.0&types=2,4&bd=ListToDetail
+
         List<String> allMatches = matchesByRegex(description, "[0-9]+([,.][0-9]{1,2})? (ares|ARES)");
         if (allMatches.size() == 1) {
             return (int) ParserUtils.getNumericOnly(allMatches.get(0));

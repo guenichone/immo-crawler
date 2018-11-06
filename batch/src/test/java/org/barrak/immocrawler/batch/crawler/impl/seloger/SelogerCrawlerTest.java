@@ -3,7 +3,7 @@ package org.barrak.immocrawler.batch.crawler.impl.seloger;
 import org.barrak.immocrawler.batch.crawler.ICrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.Whitebox;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class SelogerCrawlerTest {
     @Test
     public void search() {
         Whitebox.setInternalState(crawler, "selogerUrl", "https://www.seloger.com");
-        Whitebox.setInternalState(crawler, "cache", new HashMap<String, SearchResultDocument>());
+        Whitebox.setInternalState(crawler, "cache", new HashMap<String, ArticleDocument>());
 //        Whitebox.setInternalState(crawler, "geckodriverPath", "D:/Telechargement/geckodriver-v0.22.0-win64/geckodriver.exe");
 
         SearchCriteria criteria = new SearchCriteria(49.434418, 5.921767, 15);
@@ -30,7 +30,7 @@ public class SelogerCrawlerTest {
         criteria.setMaxPrice(500000);
         criteria.setPostalCode("57041");
 
-        List<SearchResultDocument> resultDocumentList = crawler.search(criteria);
+        List<ArticleDocument> resultDocumentList = crawler.search(criteria);
 
         assertThat(resultDocumentList).isNotEmpty();
     }

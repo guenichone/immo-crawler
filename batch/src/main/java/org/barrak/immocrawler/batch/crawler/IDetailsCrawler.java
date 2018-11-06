@@ -1,7 +1,7 @@
 package org.barrak.immocrawler.batch.crawler;
 
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 
 /**
  * Classes that implements this interface must be able to retrieve the full data of a detailed article.
@@ -11,7 +11,7 @@ import org.barrak.immocrawler.database.document.SearchResultDocument;
  */
 public interface IDetailsCrawler {
 
-    void updateDetails(SearchResultDocument article);
+    void updateDetails(ArticleDocument article);
 
     ProviderEnum getInternalProvider();
 }

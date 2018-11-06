@@ -4,9 +4,9 @@ import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
-import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
-import org.barrak.immocrawler.database.repository.SearchResultRepository;
+import org.barrak.immocrawler.database.model.ArticleDocument;
+import org.barrak.immocrawler.database.model.ArticleDocumentKey;
+import org.barrak.immocrawler.database.repository.ArticleRepository;
 import org.barrak.immocrawler.geoloc.IGeoLocService;
 import org.barrak.immocrawler.geoloc.model.Location;
 import org.slf4j.Logger;
@@ -28,16 +28,16 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
-@EnableMongoRepositories(basePackageClasses = SearchResultRepository.class)
+@EnableMongoRepositories(basePackageClasses = ArticleRepository.class)
 public class ImmoCrawlerBatch {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImmoCrawlerBatch.class);
 
     @Autowired
-    private SearchResultRepository searchResultRepository;
+    private ArticleRepository articleRepository;
 
     @Autowired
-    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
+    private Map<ArticleDocumentKey, ArticleDocument> cache;
 
     @Autowired
     private IGeoLocService geoLocService;
@@ -51,7 +51,7 @@ public class ImmoCrawlerBatch {
 		return args -> {
 
             // Clean repo for fresh import
-//			  searchResultRepository.deleteAll();
+//			  articleRepository.deleteAll();
 //            cache.clear();
 
             Location location = geoLocService.getLocation("crusnes");
@@ -65,7 +65,7 @@ public class ImmoCrawlerBatch {
 
             ForkJoinPool pool = new ForkJoinPool(8);
             crawlers.stream().forEach(crawler -> pool.submit(() ->
-                crawler.search(searchCriteria, searchResults -> searchResultRepository.saveAll(searchResults))
+                crawler.search(searchCriteria, searchResults -> articleRepository.saveAll(searchResults))
             ));
 
             pool.shutdown();
@@ -81,7 +81,7 @@ public class ImmoCrawlerBatch {
                 .collect(Collectors.toMap(IDetailsCrawler::getInternalProvider, Function.identity()));
 
         ForkJoinPool pool = new ForkJoinPool(64);
-        searchResultRepository.findAll().stream()
+        articleRepository.findAll().stream()
             .filter(article -> !article.isMoved() && !article.isError() && !article.isDetailsParsed())
             .forEach(article -> pool.submit(() -> {
                 IDetailsCrawler crawler = crawlerMap.get(article.getInternalProvider());
@@ -92,7 +92,7 @@ public class ImmoCrawlerBatch {
         pool.awaitTermination(5, TimeUnit.MINUTES);
     }
 
-    private void updateArticle(IDetailsCrawler crawler, SearchResultDocument article) {
+    private void updateArticle(IDetailsCrawler crawler, ArticleDocument article) {
         try {
             if (crawler != null) {
                 LOGGER.info("Getting details for {} {}", crawler.getInternalProvider(), article);
@@ -109,6 +109,6 @@ public class ImmoCrawlerBatch {
             LOGGER.warn("Saving parsing error in article : " + article.getUrl());
             article.setError(true);
         }
-        searchResultRepository.save(article);
+        articleRepository.save(article);
     }
 }

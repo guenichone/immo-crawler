@@ -1,6 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.seloger;
 
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class SelogerArticleCrawlerTest {
 
     @Test
     public void search() {
-        SearchResultDocument article = new SearchResultDocument();
+        ArticleDocument article = new ArticleDocument();
         article.setUrl("https://www.seloger.com/annonces/achat/maison/audun-le-roman-54/136317365.htm?enterprise=0&LISTING-LISTpg=5&natures=1,2,4&places=%7bci%3a570041%7d&price=100000%2f500000&projects=2&proximity=0,10&qsversion=1.0&types=2,4&bd=ListToDetail");
         article.setCity("kanfen");
         article.setTitle("Maison 6 pièces à Kanfen");

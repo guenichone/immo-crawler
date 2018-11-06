@@ -4,9 +4,9 @@ import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.RealEstateType;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
-import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
+import org.barrak.immocrawler.database.document.RealEstateTypeEnum;
+import org.barrak.immocrawler.database.model.ArticleDocument;
+import org.barrak.immocrawler.database.model.ArticleDocumentKey;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -31,7 +31,7 @@ public class PanettaCrawler extends JsoupPagedCrawler {
     private String panettaImmoUrl;
 
     @Autowired
-    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
+    private Map<ArticleDocumentKey, ArticleDocument> cache;
 
     @Override
     protected int getTotal(Document document) {
@@ -46,7 +46,7 @@ public class PanettaCrawler extends JsoupPagedCrawler {
     }
 
     @Override
-    protected List<SearchResultDocument> parseArticles(SearchCriteria criteria, Elements articles) {
+    protected List<ArticleDocument> parseArticles(SearchCriteria criteria, Elements articles) {
         return articles.stream()
                 .map(article -> parseArticle(criteria, article))
                 .filter(Objects::nonNull)
@@ -54,16 +54,16 @@ public class PanettaCrawler extends JsoupPagedCrawler {
     }
 
     @Override
-    protected SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
+    protected ArticleDocument parseArticle(SearchCriteria criteria, Element article) {
         Element link = article.getElementsByTag("a").first();
         String id = getId(link);
         int price = getPrice(article);
 
         String href = panettaImmoUrl + link.attr("href");
 
-        SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
+        ArticleDocumentKey cacheKey = new ArticleDocumentKey(this.getInternalProvider(), id);
         if (cache.containsKey(cacheKey)) {
-            SearchResultDocument oldSearchResult = cache.get(cacheKey);
+            ArticleDocument oldSearchResult = cache.get(cacheKey);
             if (oldSearchResult.getPrice() != price) {
                 LOGGER.info("New price for {}, previous {}, new {}", id, oldSearchResult.getPrice(), price);
             } else {
@@ -75,10 +75,10 @@ public class PanettaCrawler extends JsoupPagedCrawler {
 
         String city = link.getElementsByClass("city").first().text();
         String title = link.text();
-        RealEstateType type = link.getElementsByClass("design-name").first().text().equals("Maison individuelle") ?
-                RealEstateType.HOUSE : RealEstateType.LAND;
+        RealEstateTypeEnum type = link.getElementsByClass("design-name").first().text().equals("Maison individuelle") ?
+                RealEstateTypeEnum.HOUSE : RealEstateTypeEnum.LAND;
 
-        SearchResultDocument searchResult = new SearchResultDocument(id, href, ProviderEnum.PANETTA_IMMO, type, city, price);
+        ArticleDocument searchResult = new ArticleDocument(id, href, ProviderEnum.PANETTA_IMMO, type, city, price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article));
 

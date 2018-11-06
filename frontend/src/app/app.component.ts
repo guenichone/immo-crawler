@@ -8,17 +8,6 @@ import { MatSort, MatTableDataSource } from '@angular/material';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  displayedColumns: string[] = ['url', 'price', 'city', 'land', 'home'];
-  dataSource: MatTableDataSource;
-
-  @ViewChild(MatSort) sort: MatSort;
-
-  public constructor(private articleService: ArticleService) {
-    articleService.getArticleByLandSurfaceGreaterThan(7).subscribe(results => {
-      this.dataSource = new MatTableDataSource(results);
-      this.dataSource.sort = this.sort;
-    });
-  }
 }

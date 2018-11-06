@@ -5,9 +5,9 @@ import org.barrak.immocrawler.batch.crawler.impl.JsoupPagedCrawler;
 import org.barrak.immocrawler.batch.utils.FakeBrowserConnectionUtils;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.RealEstateType;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
-import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
+import org.barrak.immocrawler.database.document.RealEstateTypeEnum;
+import org.barrak.immocrawler.database.model.ArticleDocument;
+import org.barrak.immocrawler.database.model.ArticleDocumentKey;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,7 +30,7 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
     private String leboncoinUrl;
 
     @Autowired
-    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
+    private Map<ArticleDocumentKey, ArticleDocument> cache;
 
     @Override
     protected Connection addConnectionParams(Connection connection) {
@@ -50,7 +50,7 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
     }
 
     @Override
-    protected SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
+    protected ArticleDocument parseArticle(SearchCriteria criteria, Element article) {
         String href = article.getElementsByTag("a").first().attr("href");
         String id = ParserUtils.getLastPart(href, "/")
                 .replaceAll(".htm", "");
@@ -59,9 +59,9 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
         int price = (int) ParserUtils.getNumericOnly(priceStr);
         String url = leboncoinUrl + href;
 
-        SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
+        ArticleDocumentKey cacheKey = new ArticleDocumentKey(this.getInternalProvider(), id);
         if (cache.containsKey(cacheKey)) {
-            SearchResultDocument oldSearchResult = cache.get(cacheKey);
+            ArticleDocument oldSearchResult = cache.get(cacheKey);
             if (oldSearchResult.getPrice() != price) {
                 LOGGER.info("New price for {}, previous {}, new {}", id, oldSearchResult.getPrice(), price);
             } else {
@@ -74,9 +74,9 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
         String city = article.getElementsByAttributeValue("data-qa-id", "aditem_location").text();
         String title = article.getElementsByAttributeValue("data-qa-id", "aditem_title").text();
 
-        RealEstateType type = getRealEstateType(title);
+        RealEstateTypeEnum type = getRealEstateType(title);
 
-        SearchResultDocument result = new SearchResultDocument(id, url, getInternalProvider(), type, city, price);
+        ArticleDocument result = new ArticleDocument(id, url, getInternalProvider(), type, city, price);
 
         result.setTitle(title);
 
@@ -86,17 +86,17 @@ public class LeboncoinCrawler extends JsoupPagedCrawler {
         return result;
     }
 
-    private RealEstateType getRealEstateType(String title) {
+    private RealEstateTypeEnum getRealEstateType(String title) {
         if (title != null) {
             String lowerCaseTitle = title.toLowerCase();
             if (lowerCaseTitle.contains("maison")) {
-                return RealEstateType.HOUSE;
+                return RealEstateTypeEnum.HOUSE;
             }
             if (lowerCaseTitle.contains("terrain")) {
-                return RealEstateType.LAND;
+                return RealEstateTypeEnum.LAND;
             }
         }
-        return RealEstateType.UNKNOW;
+        return RealEstateTypeEnum.UNKNOW;
     }
 
     @Override

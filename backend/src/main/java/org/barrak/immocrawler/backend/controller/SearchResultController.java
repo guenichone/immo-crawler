@@ -1,62 +1,45 @@
 package org.barrak.immocrawler.backend.controller;
 
-import org.barrak.immocrawler.database.document.SearchResultDocument;
-import org.barrak.immocrawler.database.repository.SearchResultRepository;
+import org.barrak.immocrawler.database.model.ArticleDocument;
+import org.barrak.immocrawler.database.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/")
+@RequestMapping(path = "/articles")
 public class SearchResultController {
 
     @Autowired
-    private SearchResultRepository repository;
+    private ArticleRepository repository;
 
-    @RequestMapping(path = "/all", method = RequestMethod.GET)
-    public List<SearchResultDocument> findAll() {
+    @GetMapping(path = "/all")
+    public List<ArticleDocument> findAll() {
         return repository.findAll();
     }
 
-    @RequestMapping(value = "/search/landSurfaceGreaterThan/{surface}", method = RequestMethod.GET)
-    public List<SearchResultDocument> findByLandSurfaceGreaterThan(@PathVariable("surface") int surface) {
+    @GetMapping(value = "/search/landSurfaceGreaterThan/{surface}")
+    public List<ArticleDocument> findByLandSurfaceGreaterThan(@PathVariable("surface") int surface) {
         return repository.findByLandSurfaceGreaterThan(surface);
     }
 
-    @RequestMapping(value = "/search/landSurfaceGreaterThan/{surface}/link", method = RequestMethod.GET)
+    @GetMapping(value = "/search/landSurfaceGreaterThan/{surface}/link")
     public List<String> findByLandSurfaceGreaterThanLink(@PathVariable("surface") int surface) {
         return repository.findByLandSurfaceGreaterThan(surface).stream()
                 .map(res -> res.getUrl()).collect(Collectors.toList());
     }
 
-    @RequestMapping(value = "/search/homeSurfaceGreaterThan/{surface}", method = RequestMethod.GET)
-    public List<SearchResultDocument> findByHomeSurfaceGreaterThan(@PathVariable("surface") int surface) {
+    @GetMapping(value = "/search/homeSurfaceGreaterThan/{surface}")
+    public List<ArticleDocument> findByHomeSurfaceGreaterThan(@PathVariable("surface") int surface) {
         return repository.findByHomeSurfaceGreaterThan(surface);
     }
 
-    @RequestMapping(value = "/search/homeSurfaceGreaterThan/{surface}/link", method = RequestMethod.GET)
+    @GetMapping(value = "/search/homeSurfaceGreaterThan/{surface}/link")
     public List<String> findByHomeSurfaceGreaterThanLink(@PathVariable("surface") int surface) {
         return repository.findByHomeSurfaceGreaterThan(surface).stream()
                 .map(res -> res.getUrl()).collect(Collectors.toList());
-    }
-
-    @RequestMapping(path = "/{url}/favorite", method = RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
-    public void addToFavorite(@PathVariable("url") String url) {
-        SearchResultDocument result = repository.findById(url).get();
-        result.setFavorite(true);
-        repository.save(result);
-    }
-
-    @RequestMapping(path = "/{url}/favorite", method = RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
-    public void removeFromFavorite(@PathVariable("url") String url) {
-        SearchResultDocument result = repository.findById(url).get();
-        result.setFavorite(false);
-        repository.save(result);
     }
 
 }

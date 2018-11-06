@@ -1,8 +1,8 @@
 package org.barrak.immocrawler.backend.controller;
 
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
-import org.barrak.immocrawler.database.repository.SearchResultRepository;
+import org.barrak.immocrawler.database.model.ArticleDocument;
+import org.barrak.immocrawler.database.repository.ArticleByProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,26 +10,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/admin")
+@RequestMapping(path = "/providers")
 public class ProviderController {
 
     @Autowired
-    private SearchResultRepository repository;
+    private ArticleByProviderRepository repository;
 
-    @RequestMapping(path = "/{provider}/all", method = RequestMethod.GET)
-    public List<SearchResultDocument> findAll(@PathVariable("provider") ProviderEnum provider) {
+    @GetMapping(path = "/{provider}/all")
+    public List<ArticleDocument> findAll(@PathVariable("provider") ProviderEnum provider) {
         return repository.findByInternalProvider(provider);
     }
 
-    @RequestMapping(path = "/{provider}/all", method = RequestMethod.DELETE)
+    @DeleteMapping(path = "/{provider}/all")
     public void deleteAll(@PathVariable("provider") ProviderEnum provider) {
         repository.deleteByInternalProvider(provider);
     }
 
-    @RequestMapping(path = "/{provider}/cleanDetails", method = RequestMethod.GET)
+    @GetMapping(path = "/{provider}/cleanDetails")
     @ResponseStatus(HttpStatus.OK)
     public void cleanDetails(@PathVariable("provider") ProviderEnum provider) {
-        List<SearchResultDocument> results = repository.findByInternalProvider(provider);
+        List<ArticleDocument> results = repository.findByInternalProvider(provider);
         results.stream().forEach(article -> article.setDetailsParsed(false));
         repository.saveAll(results);
     }

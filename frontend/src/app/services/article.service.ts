@@ -11,10 +11,12 @@ export class ArticleService {
     }
 
     public getTop20Article(): Observable<Article[]> {
-        return this.httpClient.get<Article[]>('/details/top20');
+        return this.httpClient.get<Article[]>('/articles/details/top20');
     }
 
     public getArticleByLandSurfaceGreaterThan(surface: number): Observable<Article[]> {
-        return this.httpClient.get<Article[]>('/search/landSurfaceGreaterThan/' + surface);
+        return this.httpClient.get<Article[]>('/articles/search/landSurfaceGreaterThan/' + surface);
     }
+
+    public setArticleAsSold(articleId: string): 
 }

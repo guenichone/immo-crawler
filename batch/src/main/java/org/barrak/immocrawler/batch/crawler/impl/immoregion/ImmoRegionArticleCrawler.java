@@ -2,7 +2,7 @@ package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
 import org.apache.http.HttpStatus;
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.barrak.immocrawler.batch.crawler.IDetailsCrawler;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.jsoup.Connection;
@@ -25,7 +25,7 @@ public class ImmoRegionArticleCrawler implements IDetailsCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(ImmoRegionArticleCrawler.class);
 
     @Override
-    public void updateDetails(SearchResultDocument article) {
+    public void updateDetails(ArticleDocument article) {
         try {
             Connection.Response response = Jsoup.connect(article.getUrl()).followRedirects(false).execute();
             if (response.statusCode() == HttpStatus.SC_MOVED_PERMANENTLY) {

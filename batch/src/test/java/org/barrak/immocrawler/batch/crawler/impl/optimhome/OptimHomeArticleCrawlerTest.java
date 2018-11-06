@@ -1,6 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.optimhome;
 
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +14,7 @@ public class OptimHomeArticleCrawlerTest {
 
         String url = "https://www.optimhome.com/annonces/vente/algrange/maison_de_caractre/1177266-vente-algrange";
 
-        SearchResultDocument article = new SearchResultDocument();
+        ArticleDocument article = new ArticleDocument();
         article.setUrl(url);
         article.setCity("algrange");
         article.setTitle("Maison de caractère ALGRANGE (57)");

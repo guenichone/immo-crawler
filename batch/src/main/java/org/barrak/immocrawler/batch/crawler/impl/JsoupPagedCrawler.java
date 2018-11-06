@@ -2,7 +2,7 @@ package org.barrak.immocrawler.batch.crawler.impl;
 
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,7 +28,7 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
     private static final Logger LOGGER = LoggerFactory.getLogger(JsoupPagedCrawler.class);
 
     @Override
-    public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
+    public void search(SearchCriteria criteria, Consumer<List<ArticleDocument>> consumer) {
         try {
             UriComponentsBuilder urlBuilder = getSearchUrlBuilder(criteria);
             Document document = getDocumentPage(urlBuilder, 1);
@@ -74,7 +74,7 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
         }
     }
 
-    private List<SearchResultDocument> countResults(AtomicInteger counter, List<SearchResultDocument> results) {
+    private List<ArticleDocument> countResults(AtomicInteger counter, List<ArticleDocument> results) {
         counter.addAndGet(results.size());
         return results;
     }
@@ -93,11 +93,11 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
         return connection;
     }
 
-    protected List<SearchResultDocument> parseResultPage(SearchCriteria criteria, Document document) {
+    protected List<ArticleDocument> parseResultPage(SearchCriteria criteria, Document document) {
         return parseArticles(criteria, getArticles(document));
     }
 
-    protected List<SearchResultDocument> parseArticles(SearchCriteria criteria, Elements articles) {
+    protected List<ArticleDocument> parseArticles(SearchCriteria criteria, Elements articles) {
         return articles.parallelStream()
                 .map(article -> parseArticle(criteria, article))
                 .filter(Objects::nonNull)
@@ -108,7 +108,7 @@ public abstract class JsoupPagedCrawler implements IPagedCrawler {
 
     protected abstract Elements getArticles(Document document);
 
-    protected abstract SearchResultDocument parseArticle(SearchCriteria criteria, Element article);
+    protected abstract ArticleDocument parseArticle(SearchCriteria criteria, Element article);
 
     protected abstract UriComponentsBuilder getSearchUrlBuilder(SearchCriteria criteria);
 

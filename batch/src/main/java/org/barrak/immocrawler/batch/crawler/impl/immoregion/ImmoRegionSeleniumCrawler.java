@@ -3,8 +3,8 @@ package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
-import org.barrak.immocrawler.database.document.RealEstateType;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.document.RealEstateTypeEnum;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.database.document.ProviderEnum;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
@@ -45,10 +45,10 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
     private WebDriver driver;
 
     @Autowired
-    private Map<String, SearchResultDocument> cache;
+    private Map<String, ArticleDocument> cache;
 
     @Override
-    public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
+    public void search(SearchCriteria criteria, Consumer<List<ArticleDocument>> consumer) {
         open();
 
         fillCriteria(criteria);
@@ -56,7 +56,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
         search();
 
         do {
-            List<SearchResultDocument> resultsPage = parseResultsPage(criteria);
+            List<ArticleDocument> resultsPage = parseResultsPage(criteria);
             if (consumer != null) {
                 consumer.accept(resultsPage);
             }
@@ -146,7 +146,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
         return String.format("%,d €", amount).replace(String.valueOf((char) 160)," ");
     }
 
-    private List<SearchResultDocument> parseResultsPage(SearchCriteria criteria) {
+    private List<ArticleDocument> parseResultsPage(SearchCriteria criteria) {
 
         DriverUtils.scrollDown(driver); // Because of lazy load in page
         DriverUtils.sleep(3000);
@@ -161,7 +161,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
                 .collect(Collectors.toList());
     }
 
-    private SearchResultDocument parseArticle(SearchCriteria criteria, WebElement article) {
+    private ArticleDocument parseArticle(SearchCriteria criteria, WebElement article) {
         WebElement pageLink = article.findElement(By.xpath(".//a"));
         String href = pageLink.getAttribute("href");
         String title = pageLink.getText();
@@ -171,7 +171,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
         int price = getPrice(article, href);
 
         if (cache.containsKey(href)) {
-            SearchResultDocument oldSearchResult = cache.get(href);
+            ArticleDocument oldSearchResult = cache.get(href);
             if (oldSearchResult.getPrice() != price) {
                 LOGGER.info("New price for {}, previous {}, new {}", href, oldSearchResult.getPrice(), price);
             } else {
@@ -183,7 +183,7 @@ public class ImmoRegionSeleniumCrawler implements IPagedCrawler {
         }
 
         // TODO RealEstate not set
-        SearchResultDocument searchResult = new SearchResultDocument(null, href, ProviderEnum.IMMOREGION, RealEstateType.LAND, criteria.getCity(), price);
+        ArticleDocument searchResult = new ArticleDocument(null, href, ProviderEnum.IMMOREGION, RealEstateTypeEnum.LAND, criteria.getCity(), price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article, href));
 

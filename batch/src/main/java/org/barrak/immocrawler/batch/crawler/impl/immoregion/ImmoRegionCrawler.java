@@ -4,9 +4,9 @@ import org.barrak.immocrawler.batch.crawler.IPagedCrawler;
 import org.barrak.immocrawler.batch.crawler.criterias.SearchCriteria;
 import org.barrak.immocrawler.batch.utils.ParserUtils;
 import org.barrak.immocrawler.database.document.ProviderEnum;
-import org.barrak.immocrawler.database.document.RealEstateType;
-import org.barrak.immocrawler.database.document.SearchResultDocument;
-import org.barrak.immocrawler.database.document.SearchResultDocumentKey;
+import org.barrak.immocrawler.database.document.RealEstateTypeEnum;
+import org.barrak.immocrawler.database.model.ArticleDocument;
+import org.barrak.immocrawler.database.model.ArticleDocumentKey;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -36,10 +36,10 @@ public class ImmoRegionCrawler implements IPagedCrawler {
     private String immoregionUrl;
 
     @Autowired
-    private Map<SearchResultDocumentKey, SearchResultDocument> cache;
+    private Map<ArticleDocumentKey, ArticleDocument> cache;
 
     @Override
-    public void search(SearchCriteria criteria, Consumer<List<SearchResultDocument>> consumer) {
+    public void search(SearchCriteria criteria, Consumer<List<ArticleDocument>> consumer) {
         try {
             String url = buildSearchUrl(criteria, 1);
 
@@ -75,7 +75,7 @@ public class ImmoRegionCrawler implements IPagedCrawler {
         }
     }
 
-    public List<SearchResultDocument> parseResultPage(SearchCriteria criteria, int pageNumber) throws IOException {
+    public List<ArticleDocument> parseResultPage(SearchCriteria criteria, int pageNumber) throws IOException {
         String url = buildSearchUrl(criteria, pageNumber);
 
         Document document = Jsoup.connect(url).followRedirects(false).get();
@@ -83,14 +83,14 @@ public class ImmoRegionCrawler implements IPagedCrawler {
         return parseArticles(criteria, document.getElementsByTag("article"));
     }
 
-    public List<SearchResultDocument> parseArticles(SearchCriteria criteria, Elements articles) {
+    public List<ArticleDocument> parseArticles(SearchCriteria criteria, Elements articles) {
         return articles.stream()
                 .map(article -> parseArticle(criteria, article))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
-    public SearchResultDocument parseArticle(SearchCriteria criteria, Element article) {
+    public ArticleDocument parseArticle(SearchCriteria criteria, Element article) {
 
         Element a = article.getElementsByClass("mainInfos").first().getElementsByTag("a").first();
         String href = a.attr("href");
@@ -101,9 +101,9 @@ public class ImmoRegionCrawler implements IPagedCrawler {
 
         int price = (int) ParserUtils.getNumericOnly(a.text());
 
-        SearchResultDocumentKey cacheKey = new SearchResultDocumentKey(this.getInternalProvider(), id);
+        ArticleDocumentKey cacheKey = new ArticleDocumentKey(this.getInternalProvider(), id);
         if (cache.containsKey(cacheKey)) {
-            SearchResultDocument oldSearchResult = cache.get(cacheKey);
+            ArticleDocument oldSearchResult = cache.get(cacheKey);
             if (oldSearchResult.getPrice() != price) {
                 LOGGER.info("New price for {}, previous {}, new {}", id, oldSearchResult.getPrice(), price);
             } else {
@@ -115,9 +115,9 @@ public class ImmoRegionCrawler implements IPagedCrawler {
 
         String title = getTitle(article);
         String city = getCity(article);
-        RealEstateType type = title.startsWith("Maison individuelle") ? RealEstateType.HOUSE : RealEstateType.LAND;
+        RealEstateTypeEnum type = title.startsWith("Maison individuelle") ? RealEstateTypeEnum.HOUSE : RealEstateTypeEnum.LAND;
 
-        SearchResultDocument searchResult = new SearchResultDocument(id, url, ProviderEnum.IMMOREGION, type, city, price);
+        ArticleDocument searchResult = new ArticleDocument(id, url, ProviderEnum.IMMOREGION, type, city, price);
         searchResult.setTitle(title);
         searchResult.setImageUrl(getImgUrl(article, href));
         searchResult.setHomeSurface(getCharacteristic(article, "icon-surface"));

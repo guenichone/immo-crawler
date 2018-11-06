@@ -18,18 +18,41 @@
 
     <properties>
         <swagger.version>2.9.2</swagger.version>
+        <java-jwt.version>3.4.1</java-jwt.version>
+        <apache-common-validator.version>1.6</apache-common-validator.version>
     </properties>
 
     <dependencies>
+        <!-- SPRING -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- JSON WEB TOKEN-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${java-jwt.version}</version>
+        </dependency>
+
+        <!-- APACHE -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${apache-common-validator.version}</version>
+        </dependency>
+
+        <!-- INTERNAL -->
+        <dependency>
             <groupId>org.barrak.crawler</groupId>
             <artifactId>immo-crawler-database</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- SWAGGER -->

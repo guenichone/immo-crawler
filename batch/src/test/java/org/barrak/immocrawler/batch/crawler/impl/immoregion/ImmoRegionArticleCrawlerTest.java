@@ -1,6 +1,6 @@
 package org.barrak.immocrawler.batch.crawler.impl.immoregion;
 
-import org.barrak.immocrawler.database.document.SearchResultDocument;
+import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Ignore;
@@ -24,7 +24,7 @@ public class ImmoRegionArticleCrawlerTest {
 
         Document document = loadDocument(url, "kanfen.html");
 
-        SearchResultDocument article = new SearchResultDocument();
+        ArticleDocument article = new ArticleDocument();
         article.setUrl(url);
         article.setCity("kanfen");
         article.setTitle("Maison 6 pièces à Kanfen");
@@ -51,7 +51,7 @@ public class ImmoRegionArticleCrawlerTest {
 
         String url = "https://www.immoregion.fr/vente/maison/serrouville/id-5943181.html";
 
-        SearchResultDocument article = new SearchResultDocument();
+        ArticleDocument article = new ArticleDocument();
         article.setUrl(url);
         article.setCity("serrouville");
         article.setTitle("Maison mitoyenne 5 pièces à Serrouville");
@@ -90,7 +90,7 @@ public class ImmoRegionArticleCrawlerTest {
     public void testFillieres() {
         String url = "https://www.immoregion.fr/vente/maison/serrouville/id-5943181.html";
 
-        SearchResultDocument article = new SearchResultDocument();
+        ArticleDocument article = new ArticleDocument();
         article.setUrl(url);
         article.setCity("serrouville");
         article.setTitle("Maison mitoyenne 5 pièces à Serrouville");
