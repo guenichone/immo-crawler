@@ -15,8 +15,10 @@ export class ArticleService {
     }
 
     public getArticleByLandSurfaceGreaterThan(surface: number): Observable<Article[]> {
-        return this.httpClient.get<Article[]>('/articles/search/landSurfaceGreaterThan/' + surface);
+        return this.httpClient.get<Article[]>('/search/landSurfaceGreaterThan/' + surface);
     }
 
-    public setArticleAsSold(articleId: string): 
+    public setArticleAsSold(provider: string, articleId: string): Observable<Article> {
+        return this.httpClient.get<Article>('/articles/' + provider + '/' + articleId + '/sold');
+    }
 }

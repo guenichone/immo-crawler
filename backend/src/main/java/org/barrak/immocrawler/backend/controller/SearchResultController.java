@@ -1,5 +1,6 @@
 package org.barrak.immocrawler.backend.controller;
 
+import org.barrak.immocrawler.backend.model.Article;
 import org.barrak.immocrawler.database.model.ArticleDocument;
 import org.barrak.immocrawler.database.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/articles")
+@RequestMapping(path = "/search")
 public class SearchResultController {
 
     @Autowired
@@ -20,26 +21,32 @@ public class SearchResultController {
         return repository.findAll();
     }
 
-    @GetMapping(value = "/search/landSurfaceGreaterThan/{surface}")
-    public List<ArticleDocument> findByLandSurfaceGreaterThan(@PathVariable("surface") int surface) {
-        return repository.findByLandSurfaceGreaterThan(surface);
+    @GetMapping(value = "/landSurfaceGreaterThan/{surface}")
+    public List<Article> findByLandSurfaceGreaterThan(@PathVariable("surface") int surface) {
+        return mapArticleList(repository.findByLandSurfaceGreaterThanAndNotSold(surface));
     }
 
-    @GetMapping(value = "/search/landSurfaceGreaterThan/{surface}/link")
-    public List<String> findByLandSurfaceGreaterThanLink(@PathVariable("surface") int surface) {
-        return repository.findByLandSurfaceGreaterThan(surface).stream()
+    @GetMapping(value = "/landSurfaceGreaterThan/{surface}/link")
+    public List<String> findByLandSurfaceGreaterThanAndNotSoldLink(@PathVariable("surface") int surface) {
+        return repository.findByLandSurfaceGreaterThanAndNotSold(surface).stream()
                 .map(res -> res.getUrl()).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/search/homeSurfaceGreaterThan/{surface}")
-    public List<ArticleDocument> findByHomeSurfaceGreaterThan(@PathVariable("surface") int surface) {
-        return repository.findByHomeSurfaceGreaterThan(surface);
+    @GetMapping(value = "/homeSurfaceGreaterThan/{surface}")
+    public List<Article> findByHomeSurfaceGreaterThanAndNotSold(@PathVariable("surface") int surface) {
+        return mapArticleList(repository.findByHomeSurfaceGreaterThanAndNotSold(surface));
     }
 
-    @GetMapping(value = "/search/homeSurfaceGreaterThan/{surface}/link")
-    public List<String> findByHomeSurfaceGreaterThanLink(@PathVariable("surface") int surface) {
-        return repository.findByHomeSurfaceGreaterThan(surface).stream()
+    @GetMapping(value = "/homeSurfaceGreaterThan/{surface}/link")
+    public List<String> findByHomeSurfaceGreaterThanAndNotSoldLink(@PathVariable("surface") int surface) {
+        return repository.findByHomeSurfaceGreaterThanAndNotSold(surface).stream()
                 .map(res -> res.getUrl()).collect(Collectors.toList());
+    }
+
+    private List<Article> mapArticleList(List<ArticleDocument> articleDocumentList) {
+        return articleDocumentList.stream()
+                .map(articleDocument -> new Article(articleDocument))
+                .collect(Collectors.toList());
     }
 
 }

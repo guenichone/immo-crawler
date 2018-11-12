@@ -8,6 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NguiInviewModule } from '@ngui/common';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +17,9 @@ import { ArticleComponent } from './article/article.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { ArticleListComponent } from './article-list/article-list.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'article', pathMatch: 'full'},
@@ -45,14 +48,17 @@ const appRoutes: Routes = [
     NguiInviewModule,
     MatTableModule,
     MatSortModule,
+    MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
+    NgxSpinnerModule,
   ],
   providers: [
     AuthService,
     ArticleService,
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

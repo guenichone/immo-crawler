@@ -31,19 +31,19 @@ class ArticleRepositoryIT {
 
     @Test
     void findByLandSurfaceGreaterThan() {
-        List<ArticleDocument> results = articleRepository.findByLandSurfaceGreaterThan(9);
+        List<ArticleDocument> results = articleRepository.findByLandSurfaceGreaterThanAndNotSold(9);
         assertThat(results).hasSize(2);
 
-        results = articleRepository.findByLandSurfaceGreaterThan(10);
+        results = articleRepository.findByLandSurfaceGreaterThanAndNotSold(10);
         assertThat(results).hasSize(1);
     }
 
     @Test
     void findByHomeSurfaceGreaterThan() {
-        List<ArticleDocument> results = articleRepository.findByHomeSurfaceGreaterThan(80);
+        List<ArticleDocument> results = articleRepository.findByHomeSurfaceGreaterThanAndNotSold(80);
         assertThat(results).hasSize(2);
 
-        results = articleRepository.findByHomeSurfaceGreaterThan(129);
+        results = articleRepository.findByHomeSurfaceGreaterThanAndNotSold(129);
         assertThat(results).hasSize(1);
     }
 

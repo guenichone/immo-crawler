@@ -161,7 +161,6 @@ public class ArticleDocument {
         this.sold = sold;
     }
 
-
     public boolean isError() {
         return error;
     }
