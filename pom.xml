@@ -27,6 +27,7 @@
 	<modules>
 		<module>geoloc</module>
 		<module>database</module>
+		<module>frontend</module>
 		<module>backend</module>
 		<module>batch</module>
 	</modules>
