@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class OpendataSoftServiceTest {
+public class OpendataSoftServiceIT {
 
     private OpendataSoftService opendataSoftService = new OpendataSoftService("https://public.opendatasoft.com/api/records/1.0/search");
 

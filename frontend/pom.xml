@@ -6,7 +6,7 @@
   <groupId>org.barrak.crawler</groupId>
   <artifactId>immo-crawler-frontend</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>immo-crawler-frontend</name>
   <description>Immo Crawler Frontend</description>

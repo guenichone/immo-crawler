@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = GoogleMapGeoLocService.class)
 @RunWith(SpringRunner.class)
-public class GoogleMapGeoLocServiceTest {
+public class GoogleMapGeoLocServiceIT {
 
     @Autowired
     private GoogleMapGeoLocService googleMapGeoLocService;
